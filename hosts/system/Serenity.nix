@@ -61,12 +61,14 @@
     enable = true;
     wayland = true;
   };
+  
+  services.xserver.desktopManager.gnome.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = true;
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  #   xwayland.enable = true;
+  # };
 
 
 
@@ -81,12 +83,16 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+# Enable touchpad support (enabled default in most desktopManager).
+# services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
+  programs.zsh.enable = true;
+
+# Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erastos = {
-    isNormalUser = true;
+	  isNormalUser = true;
+	  shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 

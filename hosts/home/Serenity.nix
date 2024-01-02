@@ -7,6 +7,7 @@
 
   programs.zsh.enable = true;
 
+
   home.packages = [
     pkgs.gnupg
     pkgs.dropbox
@@ -24,6 +25,8 @@
     pkgs.rustup
     pkgs.kitty
     pkgs.firefox
+    pkgs.w3m
+    pkgs.pciutils
   ];
 
  
@@ -53,5 +56,10 @@
   };
 
   fonts.fontconfig.enable = true;
+
+
+  home.sessionVariables = {
+
+  };
   
 }
