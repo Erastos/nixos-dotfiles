@@ -10,7 +10,7 @@
     nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
 };
   outputs = { self, nixpkgs, home-manager, nixos-hardware, ...}@attrs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.Rogue = nixpkgs.lib.nixosSystem {
       specialArgs = attrs;
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -18,14 +18,36 @@
       };
       modules = 
       [
-       ./configuration.nix 
-       ./hardware-configuration.nix
+       ./hosts/system/Rogue.nix 
+       ./hardware/Rogue.nix
        nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
        home-manager.nixosModules.home-manager {
            home-manager.useGlobalPkgs = true; 
            home-manager.useUserPackages = true;
            home-manager.users.erastos = {
-             imports = [ ./hosts/default.nix ];
+             imports = [ ./hosts/home/Rogue.nix ];
+           };
+         }
+
+      ];
+
+    };
+
+    nixosConfigurations.Serenity = nixpkgs.lib.nixosSystem {
+      specialArgs = attrs;
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+      modules = 
+      [
+       ./hosts/system/Serentiy.nix 
+       ./hardware/Serenity.nix
+       home-manager.nixosModules.home-manager {
+           home-manager.useGlobalPkgs = true; 
+           home-manager.useUserPackages = true;
+           home-manager.users.erastos = {
+             imports = [ ./hosts/home/Serenity.nix ];
            };
          }
 

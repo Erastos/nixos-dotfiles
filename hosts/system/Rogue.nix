@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ../../hardware/Rogue.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -16,13 +16,13 @@
 
   nix.settings.experimental-features=[ "nix-command" "flakes" ];
 
-  networking.hostName = "Serenity"; # Define your hostname.
+  networking.hostName = "Rogue"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/New_York";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
