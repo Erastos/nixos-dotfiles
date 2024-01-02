@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, ...}:
 
 {
-  imports = [../modules/zsh/main.nix ../modules/zsh/prezto.nix ../modules/git.nix ];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ];
 
   home.stateVersion = "23.11";
 
@@ -22,9 +22,11 @@
     pkgs.elixir
     pkgs.ghc
     pkgs.rustup
+    pkgs.kitty
+    pkgs.firefox
   ];
 
-
+ 
   programs.home-manager.enable = true;
 
   gtk = {

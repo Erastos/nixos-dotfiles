@@ -8,10 +8,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
+    hyprland.url = "github:hyprwm/Hyprland";
 };
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ...}@attrs: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, hyprland, ...}@inputs: {
     nixosConfigurations.Rogue = nixpkgs.lib.nixosSystem {
-      specialArgs = attrs;
+      specialArgs = inputs;
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -34,14 +35,14 @@
     };
 
     nixosConfigurations.Serenity = nixpkgs.lib.nixosSystem {
-      specialArgs = attrs;
+      specialArgs = { inherit inputs;};
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
       modules = 
       [
-       ./hosts/system/Serentiy.nix 
+       ./hosts/system/Serenity.nix 
        ./hardware/Serenity.nix
        home-manager.nixosModules.home-manager {
            home-manager.useGlobalPkgs = true; 

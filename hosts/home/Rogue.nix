@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, ...}:
 
 {
-  imports = [../modules/zsh/main.nix ../modules/zsh/prezto.nix ../modules/git.nix ];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ];
 
   home.stateVersion = "23.11";
 
