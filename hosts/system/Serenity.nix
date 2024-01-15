@@ -31,8 +31,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
-
-    
+    # powerManagement.finegrained = true;
   };
 
   networking.hostName = "Serenity"; # Define your hostname.
@@ -59,7 +58,7 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm = {
     enable = true;
-    wayland = true;
+    wayland = false;
   };
   
   services.xserver.desktopManager.gnome.enable = true;
@@ -86,7 +85,6 @@
 # Enable touchpad support (enabled default in most desktopManager).
 # services.xserver.libinput.enable = true;
 
-
   programs.zsh.enable = true;
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -103,6 +101,7 @@
     wget
     vim
     git
+    podman
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -146,6 +145,19 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
+
+
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+};
 
 }
 
