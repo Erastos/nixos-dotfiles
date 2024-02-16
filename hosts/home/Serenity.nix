@@ -32,6 +32,8 @@
     pkgs.openvpn
     # pkgs.dropbox-cli
     pkgs.htop
+    pkgs.file
+    pkgs.chromium
   ];
 
  
