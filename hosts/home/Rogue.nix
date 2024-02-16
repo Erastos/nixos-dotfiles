@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, ...}:
 
 {
-  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix];
 
   home.stateVersion = "23.11";
 
@@ -16,12 +16,36 @@
     pkgs.nerdfonts
     pkgs.netcat
     pkgs.whois
+    pkgs.file
+
+    # C/C++
+    pkgs.valgrind
     pkgs.cmake
     pkgs.gnumake
     pkgs.gcc
-    pkgs.elixir
+    pkgs.boost
+    pkgs.stdman
+
+    # Haskell
     pkgs.ghc
+
+    # Rust
     pkgs.rustup
+
+    # Elixir
+    pkgs.elixir
+
+    # Python
+    pkgs.python311
+    pkgs.python311Packages.networkx
+    pkgs.python311Packages.numpy 
+
+    # Containers
+    pkgs.skopeo
+
+    # Emacs
+    pkgs.emacs
+    pkgs.ripgrep
   ];
 
 

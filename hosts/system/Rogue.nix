@@ -68,9 +68,14 @@
     packages = with pkgs; [
       firefox
       tree
+      linux-manual
+      man-pages
+      man-pages-posix
     ];
     shell = pkgs.zsh;
   };
+
+  documentation.man.generateCaches = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -30,6 +30,8 @@
       [
        ./hosts/system/Rogue.nix 
        ./hardware/Rogue.nix
+       ./modules/podman.nix
+       ./modules/neo4j.nix
        nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
        home-manager.nixosModules.home-manager {
            home-manager.useGlobalPkgs = true; 
