@@ -42,10 +42,15 @@
 
     # Containers
     pkgs.skopeo
+    pkgs.distrobox
 
     # Emacs
     pkgs.emacs
     pkgs.ripgrep
+
+    # Security
+    pkgs.radare2
+
   ];
 
 
