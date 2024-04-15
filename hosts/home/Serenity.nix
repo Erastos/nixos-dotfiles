@@ -1,22 +1,20 @@
 { config, pkgs, unstable, home-manager, ...}:
 
 {
-  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/zplug.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ];
 
   home.stateVersion = "23.11";
 
   programs.zsh.enable = true;
 
-
   home.packages = [
     pkgs.gnupg
-    pkgs.dropbox
+    # pkgs.dropbox
     # pkgs.discord
     unstable.discord
     pkgs.spotify
     pkgs.neofetch
     pkgs.nerdfonts
-    pkgs.netcat
     pkgs.whois
     pkgs.cmake
     pkgs.gnumake
@@ -30,10 +28,24 @@
     pkgs.pciutils
     pkgs.arandr
     pkgs.openvpn
-    # pkgs.dropbox-cli
+    pkgs.dropbox
     pkgs.htop
     pkgs.file
     pkgs.chromium
+    pkgs.distrobox
+    pkgs.lxappearance
+    pkgs.jetbrains.pycharm-community
+    pkgs.playerctl
+    pkgs.nushell
+    pkgs.nushellPlugins.query
+    pkgs.openvpn
+
+
+    # Security
+    pkgs.nmap
+    pkgs.gobuster
+    unstable.seclists
+    pkgs.netcat-openbsd
   ];
 
  
@@ -41,12 +53,12 @@
 
   gtk = {
     enable = true;
-    iconTheme = {
-      name = "Numix Square";
-      package = pkgs.numix-icon-theme-square;
+    cursorTheme = {
+      name = "Catppuccin-Mocha-Dark-Cursors";
+      package = pkgs.catppuccin-cursors.mochaDark;
     };
     theme = {
-      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      name = "Catppuccin-Mocha-Compact-Pink-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = [ "pink" ];
         size = "compact";
@@ -54,13 +66,13 @@
         variant = "mocha";
       };
     };
-  };
+ };
 
-  home.pointerCursor = {
-    name = "Catppuccin-Macchiato-Dark-Cursors";
-    package = pkgs.catppuccin-cursors.mochaDark;
-    size = 25;
-  };
+  # home.pointerCursor = {
+  #   name = "Catppuccin-Mocha-Dark-Cursors";
+  #   package = pkgs.catppuccin-cursors.mochaDark;
+  #   size = 25;
+  # };
 
   # programs.autorandr = {
   #   enable = true;
@@ -80,9 +92,11 @@
 
   fonts.fontconfig.enable = true;
 
-
-  home.sessionVariables = {
-
+  programs.kitty = {
+    enable = true;
+    settings = {
+      enable_audio_bell = false;
+    };
   };
 
 }

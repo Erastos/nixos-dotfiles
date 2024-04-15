@@ -11,6 +11,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     poetry2nix.url = "github:nix-community/poetry2nix/";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
+    
 };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-hardware, hyprland, poetry2nix, ...}@inputs: 
     let 
@@ -55,6 +56,10 @@
       [
        ./hosts/system/Serenity.nix 
        ./hardware/Serenity.nix
+       ./modules/i3
+       ./modules/lightdm.nix
+       ./modules/gtk.nix
+       ./modules/steam.nix
        home-manager.nixosModules.home-manager {
 	   home-manager.extraSpecialArgs = {inherit unstable;};
            home-manager.useGlobalPkgs = true; 

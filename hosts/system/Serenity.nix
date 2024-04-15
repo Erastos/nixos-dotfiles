@@ -55,13 +55,7 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm = {
-    enable = true;
-    wayland = false;
-  };
   
-  services.xserver.desktopManager.gnome.enable = true;
 
   # programs.hyprland = {
   #   enable = true;
@@ -102,7 +96,19 @@
     vim
     git
     podman
+    glibc_multi
+    python311
   ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    glibc_multi
+    zlib
+  ];
+
+  # Required to get random files to be linked into the path
+  environment.pathsToLink = ["/share"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
