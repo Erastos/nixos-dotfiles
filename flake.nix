@@ -60,6 +60,7 @@
        ./modules/lightdm.nix
        ./modules/gtk.nix
        ./modules/steam.nix
+       ./modules/security.nix
        home-manager.nixosModules.home-manager {
 	   home-manager.extraSpecialArgs = {inherit unstable;};
            home-manager.useGlobalPkgs = true; 

@@ -7,12 +7,15 @@ in {
     package = pkgs.i3-gaps;
     config = {
       modifier = mod;
-      fonts = ["DejaVu Sans Mono, FontAwesome 6"];
+      # fonts = ["DejaVu Sans Mono, FontAwesome 6"];
+      fonts = {
+        names = ["DejaVu Sans Mono, FontAwesome 6"];
+      };
       gaps.inner = 10;
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = "exec kitty";
-        "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+        "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         # "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
         # "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
 
@@ -34,7 +37,7 @@ in {
         
 
         # My multi monitor setup
-        "${mod}+m" = "move workspace to output DP-4";
+        "${mod}+m" = "move workspace to output DP-2";
         "${mod}+Shift+m" = "move workspace to output DP-0";
 
         # Lock
@@ -50,6 +53,8 @@ in {
        "${mod}+s" = "gaps inner current plus 10";
        "${mod}+Shift+s" = "gaps inner current minus 10";
        
+       # Applications
+       "${mod}+w" = "exec firefox";
       };
 
       modes.resize =  {

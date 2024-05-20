@@ -38,6 +38,11 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.nameservers = ["8.8.8.8" "10.10.1.2"];
+  # networking.networkmanager.dns = "none";
+  # networking.search = ["netsca.pe"];
+
+
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -79,12 +84,12 @@
 # Enable touchpad support (enabled default in most desktopManager).
 # services.xserver.libinput.enable = true;
 
-  programs.zsh.enable = true;
+  programs.zsh.enable = false;
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erastos = {
 	  isNormalUser = true;
-	  shell = pkgs.zsh;
+	  shell = pkgs.nushell;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 

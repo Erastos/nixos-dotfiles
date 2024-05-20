@@ -1,12 +1,11 @@
 { config, lib, pkgs, ... }:
-
 {
   programs.kitty = {
     enable = true;
     settings = {
       enable_audio_bell = false;
     };
-    themes = "Kanagawa";
-  }
+    theme = "1984 Dark";
+  };
   
 }

@@ -1,7 +1,8 @@
 { config, pkgs, unstable, home-manager, ...}:
 
 {
-  imports = [../../modules/zsh/main.nix ../../modules/zsh/zplug.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ];
+  # imports = [../../modules/zsh/main.nix ../../modules/zsh/zplug.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ../../modules/kitty.nix];
+  imports = [../../modules/nushell.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ../../modules/kitty.nix ../../modules/rofi.nix];
 
   home.stateVersion = "23.11";
 
@@ -39,6 +40,18 @@
     pkgs.nushell
     pkgs.nushellPlugins.query
     pkgs.openvpn
+    pkgs.virt-viewer
+    pkgs.dig
+
+    pkgs.vim
+
+    pkgs.vscode-fhs
+
+    pkgs.talosctl
+    pkgs.kubectl
+    pkgs.k9s
+    pkgs.kubernetes-helm
+    pkgs.skopeo
 
 
     # Security
@@ -46,6 +59,7 @@
     pkgs.gobuster
     unstable.seclists
     pkgs.netcat-openbsd
+    unstable.xsser
   ];
 
  
@@ -92,11 +106,5 @@
 
   fonts.fontconfig.enable = true;
 
-  programs.kitty = {
-    enable = true;
-    settings = {
-      enable_audio_bell = false;
-    };
-  };
-
 }
+
