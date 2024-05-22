@@ -1,11 +1,14 @@
 { config, lib, pkgs, ... }:
 {
-  programs.kitty = {
-    enable = true;
-    settings = {
-      enable_audio_bell = false;
+  imports = [];
+
+  with lib;
+  options {
+    theme = mkOption {
+      type = with types; str;
     };
-    theme = "1984 Dark";
   };
-  
+  config = {
+    
+  };
 }
