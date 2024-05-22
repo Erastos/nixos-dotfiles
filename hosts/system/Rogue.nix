@@ -72,7 +72,7 @@
       man-pages
       man-pages-posix
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
   };
 
   documentation.man.generateCaches = true;

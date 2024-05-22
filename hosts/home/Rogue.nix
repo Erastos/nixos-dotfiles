@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, ...}:
 
 {
-  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/nushell.nix];
 
   home.stateVersion = "23.11";
 
@@ -50,6 +50,9 @@
 
     # Security
     pkgs.radare2
+
+    # DevOps
+    pkgs.jq
 
   ];
 
