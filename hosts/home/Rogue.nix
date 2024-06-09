@@ -17,6 +17,7 @@
     pkgs.netcat
     pkgs.whois
     pkgs.file
+    pkgs.vscode-fhs
 
     # C/C++
     pkgs.valgrind
