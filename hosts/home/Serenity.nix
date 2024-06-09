@@ -52,6 +52,7 @@
     pkgs.k9s
     pkgs.kubernetes-helm
     pkgs.skopeo
+    pkgs.minikube
 
 
     # Security

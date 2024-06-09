@@ -42,6 +42,12 @@
   # networking.networkmanager.dns = "none";
   # networking.search = ["netsca.pe"];
 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "erastos" ];
+
+  # Tailscale
+  services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
 
 
   # Set your time zone.

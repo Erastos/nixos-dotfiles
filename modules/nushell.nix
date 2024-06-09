@@ -33,6 +33,9 @@ programs = {
         append /usr/bin/env
         )
         '';
+        shellAliases = {
+          kc = "kubectl";
+        };
    };  
    carapace.enable = true;
    carapace.enableNushellIntegration = true;
