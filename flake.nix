@@ -61,6 +61,7 @@
        ./modules/gtk.nix
        ./modules/steam.nix
        ./modules/security.nix
+       ./modules/rofi-themes.nix
        home-manager.nixosModules.home-manager {
 	   home-manager.extraSpecialArgs = {inherit unstable;};
            home-manager.useGlobalPkgs = true; 
