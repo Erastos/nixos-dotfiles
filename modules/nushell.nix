@@ -1,9 +1,10 @@
-{ config, lib, pkgs, home-manager, ...}:
+{ config, lib, pkgs, unstable, home-manager, ...}:
 
 {
 programs = {
     nushell = { 
       enable = true;
+      package = unstable.nushell;
       # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
       # configFile.source = ~/.config/nushell/config.nu;
       # for editing directly to config.nu 
@@ -35,6 +36,7 @@ programs = {
         '';
         shellAliases = {
           kc = "kubectl";
+          discord = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
         };
    };  
    carapace.enable = true;

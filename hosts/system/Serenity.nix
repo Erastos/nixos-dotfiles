@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, unstable, ... }:
 
 {
   imports =
@@ -42,12 +42,17 @@
   # networking.networkmanager.dns = "none";
   # networking.search = ["netsca.pe"];
 
+  networking.extraHosts = ''
+    10.129.79.86 driver.htb
+  '';
+
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "erastos" ];
 
   # Tailscale
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
+
 
 
   # Set your time zone.
@@ -95,7 +100,7 @@
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erastos = {
 	  isNormalUser = true;
-	  shell = pkgs.nushell;
+	  shell = unstable.nushell;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 

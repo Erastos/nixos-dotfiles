@@ -9,58 +9,94 @@
   programs.zsh.enable = true;
 
   home.packages = [
+
+    # General
     pkgs.gnupg
-    # pkgs.dropbox
-    # pkgs.discord
-    unstable.discord
+    pkgs.discord
     pkgs.spotify
     pkgs.neofetch
     pkgs.nerdfonts
     pkgs.whois
-    pkgs.cmake
-    pkgs.gnumake
-    pkgs.gcc
-    pkgs.elixir
-    pkgs.ghc
-    pkgs.rustup
+    pkgs.dropbox
     pkgs.kitty
     pkgs.firefox
     pkgs.w3m
     pkgs.pciutils
     pkgs.arandr
     pkgs.openvpn
-    pkgs.dropbox
     pkgs.htop
     pkgs.file
     pkgs.chromium
-    pkgs.distrobox
     pkgs.lxappearance
-    pkgs.jetbrains.pycharm-community
-    pkgs.playerctl
-    pkgs.nushell
-    pkgs.nushellPlugins.query
+    pkgs.vim
     pkgs.openvpn
     pkgs.virt-viewer
+    pkgs.playerctl
     pkgs.dig
-
-    pkgs.vim
-
     pkgs.vscode-fhs
+    pkgs.nix-index
+    pkgs.lutris
+    pkgs.nordic
+    pkgs.xwaylandvideobridge
+    pkgs.openssl
+    # pkgs.kdePackages.krdc
+    pkgs.remmina
+    pkgs.libreoffice-fresh
+    pkgs.unzip
+    
 
+    # C/C++
+    pkgs.cmake
+    pkgs.gnumake
+    pkgs.gcc
+
+    # Python
+    pkgs.jetbrains.pycharm-community
+
+    # Elixir
+    pkgs.elixir
+
+    # Haskell
+    pkgs.ghc
+
+    # Rust
+    pkgs.rustup
+
+    # Containers/DevOps
+    pkgs.distrobox
     pkgs.talosctl
     pkgs.kubectl
     pkgs.k9s
     pkgs.kubernetes-helm
     pkgs.skopeo
     pkgs.minikube
+    pkgs.ansible
 
+    # Nushell
+    # pkgs.nushell
+    pkgs.nushellPlugins.query
 
     # Security
     pkgs.nmap
     pkgs.gobuster
     unstable.seclists
     pkgs.netcat-openbsd
-    unstable.xsser
+    pkgs.xsser
+    pkgs.samba4Full
+    pkgs.responder
+    unstable.python312Packages.impacket
+    pkgs.crackmapexec
+    unstable.bloodhound
+    unstable.enum4linux
+    unstable.kerbrute
+
+
+    # Networking
+    pkgs.unifi
+
+
+    # PHP
+    pkgs.php
   ];
 
  

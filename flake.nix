@@ -2,7 +2,7 @@
   description = "Erastos Config Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/24.05";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,12 +56,15 @@
       [
        ./hosts/system/Serenity.nix 
        ./hardware/Serenity.nix
-       ./modules/i3
-       ./modules/lightdm.nix
+       # ./modules/i3
+       ./modules/plasma.nix
+       # ./modules/lightdm.nix
        ./modules/gtk.nix
        ./modules/steam.nix
        ./modules/security.nix
-       ./modules/rofi-themes.nix
+
+       ./modules/neo4j.nix
+       # ./modules/rofi-themes.nix
        home-manager.nixosModules.home-manager {
 	   home-manager.extraSpecialArgs = {inherit unstable;};
            home-manager.useGlobalPkgs = true; 
