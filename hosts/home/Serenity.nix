@@ -43,6 +43,7 @@
     pkgs.remmina
     pkgs.libreoffice-fresh
     pkgs.unzip
+    pkgs.emacs
     
 
     # C/C++
