@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, ...}:
 
 {
-  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/nushell.nix];
+  imports = [../../modules/zsh/main.nix ../../modules/zsh/prezto.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/nushell.nix ../../modules/tmux.nix];
 
   home.stateVersion = "23.11";
 
@@ -18,6 +18,7 @@
     pkgs.whois
     pkgs.file
     pkgs.vscode-fhs
+    pkgs.openvpn
 
     # C/C++
     pkgs.valgrind
@@ -51,9 +52,22 @@
 
     # Security
     pkgs.radare2
+    pkgs.nmap
+    pkgs.exploitdb
+    pkgs.seclists
+    pkgs.gobuster
 
     # DevOps
     pkgs.jq
+
+
+    # Kubernetes
+    pkgs.talosctl
+    pkgs.kubectl
+
+
+    # AI
+    pkgs.ollama
 
   ];
 
