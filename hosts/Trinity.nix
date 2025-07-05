@@ -6,9 +6,9 @@
 
   home.stateVersion = "23.11";
 
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
 
-  # home.packages = [
+  home.packages = [
 
   #   # General
   #   pkgs.gnupg
@@ -98,7 +98,7 @@
 
   #   # PHP
   #   pkgs.php
-  # ];
+  ];
 
  
   # programs.home-manager.enable = true;

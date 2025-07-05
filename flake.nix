@@ -42,7 +42,10 @@
        ./modules/base-packages.nix
        ./modules/plasma.nix
        ./modules/nvidia.nix
+
+
        ./hardware-configuration.nix
+
 
        ({ config, lib, pkgs, ... }: { system.stateVersion = "25.05"; })
       
@@ -52,7 +55,7 @@
            home-manager.useUserPackages = true;
            home-manager.users.netscape = {
              imports = [
-               ./hosts/home/Serenity.nix
+               ./hosts/home/Trinity.nix
                ./modules/git.nix
              ];
            };
