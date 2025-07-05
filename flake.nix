@@ -27,18 +27,19 @@
 
       modules = 
       [
-       /etc/nixos/configuration.nix
-       home-manager.nixosModules.home-manager {
-	   home-manager.extraSpecialArgs = {inherit unstable;};
-           home-manager.useGlobalPkgs = true; 
-           home-manager.useUserPackages = true;
-           home-manager.users.erastos = {
-             imports = [ ];
-           };
-         }
+       ./configuration.nix
+       # home-manager.nixosModules.home-manager {
+       #     home-manager.extraSpecialArgs = {inherit unstable;};
+       #     home-manager.useGlobalPkgs = true; 
+       #     home-manager.useUserPackages = true;
+       #     home-manager.users.erastos = {
+       #       imports = [ ];
+       #     };
+       #   }
 
       ];
 
     };
+
   };
 }
