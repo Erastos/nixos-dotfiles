@@ -42,6 +42,7 @@
        ./modules/base-packages.nix
        ./modules/plasma.nix
        ./modules/nvidia.nix
+       ./modules/nix-command.nix
 
 
        ./hardware-configuration.nix
@@ -55,7 +56,7 @@
            home-manager.useUserPackages = true;
            home-manager.users.netscape = {
              imports = [
-               ./hosts/home/Trinity.nix
+               ./hosts/Trinity.nix
                ./modules/git.nix
              ];
            };
