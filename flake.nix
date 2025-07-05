@@ -27,7 +27,24 @@
 
       modules = 
       [
-       ./configuration.nix
+       ./modules/boot/systemd-boot.nix
+       ./modules/kernel.nix
+       ./modules/network.nix
+       ./modules/time.nix
+       ./modules/locale.nix
+       ./modules/cups.nix
+       ./modules/audio/pipewire.nix
+       ./modules/touchpad.nix
+       ./modules/users.nix
+       ./modules/web/firefox.nix
+       ./modules/ssh.nix
+       ./modules/base-packages.nix
+       ./modules/plasma.nix
+       ./modules/nvidia.nix
+       ./hardware-configuration.nix
+       
+
+       # ./configuration.nix
        # home-manager.nixosModules.home-manager {
        #     home-manager.extraSpecialArgs = {inherit unstable;};
        #     home-manager.useGlobalPkgs = true; 
