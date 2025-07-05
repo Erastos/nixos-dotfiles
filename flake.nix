@@ -9,7 +9,8 @@
     };
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     
-};
+  };
+
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ...}@inputs: 
     let 
       unstable = import nixpkgs-unstable {
@@ -19,14 +20,14 @@
     in
   {
     nixosConfigurations.Trinity = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs unstable;};
+      specialArgs = { inherit unstable; };
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
 
-      modules = 
-      [
+      modules = [
+
        ./modules/boot/systemd-boot.nix
        ./modules/kernel.nix
        ./modules/network.nix
@@ -42,21 +43,22 @@
        ./modules/plasma.nix
        ./modules/nvidia.nix
        ./hardware-configuration.nix
-       
 
-       # ./configuration.nix
-       # home-manager.nixosModules.home-manager {
-       #     home-manager.extraSpecialArgs = {inherit unstable;};
-       #     home-manager.useGlobalPkgs = true; 
-       #     home-manager.useUserPackages = true;
-       #     home-manager.users.erastos = {
-       #       imports = [ ];
-       #     };
-       #   }
-
+       ({ config, lib, pkgs, ... }: { system.stateVersion = "25.05"; })
+      
+       home-manager.nixosModules.home-manager {
+           home-manager.extraSpecialArgs = { inherit unstable; };
+           home-manager.useGlobalPkgs = true; 
+           home-manager.useUserPackages = true;
+           home-manager.users.netscape = {
+             imports = [
+               ./hosts/home/Serenity.nix
+               ./modules/git.nix
+             ];
+           };
+         }
       ];
 
     };
-
   };
 }
