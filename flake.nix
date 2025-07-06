@@ -58,6 +58,7 @@
              imports = [
                ./hosts/Trinity.nix
                ./modules/git.nix
+               ./modules/zsh.nix
              ];
            };
          }
