@@ -16,7 +16,6 @@
     pkgs.spotify
     pkgs.fastfetch
   #   pkgs.neofetch
-    pkgs.nerdfonts
     pkgs.whois
     pkgs.dropbox
   #   pkgs.kitty
@@ -78,18 +77,18 @@
   #   pkgs.nushellPlugins.query
 
   #   # Security
-    pkgs.nmap
-    pkgs.gobuster
-    unstable.seclists
-    pkgs.netcat-openbsd
+  #   pkgs.nmap
+  #   pkgs.gobuster
+  #   unstable.seclists
+  #   pkgs.netcat-openbsd
   #   pkgs.xsser
   #   pkgs.samba4Full
-    pkgs.responder
+  #   pkgs.responder
   #   unstable.python312Packages.impacket
   #   pkgs.crackmapexec
   #   unstable.bloodhound
   #   unstable.enum4linux
-    unstable.kerbrute
+  # unstable.kerbrute
 
 
   #   # Networking
@@ -142,7 +141,7 @@
   # #   };
   # # };
 
-  fonts.fontconfig.enable = true;
+  # fonts.fontconfig.enable = true;
 
 }
 

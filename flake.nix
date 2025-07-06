@@ -44,7 +44,7 @@
        ./modules/nvidia.nix
        ./modules/nix-command.nix
        ./modules/steam.nix
-       ./modules/font.nix
+       # ./modules/fonts.nix
 
 
        ./hardware-configuration.nix
