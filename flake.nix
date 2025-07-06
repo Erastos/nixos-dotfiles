@@ -43,6 +43,8 @@
        ./modules/plasma.nix
        ./modules/nvidia.nix
        ./modules/nix-command.nix
+       ./modules/steam.nix
+       ./modules/font.nix
 
 
        ./hardware-configuration.nix
@@ -58,7 +60,8 @@
              imports = [
                ./hosts/Trinity.nix
                ./modules/git.nix
-               ./modules/zsh.nix
+               ./modules/zsh/main.nix
+               ./modules/zsh/prezto.nix
              ];
            };
          }
