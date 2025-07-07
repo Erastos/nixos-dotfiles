@@ -1,12 +1,9 @@
 { config, pkgs, unstable, home-manager, ...}:
 
 {
-  # imports = [../../modules/zsh/main.nix ../../modules/zsh/zplug.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ../../modules/kitty.nix];
-  # imports = [../../modules/nushell.nix ../../modules/git.nix ../../modules/tmux.nix ../../modules/i3/basic.nix ../../modules/picom.nix ../../modules/kitty.nix ../../modules/rofi.nix];
 
   home.stateVersion = "23.11";
 
-  programs.zsh.enable = true;
 
   home.packages = [
 
@@ -15,88 +12,63 @@
     pkgs.discord
     pkgs.spotify
     pkgs.fastfetch
-  #   pkgs.neofetch
     pkgs.whois
     pkgs.dropbox
-  #   pkgs.kitty
+    pkgs.wezterm
     pkgs.firefox
     pkgs.w3m
     pkgs.pciutils
-  #   pkgs.arandr
+    pkgs.arandr
     pkgs.openvpn
     pkgs.htop
     pkgs.file
     pkgs.chromium
-  #   pkgs.lxappearance
     pkgs.vim
-  #   pkgs.virt-viewer
-  #   pkgs.playerctl
-  #   pkgs.dig
-  #   pkgs.vscode-fhs
-  #   pkgs.nix-index
-  #   pkgs.lutris
-  #   pkgs.nordic
-  #   pkgs.xwaylandvideobridge
-  #   pkgs.openssl
-  #   # pkgs.kdePackages.krdc
-  #   pkgs.remmina
-  #   pkgs.libreoffice-fresh
+    pkgs.virt-viewer
+    pkgs.playerctl
+    pkgs.dig
+    pkgs.vscode-fhs
+    pkgs.nix-index
+    pkgs.openssl
+    pkgs.libreoffice-fresh
     pkgs.unzip
-  #   pkgs.emacs
-  #   
+    pkgs.emacs
+    pkgs.ripgrep
 
-  #   # C/C++
+    # C/C++
     pkgs.cmake
     pkgs.gnumake
     pkgs.gcc
 
-  #   # Python
-  #   pkgs.jetbrains.pycharm-community
 
-  #   # Elixir
-  #   pkgs.elixir
+    # Haskell
+    pkgs.ghc
 
-  #   # Haskell
-  #   pkgs.ghc
+    # Rust
+    pkgs.rustup
 
-  #   # Rust
-  #   pkgs.rustup
-
-  #   # Containers/DevOps
-  #   pkgs.distrobox
-  #   pkgs.talosctl
+    # Containers/DevOps
+    pkgs.distrobox
+    pkgs.talosctl
     pkgs.kubectl
     pkgs.k9s
     pkgs.kubernetes-helm
     pkgs.skopeo
-  #   pkgs.minikube
+    pkgs.minikube
     pkgs.ansible
-
-  #   # Nushell
-  #   # pkgs.nushell
-  #   pkgs.nushellPlugins.query
-
-  #   # Security
-  #   pkgs.nmap
-  #   pkgs.gobuster
-  #   unstable.seclists
-  #   pkgs.netcat-openbsd
-  #   pkgs.xsser
-  #   pkgs.samba4Full
-  #   pkgs.responder
-  #   unstable.python312Packages.impacket
-  #   pkgs.crackmapexec
-  #   unstable.bloodhound
-  #   unstable.enum4linux
-  # unstable.kerbrute
+    
+    # Nix / NixOS
+    pkgs.cntr
 
 
-  #   # Networking
-  #   pkgs.unifi
-
-
-  #   # PHP
-  #   pkgs.php
+    # Security
+    pkgs.nmap
+    pkgs.gobuster
+    unstable.seclists
+    pkgs.netcat-openbsd
+    pkgs.responder
+    pkgs.python313
+    pkgs.python313Packages.impacket
   ];
 
  

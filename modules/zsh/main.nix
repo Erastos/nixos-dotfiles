@@ -4,9 +4,6 @@
 
 programs.zsh = {
   enable = true;
-  shellAliases = {
-    update = "sudo nixos-rebuild switch --flake '.#Trinity'";
-  };
   history.size = 1000;
   history.save = 100000;
   history.share = true;
