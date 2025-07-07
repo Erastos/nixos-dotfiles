@@ -81,6 +81,8 @@
        ./modules/steam.nix
        ./modules/fonts.nix
 
+       ./modules/zsh/editor.nix
+
 
        ./hardware-configuration.nix
 
@@ -102,6 +104,7 @@
                ./modules/zsh/aliases.nix
                ./modules/zsh/prezto.nix
                ./modules/tmux.nix
+               ./modules/neovim.nix
              ];
            };
          }
