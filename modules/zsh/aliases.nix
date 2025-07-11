@@ -2,6 +2,6 @@
 
 {
   programs.zsh.shellAliases = {
-    update = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#Trinity'";
+    update = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#Trinity' -v";
   };
 }

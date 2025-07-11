@@ -34,6 +34,8 @@
     pkgs.unzip
     pkgs.emacs
     pkgs.ripgrep
+    pkgs.killall
+    unstable.jujutsu
 
     # C/C++
     pkgs.cmake
@@ -60,8 +62,8 @@
     # Nix / NixOS
     pkgs.cntr
 
-
     # Security
+    pkgs.wireshark
     pkgs.nmap
     pkgs.gobuster
     unstable.seclists
