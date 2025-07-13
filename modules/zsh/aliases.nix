@@ -2,6 +2,7 @@
 
 {
   programs.zsh.shellAliases = {
-    update = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#Trinity' -v";
+    up = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#Trinity' -v";
+    en = "nvim ~/nixos-dotfiles";
   };
 }
