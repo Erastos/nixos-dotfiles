@@ -105,6 +105,7 @@
                ./modules/zsh/antidote.nix
                ./modules/tmux.nix
                ./modules/neovim.nix
+               ./modules/wezterm.nix
              ];
            };
          }
