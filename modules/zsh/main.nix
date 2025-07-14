@@ -2,13 +2,17 @@
 
 {
 
-programs.zsh = {
-  enable = true;
-  history.size = 1000;
-  history.save = 100000;
-  history.share = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    defaultKeymap = "emacs";
+    history.size = 1000;
+    history.save = 100000;
+    history.share = false;
 
-};
+    zprof.enable = false;
+
+  };
 
 }
 
