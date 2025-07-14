@@ -2,7 +2,7 @@
 
 {
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "22.11";
 
 
   home.packages = [
@@ -36,12 +36,12 @@
     pkgs.ripgrep
     pkgs.killall
     unstable.jujutsu
+    pkgs.usbutils
 
     # C/C++
     pkgs.cmake
     pkgs.gnumake
     pkgs.gcc
-
 
     # Haskell
     pkgs.ghc
@@ -71,6 +71,9 @@
     pkgs.responder
     pkgs.python313
     pkgs.python313Packages.impacket
+
+    # Hardware
+    pkgs.arduino-ide
   ];
 
  
