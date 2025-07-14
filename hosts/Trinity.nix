@@ -10,7 +10,7 @@
     # General
     pkgs.gnupg
     pkgs.discord
-    pkgs.spotify
+    unstable.spotify
     pkgs.fastfetch
     pkgs.whois
     pkgs.dropbox
@@ -24,19 +24,18 @@
     pkgs.file
     pkgs.chromium
     pkgs.vim
-    pkgs.virt-viewer
     pkgs.playerctl
     pkgs.dig
-    pkgs.vscode-fhs
-    pkgs.nix-index
     pkgs.openssl
     pkgs.libreoffice-fresh
     pkgs.unzip
     pkgs.emacs
     pkgs.ripgrep
-    pkgs.killall
     unstable.jujutsu
     pkgs.usbutils
+    pkgs.obsidian
+    pkgs.telegram-desktop
+    pkgs.lsof
 
     # C/C++
     pkgs.cmake
@@ -50,14 +49,13 @@
     pkgs.rustup
 
     # Containers/DevOps
-    pkgs.distrobox
-    pkgs.talosctl
     pkgs.kubectl
-    pkgs.k9s
+    unstable.k9s
     pkgs.kubernetes-helm
     pkgs.skopeo
-    pkgs.minikube
     pkgs.ansible
+    pkgs.podman
+    pkgs.terraform
     
     # Nix / NixOS
     pkgs.cntr
@@ -65,12 +63,14 @@
     # Security
     pkgs.wireshark
     pkgs.nmap
+    unstable.netexec
     pkgs.gobuster
     unstable.seclists
     pkgs.netcat-openbsd
     pkgs.responder
     pkgs.python313
     pkgs.python313Packages.impacket
+    unstable.metasploit
 
     # Hardware
     pkgs.arduino-ide
