@@ -101,8 +101,8 @@
                ./hosts/Trinity.nix
                ./modules/git.nix
                ./modules/zsh/main.nix
-               ./modules/zsh/aliases.nix
-               ./modules/zsh/prezto.nix
+               # ./modules/zsh/aliases.nix
+               # ./modules/zsh/prezto.nix
                ./modules/tmux.nix
                ./modules/neovim.nix
              ];

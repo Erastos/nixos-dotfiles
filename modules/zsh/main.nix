@@ -8,12 +8,6 @@ programs.zsh = {
   history.save = 100000;
   history.share = true;
 
-  zplug = {
-      enable = true;
-      plugins = [
-        { name = "iplaces/astro-zsh-theme"; tags = [ as:theme ]; }
-      ];
-    };
 };
 
 }
