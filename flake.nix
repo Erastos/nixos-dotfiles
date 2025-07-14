@@ -80,8 +80,11 @@
        ./modules/nix-command.nix
        ./modules/steam.nix
        ./modules/fonts.nix
+       ./modules/lix.nix
+       ./modules/tailscale.nix
 
        ./modules/zsh/editor.nix
+       ./modules/podman.nix
 
 
        ./hardware-configuration.nix
@@ -89,9 +92,6 @@
 
        ({ config, lib, pkgs, ... }: { system.stateVersion = "25.05"; })
        
-       # ({ config, lib, pkgs, ... }: { environment.systemPackages = [pkgs.python313Packages.impacket] ; })
-       # ({ config, lib, pkgs, ... }: { environment.systemPackages = [] ; })
-      
        home-manager.nixosModules.home-manager {
            home-manager.extraSpecialArgs = { inherit unstable; };
            home-manager.useGlobalPkgs = true; 
