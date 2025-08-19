@@ -78,8 +78,8 @@
        ./modules/plasma.nix
        ./modules/nvidia.nix
        ./modules/nix-command.nix
-       ./modules/steam.nix
        ./modules/fonts.nix
+       ./modules/steam.nix
        ./modules/lix.nix
        ./modules/tailscale.nix
 
@@ -87,7 +87,7 @@
        ./modules/podman.nix
 
 
-       ./hardware-configuration.nix
+       ./hardware/Trinity.nix
 
 
        ({ config, lib, pkgs, ... }: { system.stateVersion = "25.05"; })
@@ -111,6 +111,63 @@
          }
       ];
 
+    };
+  
+  nixosConfigurations.Neo = nixpkgs.lib.nixosSystem {
+    specialArgs = { inherit unstable; };
+    pkgs = import nixpkgs {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
+
+    modules = [
+
+     ./modules/boot/systemd-boot.nix
+     ./modules/kernel.nix
+     ./modules/network.nix
+     ./modules/time.nix
+     ./modules/locale.nix
+     ./modules/cups.nix
+     ./modules/audio/pipewire.nix
+     ./modules/touchpad.nix
+     ./modules/users.nix
+     ./modules/sway.nix
+     ./modules/web/firefox.nix
+     ./modules/ssh.nix
+     ./modules/base-packages.nix
+     ./modules/nix-command.nix
+     ./modules/intel.nix
+     ./modules/sway.nix
+     ./modules/fonts.nix
+     ./modules/lix.nix
+     ./modules/tailscale.nix
+
+     ./modules/zsh/editor.nix
+     ./modules/podman.nix
+
+     ./hardware/Neo.nix
+
+
+     ({ config, lib, pkgs, ... }: { system.stateVersion = "25.05"; })
+     
+     home-manager.nixosModules.home-manager {
+         home-manager.extraSpecialArgs = { inherit unstable; };
+         home-manager.useGlobalPkgs = true; 
+         home-manager.useUserPackages = true;
+         home-manager.users.netscape = {
+           imports = [
+             ./hosts/Neo.nix
+             ./modules/git.nix
+             ./modules/zsh/main.nix
+             ./modules/zsh/aliases.nix
+             ./modules/zsh/antidote.nix
+             ./modules/tmux.nix
+             ./modules/neovim.nix
+             ./modules/wezterm.nix
+           ];
+         };
+       }
+      ];
     };
   };
 }
