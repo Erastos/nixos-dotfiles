@@ -131,13 +131,12 @@
      ./modules/audio/pipewire.nix
      ./modules/touchpad.nix
      ./modules/users.nix
-     ./modules/sway.nix
      ./modules/web/firefox.nix
      ./modules/ssh.nix
      ./modules/base-packages.nix
      ./modules/nix-command.nix
      ./modules/intel.nix
-     ./modules/sway.nix
+     ./modules/river.nix
      ./modules/fonts.nix
      ./modules/lix.nix
      ./modules/tailscale.nix
