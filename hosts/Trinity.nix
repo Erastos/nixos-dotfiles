@@ -10,7 +10,7 @@
     # General
     pkgs.gnupg
     pkgs.discord
-    unstable.spotify
+    pkgs.spotify
     pkgs.fastfetch
     pkgs.whois
     pkgs.dropbox
@@ -56,6 +56,7 @@
     pkgs.ansible
     pkgs.podman
     pkgs.terraform
+    pkgs.packer
     
     # Nix / NixOS
     pkgs.cntr
