@@ -6,6 +6,9 @@ programs.tmux = {
   enable = true;
   prefix = "C-a";
   historyLimit = 10000;
+  plugins = with pkgs.tmuxPlugins; [
+    resurrect
+  ];
   extraConfig = ''
   # remap prefix from 'C-b' to 'C-a'
   # unbind C-b
@@ -27,11 +30,6 @@ programs.tmux = {
   bind -T copy-mode f send -X page-down
 
   bind C-u copy-mode -u
-
-  set -g @plugin 'tmux-plugins/tpm'
-  set -g @plugin 'tmux-plugins/tmux-resurrect'
-
-  run '/usr/share/tmux-plugin-manager/tpm'
   '';
 };
 

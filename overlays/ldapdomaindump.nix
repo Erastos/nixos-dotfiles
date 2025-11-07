@@ -1,3 +1,8 @@
+# Overlay to fix ldapdomaindump package for Python 3.13
+# This is required because:
+# 1. The responder package depends on ldapdomaindump
+# 2. The default nixpkgs version has compatibility issues with Python 3.13
+# 3. This overlay updates to version 0.10.0 and removes the deprecated 'future' dependency
 ( self: super: {
     python313 = super.python313.override {
       packageOverrides = pythonSelf: pythonSuper: {

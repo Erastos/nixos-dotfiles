@@ -77,49 +77,8 @@
     pkgs.arduino-ide
   ];
 
- 
+
   programs.home-manager.enable = true;
-
-  # gtk = {
-  #   enable = true;
-  #   cursorTheme = {
-  #     name = "Catppuccin-Mocha-Dark-Cursors";
-  #     package = pkgs.catppuccin-cursors.mochaDark;
-  #   };
-  #   theme = {
-  #     name = "Catppuccin-Mocha-Compact-Pink-Dark";
-  #     package = pkgs.catppuccin-gtk.override {
-  #       accents = [ "pink" ];
-  #       size = "compact";
-  #       tweaks = [ "rimless" "black" ];
-  #       variant = "mocha";
-  #     };
-  #   };
-  # };
-
-  # # home.pointerCursor = {
-  # #   name = "Catppuccin-Mocha-Dark-Cursors";
-  # #   package = pkgs.catppuccin-cursors.mochaDark;
-  # #   size = 25;
-  # # };
-
-  # # programs.autorandr = {
-  # #   enable = true;
-  # #   profiles."default".config = {
-  # #     "DP-0" = {
-  # #       enable = true;
-  # #       primary = false;
-  # #       position = "2560x0";
-  # #     };
-  # #     "DP-4" = {
-  # #       enable = true;
-  # #       primary = true;
-  # #       position = "0x0";
-  # #     };
-  # #   };
-  # # };
-
-  # fonts.fontconfig.enable = true;
 
 }
 

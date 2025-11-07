@@ -4,7 +4,7 @@
   options = {
     systemName = lib.mkOption {
       type = lib.types.str;
-      default = "Neo";
+      example = "Neo";
       description = "Name of the NixOS system configuration (used in flake reference)";
     };
   };

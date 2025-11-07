@@ -2,12 +2,11 @@
   description = "Netscape's Config Flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ...}:
     let
