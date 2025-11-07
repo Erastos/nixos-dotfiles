@@ -3,3 +3,4 @@
 {
   programs.sway.enable = true;
 }
+

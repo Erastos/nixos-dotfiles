@@ -37,6 +37,9 @@
     pkgs.telegram-desktop
     pkgs.lsof
     pkgs.pulsemixer
+    pkgs.acpi
+    pkgs.dmenu
+    pkgs.wl-clipboard
 
     # C/C++
     pkgs.cmake
@@ -57,6 +60,7 @@
     pkgs.ansible
     pkgs.podman
     pkgs.terraform
+    pkgs.jq
     
     # Nix / NixOS
     pkgs.cntr
@@ -75,6 +79,10 @@
 
     # Hardware
     pkgs.arduino-ide
+    pkgs.platformio
+
+    # AI
+    unstable.claude-code
   ];
 
  

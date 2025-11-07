@@ -1,6 +1,6 @@
 { config, lib, pkgs, ...}:
 
 {
-  networking.hostName = "Trinity";
+  networking.hostName = config.systemName;
   networking.networkmanager.enable = true;
 }
