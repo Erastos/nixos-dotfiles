@@ -14,118 +14,58 @@
       overlays = [(import ./overlays/ldapdomaindump.nix) ];
       pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true;};
       unstable = import nixpkgs-unstable { inherit system overlays; config.allowUnfree = true;};
-      colors = ./modules/colors/red.nix;
     in
     {
       nixosConfigurations.Trinity = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         specialArgs = {inherit unstable;};
         modules = [
-         ./modules/basic.nix
-         ./modules/boot/systemd-boot.nix
-         ./modules/kernel.nix
-         ./modules/network.nix
-         ./modules/time.nix
-         ./modules/locale.nix
-         ./modules/cups.nix
-         ./modules/audio/pipewire.nix
-         ./modules/touchpad.nix
-         ./modules/users.nix
-         ./modules/web/firefox.nix
-         ./modules/ssh.nix
-         ./modules/base-packages.nix
-         ./modules/plasma.nix
-         ./modules/nvidia.nix
-         ./modules/nix-command.nix
-         ./modules/fonts.nix
-         ./modules/steam.nix
-         ./modules/lix.nix
-         ./modules/tailscale.nix
+          ./modules
 
-         ./modules/zsh/editor.nix
-         ./modules/podman.nix
+          ./hardware/Trinity.nix
 
+          ({ config, lib, pkgs, ... }: {
+            system.stateVersion = "25.05";
+            netscape.systemName = "Trinity";
+            netscape.hostType = "desktop";
+          })
 
-         ./hardware/Trinity.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.extraSpecialArgs = { inherit unstable; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.netscape = {
+              imports = [
+                ./modules/home
+                ./hosts/Trinity.nix
+              ];
+            };
+          }
+        ];
+      };
 
-         ({ config, lib, pkgs, ... }: {
-           system.stateVersion = "25.05";
-           systemName = "Trinity";
-         })
-       
-         home-manager.nixosModules.home-manager {
-           home-manager.extraSpecialArgs = { inherit unstable; };
-           home-manager.useGlobalPkgs = true; 
-           home-manager.useUserPackages = true;
-           home-manager.users.netscape = {
-             imports = [
-               ./hosts/Trinity.nix
-               ./modules/git.nix
-               ./modules/zsh/main.nix
-               ./modules/zsh/aliases.nix
-               ./modules/zsh/antidote.nix
-               ./modules/tmux.nix
-               ./modules/neovim.nix
-               ./modules/wezterm.nix
-             ];
-           };
-         }
-      ];
-    };
-
-    nixosConfigurations.Neo = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.Neo = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         specialArgs = {inherit unstable;};
         modules = [
-          ./modules/basic.nix
-          ./modules/boot/systemd-boot.nix
-          ./modules/kernel.nix
-          ./modules/network.nix
-          ./modules/time.nix
-          ./modules/locale.nix
-          ./modules/cups.nix
-          ./modules/audio/pipewire.nix
-          ./modules/touchpad.nix
-          ./modules/users.nix
-          ./modules/web/firefox.nix
-          ./modules/ssh.nix
-          ./modules/base-packages.nix
-          ./modules/nix-command.nix
-          ./modules/intel.nix
-          ./modules/fonts.nix
-          ./modules/lix.nix
-          ./modules/tailscale.nix
-          ./modules/graphics.nix
-          ./modules/sway.nix
-
-          ./modules/zsh/editor.nix
-          ./modules/podman.nix
+          ./modules
 
           ./hardware/Neo.nix
 
           ({ config, lib, pkgs, ... }: {
             system.stateVersion = "25.05";
-            systemName = "Neo";
+            netscape.systemName = "Neo";
+            netscape.hostType = "laptop";
           })
 
           home-manager.nixosModules.home-manager {
-              home-manager.extraSpecialArgs = { inherit unstable; };
-              home-manager.useGlobalPkgs = true; 
-              home-manager.useUserPackages = true;
-              home-manager.users.netscape = {
-                imports = [
-                  colors
-                  ./hosts/Neo.nix
-                  ./modules/git.nix
-                  ./modules/zsh/main.nix
-                  ./modules/zsh/aliases.nix
-                  ./modules/zsh/antidote.nix
-                  ./modules/tmux.nix
-                  ./modules/neovim.nix
-                  ./modules/wezterm.nix
-                  ./modules/foot.nix
-                  ./modules/river.nix
-                  ./modules/waybar.nix
+            home-manager.extraSpecialArgs = { inherit unstable; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.netscape = {
+              imports = [
+                ./modules/home
+                ./hosts/Neo.nix
               ];
             };
           }
