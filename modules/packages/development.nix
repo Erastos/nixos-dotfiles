@@ -9,7 +9,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home-manager.users.netscape = {
+    home-manager.users.netscape = { config, ... }: {
       home.packages = with pkgs; [
         # C/C++
         cmake
@@ -20,7 +20,24 @@ in
         ghc
 
         # Rust
-        rustup
+        cargo
+        rustc
+
+        # Python with pip and pynvim
+        python313Packages.pip
+        python313Packages.pynvim
+
+        # Fast file finder for telescope
+        fd
+      ]
+      # LSP servers for Neovim
+      ++ lib.optionals config.programs.neovim.enable [
+        lua-language-server
+        ansible-language-server
+        gopls
+        yaml-language-server
+        pyright
+        rust-analyzer
       ];
     };
   };

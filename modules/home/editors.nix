@@ -12,6 +12,7 @@ in
     # Neovim
     programs.zsh.sessionVariables = {
       EDITOR = "nvim";
+      NVIM_THEME = "tokyonight";
     };
 
     programs.neovim = {
