@@ -7,5 +7,6 @@
     ./devops.nix
     ./security.nix
     ./hardware.nix
+    ./ai.nix
   ];
 }
