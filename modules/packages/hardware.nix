@@ -13,6 +13,7 @@ in
       home.packages = with pkgs; [
         # Hardware
         arduino-ide
+        platformio
       ];
     };
   };

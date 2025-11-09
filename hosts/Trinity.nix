@@ -7,9 +7,6 @@
 
   home.packages = [
 
-    # Containers/DevOps (Trinity-specific)
-    pkgs.packer
-
     # Security (Trinity-specific)
     pkgs.python313Packages.impacket
   ];

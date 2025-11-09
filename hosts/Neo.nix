@@ -13,12 +13,6 @@
     pkgs.dmenu
     pkgs.wl-clipboard
 
-    # Containers/DevOps (Neo-specific)
-    pkgs.jq
-
-    # Hardware (Neo-specific)
-    pkgs.platformio
-
     # AI (Neo-specific)
     unstable.claude-code
   ];

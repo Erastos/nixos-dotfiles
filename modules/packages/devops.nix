@@ -19,6 +19,8 @@ in
         ansible
         podman
         terraform
+        jq
+        packer
 
         # Nix / NixOS
         cntr
