@@ -6,13 +6,17 @@ in
 {
   options.netscape.home.editors = {
     enable = lib.mkEnableOption "editor configuration (Neovim and Tmux)" // { default = true; };
+    theme = lib.mkOption {
+      type = lib.types.str;
+      default = "onedark";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     # Neovim
     programs.zsh.sessionVariables = {
       EDITOR = "nvim";
-      NVIM_THEME = "tokyonight";
+      NVIM_THEME = cfg.theme;
     };
 
     programs.neovim = {

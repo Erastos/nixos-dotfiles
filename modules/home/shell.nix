@@ -27,12 +27,15 @@ in
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
       };
 
-      # Antidote plugin manager
+      # Powerlevel 10K Theme
       initContent = ''
         promptinit && prompt powerlevel10k
         source ~/.p10k.zsh
       '';
+
       completionInit = "";
+
+      # Antidote plugin manager
       antidote = {
         enable = true;
         plugins = [
