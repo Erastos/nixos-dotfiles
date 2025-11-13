@@ -11,6 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.netscape = {
       home.packages = with unstable; [
+        opencode
         claude-code
       ];
     };

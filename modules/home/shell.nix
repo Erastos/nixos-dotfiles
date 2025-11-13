@@ -24,6 +24,7 @@ in
         up = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
         boot = "sudo nixos-rebuild boot --flake '/home/netscape/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
         en = "nvim ~/nixos-dotfiles";
+        eco = "nvim ~/.config/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
       };
 
