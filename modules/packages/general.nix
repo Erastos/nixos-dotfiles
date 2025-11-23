@@ -40,8 +40,6 @@ in
         obsidian
         telegram-desktop
         lsof
-        linphone
-        twinkle
       ];
     };
   };
