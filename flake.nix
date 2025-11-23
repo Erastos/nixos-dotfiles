@@ -30,6 +30,7 @@
             system.stateVersion = "25.05";
             netscape.systemName = "Trinity";
             netscape.hostType = "desktop";
+            netscape.system.networking.firewall.http.enable = true;
           })
 
           home-manager.nixosModules.home-manager {
