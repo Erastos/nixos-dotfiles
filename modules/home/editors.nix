@@ -10,6 +10,11 @@ in
       type = lib.types.str;
       default = "tokyonight";
     };
+    tmuxTheme = lib.mkOption {
+      type = lib.types.enum [ "catppuccin-mocha" "catppuccin-macchiato" "catppuccin-frappe" "catppuccin-latte" "dracula" ];
+      default = "catppuccin-mocha";
+      description = "Tmux color theme";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,12 +40,29 @@ in
       historyLimit = 10000;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
+        catppuccin
+        dracula
       ];
       extraConfig = ''
-        # remap prefix from 'C-b' to 'C-a'
-        # unbind C-b
-        # set-option -g prefix C-a
-        # bind-key C-a send-prefix
+        # Terminal color support
+        set -g default-terminal "tmux-256color"
+        set -ga terminal-overrides ",*256col*:RGB"
+
+        # Theme selection
+        ${if cfg.tmuxTheme == "catppuccin-mocha" then ''
+          run ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin-mocha.tmux
+        '' else if cfg.tmuxTheme == "catppuccin-macchiato" then ''
+          run ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin-macchiato.tmux
+        '' else if cfg.tmuxTheme == "catppuccin-frappe" then ''
+          run ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin-frappe.tmux
+        '' else if cfg.tmuxTheme == "catppuccin-latte" then ''
+          run ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin-latte.tmux
+        '' else if cfg.tmuxTheme == "dracula" then ''
+          run ${pkgs.tmuxPlugins.dracula}/share/tmux-plugins/dracula/dracula.tmux
+        '' else ""}
+
+        # Reload configuration
+        bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 
         # split panes using | and -
         bind | split-window -h
@@ -58,17 +80,15 @@ in
 
         bind C-u copy-mode -u
 
-        # # Unbind the default binding of C-w
-        # unbind-key -n C-w
-        #
-        # # Rebind C-w as a prefix for handling custom subkeys
-        # bind-key -n C-w switch-client -T prefix
-        #
-        # # Bind h with prefix C-w to select the left pane
-        # bind-key -T prefix h select-pane -L
-        # bind-key -T prefix l select-pane -R
-        # bind-key -T prefix j select-pane -D
-        # bind-key -T prefix k select-pane -U
+        # Status bar configuration
+        set -g status-position bottom
+        set -g status-justify left
+        set -g status-left-length 200
+        set -g status-right-length 200
+        set -g status-left "[#S]  "
+
+        # Display git branch and status in right side
+        set -g status-right "#(cd #{pane_current_path} && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo \'\') | %H:%M | %a %b %d"
       '';
     };
   };
