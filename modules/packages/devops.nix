@@ -18,9 +18,12 @@ in
         skopeo
         ansible
         podman
-        terraform
+        unstable.terraform
         jq
         packer
+        talosctl
+        sops
+        age
 
         # Nix / NixOS
         cntr
