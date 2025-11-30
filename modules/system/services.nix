@@ -2,6 +2,7 @@
 
 let
   cfg = config.netscape.system.services;
+  isLaptop = config.netscape.hostType == "laptop";
 in
 {
   options.netscape.system.services = {
@@ -14,7 +15,7 @@ in
     };
 
     bluetooth = {
-      enable = lib.mkEnableOption "Bluetooth" // { default = true; };
+      enable = lib.mkEnableOption "Bluetooth" // { default = isLaptop; };
     };
   };
 
