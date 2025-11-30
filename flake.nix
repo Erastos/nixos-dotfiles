@@ -11,11 +11,11 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ...}:
     let
       system = "x86_64-linux";
-      overlays = builtins.map (name: import (./overlays + "/${name}"))
-        (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
-          (builtins.attrNames (builtins.readDir ./overlays)));
-      pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true;};
-      unstable = import nixpkgs-unstable { inherit system overlays; config.allowUnfree = true;};
+      # overlays = builtins.map (name: import (./overlays + "/${name}"))
+      #   (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
+      #     (builtins.attrNames (builtins.readDir ./overlays)));
+      pkgs = import nixpkgs { inherit system /* overlays */; config.allowUnfree = true;};
+      unstable = import nixpkgs-unstable { inherit system /* overlays */; config.allowUnfree = true;};
     in
     {
       nixosConfigurations.Trinity = nixpkgs.lib.nixosSystem {
