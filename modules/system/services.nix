@@ -12,6 +12,10 @@ in
     podman = {
       enable = lib.mkEnableOption "Podman container runtime" // { default = true; };
     };
+
+    bluetooth = {
+      enable = lib.mkEnableOption "Bluetooth" // { default = true; };
+    };
   };
 
   config = lib.mkMerge [
@@ -31,6 +35,10 @@ in
           defaultNetwork.settings.dns_enabled = true;
         };
       };
+    })
+
+    (lib.mkIf cfg.bluetooth.enable {
+      hardware.bluetooth.enable = true;
     })
   ];
 }
