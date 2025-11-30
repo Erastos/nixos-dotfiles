@@ -11,7 +11,6 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.netscape = {
       home.packages = with pkgs; [
-        # General
         gnupg
         discord
         spotify

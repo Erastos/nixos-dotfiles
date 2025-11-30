@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-      extraConfig = { user = { name = "Andrew Smith"; email = "andrew@andrewnsmith.net"; }; };
+      settings = { user = { name = "Andrew Smith"; email = "andrew@andrewnsmith.net"; }; };
     };
 
     programs.gh.enable = true;

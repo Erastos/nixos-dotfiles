@@ -33,7 +33,7 @@ in
       # LSP servers for Neovim
       ++ lib.optionals config.programs.neovim.enable [
         lua-language-server
-        ansible-language-server
+        # ansible-language-server
         gopls
         yaml-language-server
         pyright
