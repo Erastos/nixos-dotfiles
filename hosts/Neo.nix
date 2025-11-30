@@ -7,11 +7,18 @@
 
   home.packages = [
 
-    # Security (Trinity-specific)
-    pkgs.python313Packages.impacket
+    # General (Neo-specific)
+    pkgs.pulsemixer
+    pkgs.acpi
+    pkgs.dmenu
+    pkgs.wl-clipboard
+
+    # AI (Neo-specific)
+    unstable.claude-code
   ];
 
 
   programs.home-manager.enable = true;
+
 }
 
