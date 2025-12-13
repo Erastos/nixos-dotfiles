@@ -37,6 +37,7 @@ in
     programs.tmux = {
       enable = true;
       prefix = "C-a";
+      keyMode = "emacs";
       historyLimit = 10000;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
