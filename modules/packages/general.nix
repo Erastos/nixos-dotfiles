@@ -39,6 +39,7 @@ in
         obsidian
         telegram-desktop
         lsof
+        pamixer
       ];
     };
   };

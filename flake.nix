@@ -59,6 +59,7 @@
             system.stateVersion = "25.05";
             netscape.systemName = "Neo";
             netscape.hostType = "laptop";
+            netscape.system.networking.firewall.http.enable = true;
           })
 
           home-manager.nixosModules.home-manager {
