@@ -65,6 +65,9 @@ in
         # Reload configuration
         bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 
+        # Send C-a to shell when pressed twice
+        bind C-a send-keys C-a
+
         # split panes using | and -
         bind | split-window -h
         bind - split-window -v
