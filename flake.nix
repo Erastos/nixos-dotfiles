@@ -67,6 +67,7 @@
             netscape.systemName = "Neo";
             netscape.hostType = "laptop";
             netscape.system.networking.firewall.http.enable = true;
+            netscape.system.htb.enable = true;
           })
 
           home-manager.nixosModules.home-manager {
