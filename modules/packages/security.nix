@@ -21,6 +21,7 @@ in
         responder
         python313
         unstable.metasploit
+        inetutils
       ];
     };
   };

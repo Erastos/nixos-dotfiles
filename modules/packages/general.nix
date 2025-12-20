@@ -40,6 +40,7 @@ in
         telegram-desktop
         lsof
         pamixer
+        remmina
       ];
     };
   };
