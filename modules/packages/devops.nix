@@ -24,6 +24,7 @@ in
         talosctl
         sops
         age
+        ssh-to-age
 
         # Nix / NixOS
         cntr

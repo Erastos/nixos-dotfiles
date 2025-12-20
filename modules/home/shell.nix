@@ -9,6 +9,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Ensure SOPS age directory exists
+    home.file.".config/sops/age/.keep".text = ''
+      # This directory stores age keys for SOPS encryption
+      # Place your converted SSH host key here as keys.txt
+    '';
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -26,6 +32,7 @@ in
         en = "nvim ~/nixos-dotfiles";
         eco = "nvim ~/.config/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
+        secrets = "cd ~/nixos-dotfiles && sops secrets/secrets.yaml";
       } // lib.optionalAttrs osConfig.netscape.system.htb.enable {
         htb = "sudo systemctl start htb-update.service";
       };
