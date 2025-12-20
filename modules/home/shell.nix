@@ -26,6 +26,8 @@ in
         en = "nvim ~/nixos-dotfiles";
         eco = "nvim ~/.config/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
+      } // lib.optionalAttrs osConfig.netscape.system.htb.enable {
+        htb = "sudo systemctl start htb-update.service";
       };
 
       # Powerlevel 10K Theme

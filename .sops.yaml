@@ -1,0 +1,8 @@
+keys:
+  - &trinity_age age1t0n4rl8jjsclpxd6s2tme4ehpcyuqd07u0klpq34sqmvc7dgyatq3483p5
+
+creation_rules:
+  - path_regex: secrets/secrets\.yaml$
+    key_groups:
+      - age:
+          - *trinity_age

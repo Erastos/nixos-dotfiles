@@ -9,5 +9,7 @@
     ./desktop.nix
     ./services.nix
     ./users.nix
+    ./htb.nix
+    ./secrets.nix
   ];
 }

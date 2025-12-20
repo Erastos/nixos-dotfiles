@@ -7,8 +7,12 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ...}:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ...}:
     let
       system = "x86_64-linux";
       # overlays = builtins.map (name: import (./overlays + "/${name}"))
@@ -23,6 +27,7 @@
         specialArgs = {inherit unstable;};
         modules = [
           ./modules
+          sops-nix.nixosModules.sops
 
           ./hardware/Trinity.nix
 
@@ -31,6 +36,7 @@
             netscape.systemName = "Trinity";
             netscape.hostType = "desktop";
             netscape.system.networking.firewall.http.enable = true;
+            netscape.system.htb.enable = true;
           })
 
           home-manager.nixosModules.home-manager {
@@ -52,6 +58,7 @@
         specialArgs = {inherit unstable;};
         modules = [
           ./modules
+          sops-nix.nixosModules.sops
 
           ./hardware/Neo.nix
 

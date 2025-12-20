@@ -20,6 +20,7 @@ in
     firewall.http = {
       enable = lib.mkEnableOption "Allow HTTP traffic through the firewall";
     };
+
   };
 
   config = lib.mkMerge [
@@ -49,5 +50,6 @@ in
     (lib.mkIf cfg.firewall.http.enable {
       networking.firewall.allowedTCPPorts = [ 8000 ];
     })
+
   ];
 }

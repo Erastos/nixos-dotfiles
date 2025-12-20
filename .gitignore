@@ -1,0 +1,10 @@
+# Private keys - NEVER commit
+*.key
+*.pem
+*_rsa
+*_ed25519
+!*.pub
+
+# Build artifacts
+result
+result-*
