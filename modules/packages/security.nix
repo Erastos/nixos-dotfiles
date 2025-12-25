@@ -9,6 +9,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    programs.adb.enable = true;
     home-manager.users.netscape = {
       home.packages = with pkgs; [
         # Security
@@ -22,6 +23,8 @@ in
         python313
         unstable.metasploit
         inetutils
+        apktool
+        jadx
       ];
     };
   };
