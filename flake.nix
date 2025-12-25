@@ -37,6 +37,7 @@
             netscape.hostType = "desktop";
             netscape.system.networking.firewall.http.enable = true;
             netscape.system.htb.enable = true;
+            netscape.system.virtualisation.vmware.enable = true;
           })
 
           home-manager.nixosModules.home-manager {

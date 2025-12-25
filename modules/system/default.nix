@@ -11,5 +11,6 @@
     ./users.nix
     ./htb.nix
     ./secrets.nix
+    ./virtualization.nix
   ];
 }

@@ -25,6 +25,7 @@ in
         inetutils
         apktool
         jadx
+        android-tools
       ];
     };
   };
