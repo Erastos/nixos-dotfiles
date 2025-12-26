@@ -26,6 +26,8 @@ in
         apktool
         jadx
         android-tools
+        binwalk
+        realm-studio
       ];
     };
   };
