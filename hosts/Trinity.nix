@@ -11,7 +11,6 @@
     pkgs.python313Packages.impacket
   ];
 
-
   programs.home-manager.enable = true;
 }
 

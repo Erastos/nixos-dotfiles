@@ -3,6 +3,7 @@
 let
   cfg = config.netscape.home.terminals;
   isLaptop = osConfig.netscape.hostType == "laptop";
+  isDesktop = osConfig.netscape.hostType == "desktop";
 in
 {
   options.netscape.home.terminals = {
@@ -11,7 +12,7 @@ in
     };
 
     foot = {
-      enable = lib.mkEnableOption "Foot terminal emulator" // { default = isLaptop; };
+      enable = lib.mkEnableOption "Foot terminal emulator" // { default = isLaptop || isDesktop; };
     };
   };
 
@@ -24,7 +25,35 @@ in
         extraConfig = ''
           local config = {}
 
-          config.color_scheme = 'Blue Matrix'
+          -- Custom colorscheme from NixOS config
+          config.colors = {
+            foreground = "#${config.colors.foreground}",
+            background = "#${config.colors.background}",
+            cursor_bg = "#${config.colors.cursor.cursor}",
+            cursor_fg = "#${config.colors.cursor.text}",
+
+            ansi = {
+              "#${config.colors.black}",
+              "#${config.colors.red}",
+              "#${config.colors.green}",
+              "#${config.colors.yellow}",
+              "#${config.colors.blue}",
+              "#${config.colors.magenta}",
+              "#${config.colors.cyan}",
+              "#${config.colors.white}",
+            },
+
+            brights = {
+              "#${config.colors.brightBlack}",
+              "#${config.colors.brightRed}",
+              "#${config.colors.brightGreen}",
+              "#${config.colors.brightYellow}",
+              "#${config.colors.brightBlue}",
+              "#${config.colors.brightMagenta}",
+              "#${config.colors.brightCyan}",
+              "#${config.colors.brightWhite}",
+            },
+          }
 
           config.font_size = 11.0
 

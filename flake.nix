@@ -48,6 +48,11 @@
               imports = [
                 ./modules/home
                 ./hosts/Trinity.nix
+                ({config, lib, ...}: {
+                  netscape.home.colors.enable = true;
+                  netscape.home.colors.scheme = "blue-matrix";
+                  netscape.home.terminals.foot.enable = true;
+                })
               ];
             };
           }

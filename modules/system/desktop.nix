@@ -33,6 +33,17 @@ in
         wayland-utils
         wl-clipboard
       ];
+      xdg.terminal-exec = {
+        enable = true;
+        settings = {
+          default = [
+            "foot.desktop"
+          ];
+        };
+      };
+      # xdg.configFile."xdg-terminals.list".text = ''
+      #   foot.desktop
+      # '';
     })
 
     # Sway
