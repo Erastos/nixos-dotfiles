@@ -11,8 +11,16 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ...}:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, ...}:
     let
       system = "x86_64-linux";
       overlays = builtins.map (name: import (./overlays + "/${name}"))
@@ -24,7 +32,7 @@
     {
       nixosConfigurations.Trinity = nixpkgs.lib.nixosSystem {
         inherit pkgs;
-        specialArgs = {inherit unstable;};
+        specialArgs = {inherit unstable claude-desktop; };
         modules = [
           ./modules
           sops-nix.nixosModules.sops
@@ -41,7 +49,7 @@
           })
 
           home-manager.nixosModules.home-manager {
-            home-manager.extraSpecialArgs = { inherit unstable; };
+            home-manager.extraSpecialArgs = { inherit unstable claude-desktop; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.netscape = {
@@ -61,7 +69,7 @@
 
       nixosConfigurations.Neo = nixpkgs.lib.nixosSystem {
         inherit pkgs;
-        specialArgs = {inherit unstable;};
+        specialArgs = { inherit unstable claude-desktop; };
         modules = [
           ./modules
           sops-nix.nixosModules.sops

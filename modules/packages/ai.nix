@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, unstable, claude-desktop, ... }:
 
 let
   cfg = config.netscape.packages.ai;
@@ -13,6 +13,7 @@ in
       home.packages = with unstable; [
         opencode
         claude-code
+        claude-desktop.packages.${stdenv.hostPlatform.system}.claude-desktop-with-fhs
       ];
     };
   };
