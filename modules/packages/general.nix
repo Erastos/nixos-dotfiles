@@ -41,6 +41,7 @@ in
         lsof
         pamixer
         remmina
+        p7zip
       ];
     };
   };

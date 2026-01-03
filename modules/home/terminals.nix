@@ -77,10 +77,11 @@ in
           main = {
             font = "Hack Nerd Font:size=12";
           };
-          cursor = {
-            color = "${config.colors.cursor.text} ${config.colors.cursor.cursor}"; # <text> <cursor>
-          };
+          # cursor = {
+          #   color = "${config.colors.cursor.text} ${config.colors.cursor.cursor}"; # <text> <cursor>
+          # };
           colors = {
+            cursor = "${config.colors.cursor.text} ${config.colors.cursor.cursor}";
             foreground = config.colors.foreground;
             background = config.colors.background;
             regular0 = config.colors.black; # black

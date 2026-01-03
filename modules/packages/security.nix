@@ -28,6 +28,9 @@ in
         android-tools
         binwalk
         realm-studio
+        dex2jar
+        unstable.ghidra-bin
+        quark-engine
       ];
     };
   };
