@@ -6,7 +6,8 @@
     ./shell.nix
     ./terminals.nix
     ./editors.nix
-    ./wm.nix
+    ./wm
     ./git.nix
+    ./gtk.nix
   ];
 }

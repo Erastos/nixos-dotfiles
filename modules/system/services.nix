@@ -2,7 +2,6 @@
 
 let
   cfg = config.netscape.system.services;
-  isLaptop = config.netscape.hostType == "laptop";
 in
 {
   options.netscape.system.services = {
@@ -15,7 +14,7 @@ in
     };
 
     bluetooth = {
-      enable = lib.mkEnableOption "Bluetooth" // { default = isLaptop; };
+      enable = lib.mkEnableOption "Bluetooth";
     };
 
     dropbox = {
@@ -24,6 +23,11 @@ in
   };
 
   config = lib.mkMerge [
+    # Default services based on host type
+    {
+      netscape.system.services.bluetooth.enable = lib.mkDefault (config.netscape.hostType == "laptop");
+    }
+
     # CUPS printing
     (lib.mkIf cfg.printing.enable {
       services.printing.enable = true;

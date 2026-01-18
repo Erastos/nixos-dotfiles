@@ -8,12 +8,14 @@ in
     # System identification
     systemName = lib.mkOption {
       type = lib.types.str;
+      default = "nixos";
       example = "Neo";
       description = "Name of the NixOS system configuration (used in flake reference)";
     };
 
     hostType = lib.mkOption {
       type = lib.types.enum [ "desktop" "laptop" ];
+      default = "desktop";
       example = "laptop";
       description = "Type of host system (desktop or laptop)";
     };

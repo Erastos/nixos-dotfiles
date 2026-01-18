@@ -2,7 +2,6 @@
 
 let
   cfg = config.netscape.home.colors;
-  isLaptop = osConfig.netscape.hostType == "laptop";
 
   # Import all colorscheme definitions
   colorschemes = import ./colorschemes { inherit lib; };
@@ -12,16 +11,17 @@ let
 in
 {
   options.netscape.home.colors = {
-    enable = lib.mkEnableOption "color scheme configuration" // { default = isLaptop; };
+    enable = lib.mkEnableOption "color scheme configuration";
 
     scheme = lib.mkOption {
-      type = lib.types.enum [ "burgundy-red" "blue-matrix" ];
+      type = lib.types.enum [ "burgundy-red" "blue-matrix" "cyberpunk-neon" ];
       default = "burgundy-red";
       description = ''
         Global colorscheme to use across all themed applications.
         Available schemes:
         - burgundy-red: Dark burgundy/red aesthetic (original)
         - blue-matrix: Bright cyan/blue matrix-inspired theme
+        - cyberpunk-neon: Vibrant cyberpunk neon theme with pinks and cyans
       '';
     };
   };
@@ -33,5 +33,8 @@ in
     description = "Currently active color scheme";
   };
 
-  config = lib.mkIf cfg.enable { };
+  config = {
+    # Enable colors by default on laptops
+    netscape.home.colors.enable = lib.mkDefault (osConfig.netscape.hostType == "laptop");
+  };
 }

@@ -5,8 +5,8 @@ let
 in
 {
   options.netscape.system.virtualisation = {
-    vmware.enable = lib.mkEnableOption "Enale VMware Host Virtualisation";
-    qemu.enable = lib.mkEnableOption "Enale Qemu Host Virtualisation";
+    vmware.enable = lib.mkEnableOption "Enable VMware Host Virtualisation";
+    qemu.enable = lib.mkEnableOption "Enable Qemu Host Virtualisation";
   };
 
   config = lib.mkMerge [

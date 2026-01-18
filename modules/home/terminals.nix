@@ -2,8 +2,6 @@
 
 let
   cfg = config.netscape.home.terminals;
-  isLaptop = osConfig.netscape.hostType == "laptop";
-  isDesktop = osConfig.netscape.hostType == "desktop";
 in
 {
   options.netscape.home.terminals = {
@@ -12,7 +10,7 @@ in
     };
 
     foot = {
-      enable = lib.mkEnableOption "Foot terminal emulator" // { default = isLaptop || isDesktop; };
+      enable = lib.mkEnableOption "Foot terminal emulator" // { default = true; };
     };
   };
 

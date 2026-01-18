@@ -27,12 +27,12 @@ in
 
       # Aliases
       shellAliases = {
-        up = "sudo nixos-rebuild switch --flake '/home/netscape/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
-        boot = "sudo nixos-rebuild boot --flake '/home/netscape/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
-        en = "nvim ~/nixos-dotfiles";
-        eco = "nvim ~/.config/nvim";
+        up = "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
+        boot = "sudo nixos-rebuild boot --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
+        en = "nvim ${config.home.homeDirectory}/nixos-dotfiles";
+        eco = "nvim ${config.xdg.configHome}/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
-        secrets = "cd ~/nixos-dotfiles && sops secrets/secrets.yaml";
+        secrets = "cd ${config.home.homeDirectory}/nixos-dotfiles && sops secrets/secrets.yaml";
       } // lib.optionalAttrs osConfig.netscape.system.htb.enable {
         htb = "sudo systemctl start htb-update.service";
       };

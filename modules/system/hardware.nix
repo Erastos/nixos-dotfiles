@@ -2,17 +2,15 @@
 
 let
   cfg = config.netscape.system.hardware;
-  isDesktop = config.netscape.hostType == "desktop";
-  isLaptop = config.netscape.hostType == "laptop";
 in
 {
   options.netscape.system.hardware = {
     nvidia = {
-      enable = lib.mkEnableOption "NVIDIA graphics drivers" // { default = isDesktop; };
+      enable = lib.mkEnableOption "NVIDIA graphics drivers";
     };
 
     intel = {
-      enable = lib.mkEnableOption "Intel graphics drivers (modesetting)" // { default = isLaptop; };
+      enable = lib.mkEnableOption "Intel graphics drivers (modesetting)";
     };
 
     graphics = {
@@ -25,6 +23,12 @@ in
   };
 
   config = lib.mkMerge [
+    # Default hardware settings based on host type
+    {
+      netscape.system.hardware.nvidia.enable = lib.mkDefault (config.netscape.hostType == "desktop");
+      netscape.system.hardware.intel.enable = lib.mkDefault (config.netscape.hostType == "laptop");
+    }
+
     # NVIDIA
     (lib.mkIf cfg.nvidia.enable {
       hardware.graphics.enable = true;

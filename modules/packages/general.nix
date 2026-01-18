@@ -42,6 +42,8 @@ in
         pamixer
         remmina
         p7zip
+        eza
+        bat
       ];
     };
   };

@@ -26,77 +26,45 @@
       overlays = builtins.map (name: import (./overlays + "/${name}"))
         (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
           (builtins.attrNames (builtins.readDir ./overlays)));
-      pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true;};
-      unstable = import nixpkgs-unstable { inherit system overlays; config.allowUnfree = true;};
+      unstable = import nixpkgs-unstable { inherit system overlays; config.allowUnfree = true; };
+      mkHost = import ./lib/mkHost.nix {
+        inherit nixpkgs home-manager sops-nix unstable claude-desktop overlays;
+      };
     in
     {
-      nixosConfigurations.Trinity = nixpkgs.lib.nixosSystem {
-        inherit pkgs;
-        specialArgs = {inherit unstable claude-desktop; };
-        modules = [
-          ./modules
-          sops-nix.nixosModules.sops
-
-          ./hardware/Trinity.nix
-
-          ({ config, lib, pkgs, ... }: {
-            system.stateVersion = "25.05";
-            netscape.systemName = "Trinity";
-            netscape.hostType = "desktop";
-            netscape.system.networking.firewall.http.enable = true;
-            netscape.system.htb.enable = true;
-            netscape.system.virtualisation.vmware.enable = true;
-          })
-
-          home-manager.nixosModules.home-manager {
-            home-manager.extraSpecialArgs = { inherit unstable claude-desktop; };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.netscape = {
-              imports = [
-                ./modules/home
-                ./hosts/Trinity.nix
-                ({config, lib, ...}: {
-                  netscape.home.colors.enable = true;
-                  netscape.home.colors.scheme = "blue-matrix";
-                  netscape.home.terminals.foot.enable = true;
-                })
-              ];
-            };
-          }
-        ];
+      nixosConfigurations.Trinity = mkHost {
+        name = "Trinity";
+        hostType = "desktop";
+        hardware = ./hardware/Trinity.nix;
+        systemConfig = {
+          netscape.system.networking.firewall.http.enable = true;
+          netscape.system.htb.enable = true;
+          netscape.system.virtualisation.vmware.enable = true;
+          netscape.system.desktop.plasma.enable = false;
+          netscape.system.desktop.niri.enable = true;
+        };
+        homeConfig = {
+          netscape.home.colors.enable = true;
+          netscape.home.colors.scheme = "cyberpunk-neon";
+          netscape.home.terminals.foot.enable = true;
+          netscape.home.wm.niri.enable = true;
+          netscape.home.wm.waybar.enable = true;
+          netscape.home.theming.enable = true;
+        };
+        hostPackages = ./hosts/Trinity.nix;
       };
 
-      nixosConfigurations.Neo = nixpkgs.lib.nixosSystem {
-        inherit pkgs;
-        specialArgs = { inherit unstable claude-desktop; };
-        modules = [
-          ./modules
-          sops-nix.nixosModules.sops
-
-          ./hardware/Neo.nix
-
-          ({ config, lib, pkgs, ... }: {
-            system.stateVersion = "25.05";
-            netscape.systemName = "Neo";
-            netscape.hostType = "laptop";
-            netscape.system.networking.firewall.http.enable = true;
-            netscape.system.htb.enable = true;
-            netscape.system.virtualisation.qemu.enable = true;
-          })
-
-          home-manager.nixosModules.home-manager {
-            home-manager.extraSpecialArgs = { inherit unstable; };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.netscape = {
-              imports = [
-                ./modules/home
-                ./hosts/Neo.nix
-              ];
-            };
-          }
-        ];
+      nixosConfigurations.Neo = mkHost {
+        name = "Neo";
+        hostType = "laptop";
+        hardware = ./hardware/Neo.nix;
+        systemConfig = {
+          netscape.system.networking.firewall.http.enable = true;
+          netscape.system.htb.enable = true;
+          netscape.system.virtualisation.qemu.enable = true;
+        };
+        homeConfig = {};
+        hostPackages = ./hosts/Neo.nix;
       };
     };
 }
