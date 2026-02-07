@@ -33,6 +33,7 @@ in
         eco = "nvim ${config.xdg.configHome}/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
         secrets = "cd ${config.home.homeDirectory}/nixos-dotfiles && sops secrets/secrets.yaml";
+        k = "kubectl";
       } // lib.optionalAttrs osConfig.netscape.system.htb.enable {
         htb = "sudo systemctl start htb-update.service";
       };

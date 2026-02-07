@@ -14,6 +14,8 @@ in
         opencode
         claude-code
         claude-desktop.packages.${stdenv.hostPlatform.system}.claude-desktop-with-fhs
+        beads
+        gastown
       ];
     };
   };

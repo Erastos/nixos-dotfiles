@@ -2,7 +2,7 @@
   description = "Netscape's Config Flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    # go-overlay = {
+    #   url = "github:purpleclay/go-overlay";
+    # };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, ...}:
     let

@@ -29,6 +29,9 @@ in
 
         # Fast file finder for telescope
         fd
+
+        # Sqlite DB Client 
+        sqlite
       ]
       # LSP servers for Neovim
       ++ lib.optionals config.programs.neovim.enable [
