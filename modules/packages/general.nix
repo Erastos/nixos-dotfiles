@@ -44,6 +44,8 @@ in
         p7zip
         eza
         bat
+        android-file-transfer
+        lxappearance
       ];
     };
   };

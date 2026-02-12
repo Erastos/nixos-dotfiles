@@ -10,7 +10,11 @@ in
     };
 
     podman = {
-      enable = lib.mkEnableOption "Podman container runtime" // { default = true; };
+      enable = lib.mkEnableOption "Podman container runtime" // { default = false; };
+    };
+
+    docker = {
+      enable = lib.mkEnableOption "Docker container runtime" // { default = false; };
     };
 
     bluetooth = {
@@ -26,6 +30,13 @@ in
     # Default services based on host type
     {
       netscape.system.services.bluetooth.enable = lib.mkDefault (config.netscape.hostType == "laptop");
+
+      assertions = [
+        {
+          assertion = !(cfg.docker.enable && cfg.podman.enable);
+          message = "Docker and Podman cannot both be enabled. Choose one container runtime.";
+        }
+      ];
     }
 
     # CUPS printing
@@ -33,16 +44,20 @@ in
       services.printing.enable = true;
     })
 
+    # Docker
+    (lib.mkIf cfg.docker.enable {
+      users.users.netscape.extraGroups = ["docker"];
+      virtualisation.docker.enable = true;
+    })
+
     # Podman
     (lib.mkIf cfg.podman.enable {
-      virtualisation = {
-        podman = {
-          enable = true;
-          # Create a `docker` alias for podman, to use it as a drop-in replacement
-          dockerCompat = true;
-          # Required for containers under podman-compose to be able to talk to each other.
-          defaultNetwork.settings.dns_enabled = true;
-        };
+      virtualisation.podman = {
+        enable = true;
+        # Create a `docker` alias for podman, to use it as a drop-in replacement
+        dockerCompat = true;
+        # Required for containers under podman-compose to be able to talk to each other.
+        defaultNetwork.settings.dns_enabled = true;
       };
     })
 
