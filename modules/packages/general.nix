@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.netscape.packages.general;
@@ -46,6 +46,7 @@ in
         bat
         android-file-transfer
         lxappearance
+        cool-retro-term
       ];
     };
   };

@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ...}:
+{ config, pkgs, ...}:
 
 {
   home.stateVersion = "22.11";
@@ -11,7 +11,7 @@
     pkgs.wl-clipboard
 
     # AI (Neo-specific)
-    unstable.claude-code
+    pkgs.unstable.claude-code
   ];
 }
 

@@ -32,6 +32,9 @@ in
 
         # Sqlite DB Client 
         sqlite
+
+        _86Box-with-roms
+
       ]
       # LSP servers for Neovim
       ++ lib.optionals config.programs.neovim.enable [

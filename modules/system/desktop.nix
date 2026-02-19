@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.netscape.system.desktop;
@@ -134,7 +134,7 @@ in
     # Steam
     (lib.mkIf cfg.steam.enable {
       programs.steam.enable = true;
-      programs.steam.extraCompatPackages = [ unstable.proton-ge-bin ];
+      programs.steam.extraCompatPackages = [ pkgs.unstable.proton-ge-bin ];
       programs.steam.gamescopeSession.enable = true;
       programs.steam.protontricks.enable = true;
       programs.gamemode.enable = true;

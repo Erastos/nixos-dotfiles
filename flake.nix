@@ -29,9 +29,15 @@
       overlays = builtins.map (name: import (./overlays + "/${name}"))
         (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
           (builtins.attrNames (builtins.readDir ./overlays)));
-      unstable = import nixpkgs-unstable { inherit system overlays; config.allowUnfree = true; };
+      unstableOverlay = final: prev: {
+        unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
       mkHost = import ./lib/mkHost.nix {
-        inherit nixpkgs home-manager sops-nix unstable claude-desktop overlays;
+        inherit nixpkgs home-manager sops-nix claude-desktop;
+        overlays = [ unstableOverlay ] ++ overlays;
       };
     in
     {

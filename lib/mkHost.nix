@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, sops-nix, unstable, claude-desktop, overlays }:
+{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays }:
 
 { name, hostType, hardware, systemConfig ? {}, homeConfig ? {}, hostPackages }:
 
@@ -8,7 +8,7 @@ nixpkgs.lib.nixosSystem {
     inherit overlays;
     config.allowUnfree = true;
   };
-  specialArgs = { inherit unstable claude-desktop; };
+  specialArgs = { inherit claude-desktop; };
   modules = [
     ../modules
     sops-nix.nixosModules.sops
@@ -20,7 +20,7 @@ nixpkgs.lib.nixosSystem {
     } systemConfig)
     home-manager.nixosModules.home-manager
     {
-      home-manager.extraSpecialArgs = { inherit unstable claude-desktop; };
+      home-manager.extraSpecialArgs = { inherit claude-desktop; };
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.netscape = {

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.netscape.packages.devops;
@@ -24,6 +24,8 @@ in
         sops
         age
         ssh-to-age
+
+        docker-compose
 
         # Nix / NixOS
         cntr

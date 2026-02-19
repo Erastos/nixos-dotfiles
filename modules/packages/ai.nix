@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, claude-desktop, ... }:
+{ config, lib, pkgs, claude-desktop, ... }:
 
 let
   cfg = config.netscape.packages.ai;
@@ -10,12 +10,12 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.netscape = {
-      home.packages = with unstable; [
-        opencode
-        claude-code
-        claude-desktop.packages.${stdenv.hostPlatform.system}.claude-desktop-with-fhs
-        beads
-        gastown
+      home.packages = [
+        pkgs.unstable.opencode
+        pkgs.unstable.claude-code
+        claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs
+        pkgs.beads
+        pkgs.gastown
       ];
     };
   };
