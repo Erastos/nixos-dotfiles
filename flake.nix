@@ -45,6 +45,7 @@
           netscape.system.virtualisation.vmware.enable = true;
           netscape.system.desktop.plasma.enable = false;
           netscape.system.desktop.niri.enable = true;
+          netscape.system.services.docker.enable = true;
         };
         homeConfig = {
           netscape.home.colors.enable = true;
@@ -65,8 +66,13 @@
           netscape.system.networking.firewall.http.enable = true;
           netscape.system.htb.enable = true;
           netscape.system.virtualisation.qemu.enable = true;
+          netscape.system.services.docker.enable = true;
         };
-        homeConfig = {};
+        homeConfig = {
+          netscape.home.wm.waybar.enable = true;
+          netscape.home.theming.enable = true;
+          netscape.home.theming.gtkTheme = "Tokyonight-Dark";
+        };
         hostPackages = ./hosts/Neo.nix;
       };
     };

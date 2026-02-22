@@ -17,7 +17,6 @@ in
         kubernetes-helm
         skopeo
         ansible
-        podman
         unstable.terraform
         jq
         packer
@@ -28,6 +27,8 @@ in
 
         # Nix / NixOS
         cntr
+      ] ++ lib.optionals config.netscape.system.services.docker.enable [
+        docker-compose
       ];
     };
   };
