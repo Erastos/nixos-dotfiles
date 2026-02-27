@@ -43,6 +43,7 @@ in
         yaml-language-server
         pyright
         rust-analyzer
+        ansible-language-server
       ];
     };
   };
