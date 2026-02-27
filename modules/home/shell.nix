@@ -42,6 +42,13 @@ in
       initContent = ''
         promptinit && prompt powerlevel10k
         source ~/.p10k.zsh
+
+        # Dev shell launcher — hides nix develop --no-pure-eval
+        dev() {
+          local shell="''${1:?Usage: dev <shell-name>}"
+          shift
+          nix develop --no-pure-eval "/home/netscape/nixos-dotfiles#''${shell}" "$@"
+        }
       '';
 
       completionInit = "";
