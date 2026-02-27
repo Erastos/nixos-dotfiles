@@ -31,6 +31,10 @@ in
         dex2jar
         unstable.ghidra-bin
         quark-engine
+        exiftool
+        foremost
+        openstego
+        aapt
       ];
     };
   };
