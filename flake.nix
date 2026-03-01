@@ -20,11 +20,15 @@
       inputs.flake-utils.follows = "flake-utils";
     };
     devenv.url = "github:cachix/devenv";
+    nixpkgs-python = {
+      url = "github:cachix/nixpkgs-python";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
     # go-overlay = {
     #   url = "github:purpleclay/go-overlay";
     # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, ...}:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, ...}:
     let
       system = "x86_64-linux";
       overlays = builtins.map (name: import (./overlays + "/${name}"))
@@ -93,7 +97,7 @@
           config.allowUnfree = true;
         };
       in {
-        devShells = import ./shells { inherit pkgs devenv system; };
+        devShells = import ./shells { inherit self pkgs devenv system nixpkgs-python; };
       }
     );
 }

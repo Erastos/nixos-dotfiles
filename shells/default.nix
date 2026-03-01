@@ -1,6 +1,6 @@
-{ pkgs, devenv, system }:
+{ self, pkgs, devenv, system, nixpkgs-python }:
 let
-  mkDevShell = import ../lib/mkDevShell.nix { inherit pkgs devenv system; };
+  mkDevShell = import ../lib/mkDevShell.nix { inherit self pkgs devenv system nixpkgs-python; };
   callShell  = path: import path { inherit pkgs mkDevShell; };
 in {
   python   = callShell ./python.nix;
