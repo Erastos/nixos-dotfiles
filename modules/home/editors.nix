@@ -69,8 +69,8 @@ in
         bind C-a send-keys C-a
 
         # split panes using | and -
-        bind | split-window -h
-        bind - split-window -v
+        bind | split-window -h -c "#{pane_current_path}"
+        bind - split-window -v -c "#{pane_current_path}"
         unbind '"'
         unbind %
 

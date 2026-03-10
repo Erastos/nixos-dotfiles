@@ -27,7 +27,7 @@ in
       riverctl map normal Super Return spawn $terminal
 
       # Super+E to start firefox
-      riverctl map normal Super E spawn $browser
+      riverctl map normal Super W spawn $browser
 
       # Super+D to start launcher dmenu
       riverctl map normal Super D spawn $launcher
