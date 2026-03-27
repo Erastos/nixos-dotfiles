@@ -135,9 +135,26 @@ in
     (lib.mkIf cfg.steam.enable {
       programs.steam.enable = true;
       programs.steam.extraCompatPackages = [ pkgs.unstable.proton-ge-bin ];
+      programs.steam.extraPackages = with pkgs; [
+        # System Wine with X11 support for protontricks GUI tools
+        # (Proton's Wine is Wayland-only and doesn't render utility windows on niri)
+        wineWow64Packages.stable
+        freetype
+      ];
       programs.steam.gamescopeSession.enable = true;
       programs.steam.protontricks.enable = true;
+      programs.steam.protontricks.package = pkgs.unstable.protontricks;
       programs.gamemode.enable = true;
+
+      # Wrap protontricks in configured steam-run FHS environment and
+      # use system Wine (X11) instead of Proton Wine (Wayland-only)
+      environment.systemPackages = [
+        (pkgs.writeShellScriptBin "protontricks" ''
+          exec ${config.programs.steam.package.run}/bin/steam-run \
+            env WINE=/usr/bin/wine WINESERVER=/usr/bin/wineserver \
+            ${config.programs.steam.protontricks.package}/bin/protontricks --no-bwrap "$@"
+        '')
+      ];
     })
   ];
 }
