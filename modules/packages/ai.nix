@@ -16,6 +16,8 @@ in
         claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs
         pkgs.beads
         pkgs.gastown
+        pkgs.claude-squad
+        pkgs.ntm
       ];
     };
   };
