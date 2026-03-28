@@ -56,7 +56,7 @@ in
 
     # Firewall HTTP
     (lib.mkIf cfg.firewall.http.enable {
-      networking.firewall.allowedTCPPorts = [ 8000 ];
+      networking.firewall.allowedTCPPortRanges = [{ from = 8000; to = 8010; }];
     })
 
     # Firewall RSHELL

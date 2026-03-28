@@ -9,6 +9,7 @@
     ./wm
     ./git.nix
     ./gtk.nix
+    ./ntm.nix
     ./newsboat.nix
   ];
 }
