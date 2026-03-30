@@ -4,6 +4,6 @@
     nmap unstable.netexec gobuster unstable.seclists
     netcat-openbsd responder hashcat
     unstable.metasploit wireshark tcpdump
-    impacket bloodhound binwalk xxd curl
+    python3Packages.impacket bloodhound binwalk xxd curl
   ];
 }

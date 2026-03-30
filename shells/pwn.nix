@@ -5,6 +5,6 @@
     python313Packages.pwntools
     gdb gef patchelf checksec
     binutils file ltrace strace
-    radare2 ropper unstable.ghidra-bin xxd
+    radare2 python313Packages.ropper unstable.ghidra-bin xxd
   ];
 }
