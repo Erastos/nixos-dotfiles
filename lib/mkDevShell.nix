@@ -15,6 +15,7 @@ devenv.lib.mkShell {
   inputs = { inherit self devenv nixpkgs-python; nixpkgs = { legacyPackages.${system} = pkgs; }; };
   inherit pkgs;
   modules = [{
+    devenv.root = builtins.toString self;
     inherit packages languages services scripts processes;
 
     enterShell = ''
