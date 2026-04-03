@@ -28,10 +28,10 @@ in
       enable = true;
     };
 
-    home.packages = [
-      pkgs.nodejs_24
-      pkgs.go
-    ];
+    # home.packages = [
+    #   pkgs.nodejs_24
+    #   pkgs.go
+    # ];
 
     # Tmux
     programs.tmux = {

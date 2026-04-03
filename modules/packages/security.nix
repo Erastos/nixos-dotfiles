@@ -20,7 +20,7 @@ in
         unstable.seclists
         netcat-openbsd
         responder
-        python313
+        # python313
         unstable.metasploit
         inetutils
         apktool

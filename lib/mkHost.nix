@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays }:
+{ nixpkgs, home-manager, sops-nix, claude-desktop, nix-openclaw, overlays }:
 
 { name, hostType, hardware, systemConfig ? {}, homeConfig ? {}, hostPackages }:
 
@@ -24,7 +24,11 @@ nixpkgs.lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.netscape = {
-        imports = [ ../modules/home hostPackages ];
+        imports = [
+          ../modules/home
+          hostPackages
+          nix-openclaw.homeManagerModules.openclaw
+        ];
       } // homeConfig;
     }
   ];

@@ -18,7 +18,7 @@ in
         skopeo
         ansible
         unstable.terraform
-        jq
+        # jq
         packer
         talosctl
         sops

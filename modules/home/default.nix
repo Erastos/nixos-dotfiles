@@ -10,5 +10,6 @@
     ./git.nix
     ./gtk.nix
     ./newsboat.nix
+    ./openclaw.nix
   ];
 }

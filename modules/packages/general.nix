@@ -33,7 +33,7 @@ in
         libreoffice-fresh
         unzip
         emacs
-        ripgrep
+        # ripgrep
         unstable.jujutsu
         usbutils
         obsidian

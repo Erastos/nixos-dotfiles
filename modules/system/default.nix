@@ -10,6 +10,7 @@
     ./services.nix
     ./users.nix
     ./htb.nix
+    ./openclaw.nix
     ./secrets.nix
     ./virtualization.nix
   ];
