@@ -31,6 +31,7 @@ in
     home.packages = [
       pkgs.nodejs_24
       pkgs.go
+      pkgs.tree-sitter
     ];
 
     # Tmux
