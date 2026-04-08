@@ -17,7 +17,7 @@ in
         nmap
         unstable.netexec
         gobuster
-        unstable.seclists
+        seclists
         netcat-openbsd
         responder
         python313
