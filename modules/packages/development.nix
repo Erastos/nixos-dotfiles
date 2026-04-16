@@ -35,6 +35,8 @@ in
 
         _86Box-with-roms
 
+        hercules
+
       ]
       # LSP servers for Neovim
       ++ lib.optionals config.programs.neovim.enable [
