@@ -1,4 +1,4 @@
-{ config, lib, pkgs, claude-desktop, ... }:
+{ config, lib, pkgs, claude-desktop, hermes-agent, ... }:
 
 let
   cfg = config.netscape.packages.ai;
@@ -9,6 +9,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    services.hermes-agent = {
+      enable = true;
+      settings.model.default = "anthropic/claude-sonnet-4";
+      addToSystemPackages = true;
+    };
     home-manager.users.netscape = {
       home.packages = [
         pkgs.unstable.opencode

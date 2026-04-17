@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays }:
+{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays, hermes-agent }:
 
 { name, hostType, hardware, systemConfig ? {}, homeConfig ? {}, hostPackages }:
 
@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../modules
     sops-nix.nixosModules.sops
+    hermes-agent.nixosModules.default
     hardware
     ({ lib, ... }: lib.recursiveUpdate {
       system.stateVersion = "25.05";

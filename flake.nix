@@ -24,11 +24,12 @@
       url = "github:cachix/nixpkgs-python";
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
+    hermes-agent.url = "github:NousResearch/hermes-agent";
     # go-overlay = {
     #   url = "github:purpleclay/go-overlay";
     # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, ...}:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, ...}:
     let
       system = "x86_64-linux";
       overlays = builtins.map (name: import (./overlays + "/${name}"))
@@ -45,7 +46,7 @@
       };
       allOverlays = [ unstableOverlay ] ++ overlays;
       mkHost = import ./lib/mkHost.nix {
-        inherit nixpkgs home-manager sops-nix claude-desktop;
+        inherit nixpkgs home-manager sops-nix claude-desktop hermes-agent;
         overlays = allOverlays;
       };
     in
