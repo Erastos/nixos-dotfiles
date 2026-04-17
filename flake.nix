@@ -38,6 +38,9 @@
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "openclaw-2026.4.12"
+          ];
         };
       };
       allOverlays = [ unstableOverlay ] ++ overlays;
@@ -96,6 +99,9 @@
           inherit system;
           overlays = allOverlays;
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "openclaw-2026.4.12"
+          ];
         };
       in {
         devShells = import ./shells { inherit self pkgs devenv system nixpkgs-python; };
