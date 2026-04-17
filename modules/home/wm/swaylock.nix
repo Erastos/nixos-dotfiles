@@ -1,14 +1,11 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.netscape.home.wm;
-  colors = config.colors;
-in
+{ ... }:
 {
-  config = lib.mkIf cfg.swaylock.enable {
-    home.packages = with pkgs; [
-      swaylock-effects
-    ];
+  homeModuleLib.swaylock = { config, lib, pkgs, ... }:
+  let
+    colors = config.colors;
+  in
+  {
+    home.packages = with pkgs; [ swaylock-effects ];
 
     xdg.configFile."swaylock/config".text = ''
       daemonize

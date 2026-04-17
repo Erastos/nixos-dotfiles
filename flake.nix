@@ -11,6 +11,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -22,90 +24,26 @@
     devenv.url = "github:cachix/devenv";
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
-      inputs = { nixpkgs.follows = "nixpkgs"; };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hermes-agent.url = "github:NousResearch/hermes-agent";
-    # go-overlay = {
-    #   url = "github:purpleclay/go-overlay";
-    # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, ...}:
-    let
-      system = "x86_64-linux";
-      overlays = builtins.map (name: import (./overlays + "/${name}"))
-        (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
-          (builtins.attrNames (builtins.readDir ./overlays)));
-      unstableOverlay = final: prev: {
-        unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "openclaw-2026.4.12"
-          ];
-        };
-      };
-      allOverlays = [ unstableOverlay ] ++ overlays;
-      mkHost = import ./lib/mkHost.nix {
-        inherit nixpkgs home-manager sops-nix claude-desktop hermes-agent;
-        overlays = allOverlays;
-      };
-    in
-    {
-      nixosConfigurations.Trinity = mkHost {
-        name = "Trinity";
-        hostType = "desktop";
-        hardware = ./hardware/Trinity.nix;
-        systemConfig = {
-          netscape.system.networking.firewall.http.enable = true;
-          netscape.system.htb.enable = true;
-          netscape.system.virtualisation.vmware.enable = true;
-          netscape.system.virtualisation.qemu.enable = true;
-          netscape.system.desktop.plasma.enable = false;
-          netscape.system.desktop.niri.enable = true;
-          netscape.system.services.docker.enable = true;
-        };
-        homeConfig = {
-          netscape.home.colors.enable = true;
-          netscape.home.colors.scheme = "cyberpunk-neon";
-          netscape.home.terminals.foot.enable = true;
-          netscape.home.wm.niri.enable = true;
-          netscape.home.wm.waybar.enable = true;
-          netscape.home.theming.enable = true;
-        };
-        hostPackages = ./hosts/Trinity.nix;
-      };
-
-      nixosConfigurations.Neo = mkHost {
-        name = "Neo";
-        hostType = "laptop";
-        hardware = ./hardware/Neo.nix;
-        systemConfig = {
-          netscape.system.networking.firewall.http.enable = true;
-          netscape.system.htb.enable = true;
-          netscape.system.virtualisation.qemu.enable = true;
-          netscape.system.services.docker.enable = true;
-        };
-        homeConfig = {
-          netscape.home.wm.waybar.enable = true;
-          netscape.home.theming.enable = true;
-          netscape.home.theming.gtkTheme = "Tokyonight-Dark";
-        };
-        hostPackages = ./hosts/Neo.nix;
-      };
-    }
-    //
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = allOverlays;
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "openclaw-2026.4.12"
-          ];
-        };
-      in {
-        devShells = import ./shells { inherit self pkgs devenv system nixpkgs-python; };
-      }
-    );
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ lib, config, ... }: {
+    imports = [ (inputs.import-tree ./modules) ];
+    config.systems = [ "x86_64-linux" ];
+    options.nixosModuleLib = lib.mkOption {
+      type = lib.types.lazyAttrsOf lib.types.deferredModule;
+      default = {};
+    };
+    options.homeModuleLib = lib.mkOption {
+      type = lib.types.lazyAttrsOf lib.types.deferredModule;
+      default = {};
+    };
+    options.configurations.nixos = lib.mkOption {
+      type = lib.types.lazyAttrsOf (lib.types.submodule {
+        options.module = lib.mkOption { type = lib.types.deferredModule; };
+      });
+      default = {};
+    };
+  });
 }

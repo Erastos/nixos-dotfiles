@@ -1,14 +1,7 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.netscape.packages.general;
-in
+{ ... }:
 {
-  options.netscape.packages.general = {
-    enable = lib.mkEnableOption "general utility packages" // { default = true; };
-  };
-
-  config = lib.mkIf cfg.enable {
+  nixosModuleLib.generalPkgs = { pkgs, ... }:
+  {
     home-manager.users.netscape = {
       home.packages = with pkgs; [
         gnupg

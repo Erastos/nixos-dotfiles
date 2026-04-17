@@ -1,18 +1,10 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.netscape.packages.security;
-in
+{ ... }:
 {
-  options.netscape.packages.security = {
-    enable = lib.mkEnableOption "security and penetration testing tools" // { default = true; };
-  };
-
-  config = lib.mkIf cfg.enable {
+  nixosModuleLib.securityPkgs = { pkgs, ... }:
+  {
     programs.adb.enable = true;
     home-manager.users.netscape = {
       home.packages = with pkgs; [
-        # Security
         wireshark
         nmap
         unstable.netexec

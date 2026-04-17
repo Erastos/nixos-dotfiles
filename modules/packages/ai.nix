@@ -1,14 +1,7 @@
-{ config, lib, pkgs, claude-desktop, hermes-agent, ... }:
-
-let
-  cfg = config.netscape.packages.ai;
-in
+{ ... }:
 {
-  options.netscape.packages.ai = {
-    enable = lib.mkEnableOption "AI Packages" // { default = true; };
-  };
-
-  config = lib.mkIf cfg.enable {
+  nixosModuleLib.aiPkgs = { pkgs, claude-desktop, ... }:
+  {
     services.hermes-agent = {
       enable = true;
       settings.model.default = "anthropic/claude-sonnet-4";

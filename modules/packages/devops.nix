@@ -1,17 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.netscape.packages.devops;
-in
+{ ... }:
 {
-  options.netscape.packages.devops = {
-    enable = lib.mkEnableOption "DevOps and container tools" // { default = true; };
-  };
-
-  config = lib.mkIf cfg.enable {
+  nixosModuleLib.devopsPkgs = { pkgs, ... }:
+  {
     home-manager.users.netscape = {
       home.packages = with pkgs; [
-        # Containers/DevOps
         kubectl
         unstable.k9s
         kubernetes-helm
@@ -24,13 +16,8 @@ in
         sops
         age
         ssh-to-age
-
         docker-compose
-
-        # Nix / NixOS
         cntr
-      ] ++ lib.optionals config.netscape.system.services.docker.enable [
-        docker-compose
       ];
     };
   };
