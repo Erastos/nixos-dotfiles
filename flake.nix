@@ -25,28 +25,34 @@
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.home-manager.follows = "home-manager";
+    };
     # go-overlay = {
     #   url = "github:purpleclay/go-overlay";
     # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, ...}:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, nix-openclaw, ...}:
     let
       system = "x86_64-linux";
       overlays = builtins.map (name: import (./overlays + "/${name}"))
         (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
           (builtins.attrNames (builtins.readDir ./overlays)));
-      unstableOverlay = final: prev: {
-        unstable = import nixpkgs-unstable {
+      unstableOverlay = final: prev: let
+        unstablePkgs = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "openclaw-2026.4.12"
-          ];
+          config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
+          overlays = [ nix-openclaw.overlays.default ];
         };
+      in {
+        unstable = unstablePkgs;
+        inherit (unstablePkgs) openclaw openclawPackages;
       };
       allOverlays = [ unstableOverlay ] ++ overlays;
       mkHost = import ./lib/mkHost.nix {
-        inherit nixpkgs home-manager sops-nix claude-desktop hermes-agent;
+        inherit nixpkgs home-manager sops-nix claude-desktop hermes-agent nix-openclaw;
         overlays = allOverlays;
       };
     in
@@ -63,6 +69,7 @@
           netscape.system.desktop.plasma.enable = false;
           netscape.system.desktop.niri.enable = true;
           netscape.system.services.docker.enable = true;
+          # netscape.system.openclaw.enable = true;
         };
         homeConfig = {
           netscape.home.colors.enable = true;
@@ -71,6 +78,9 @@
           netscape.home.wm.niri.enable = true;
           netscape.home.wm.waybar.enable = true;
           netscape.home.theming.enable = true;
+          # netscape.home.openclaw.enable = true;
+          # netscape.home.openclaw.discord.enable = true;
+          # netscape.home.openclaw.discord.allowedUsers = [ "472461058855010334" ];
         };
         hostPackages = ./hosts/Trinity.nix;
       };
