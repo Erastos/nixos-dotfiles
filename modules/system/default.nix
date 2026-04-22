@@ -12,5 +12,6 @@
     ./htb.nix
     ./secrets.nix
     ./virtualization.nix
+    ./openclaw.nix
   ];
 }

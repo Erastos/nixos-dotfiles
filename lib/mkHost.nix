@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays, hermes-agent }:
+{ nixpkgs, home-manager, sops-nix, claude-desktop, overlays, hermes-agent, nix-openclaw }:
 
 { name, hostType, hardware, systemConfig ? {}, homeConfig ? {}, hostPackages }:
 
@@ -8,7 +8,7 @@ nixpkgs.lib.nixosSystem {
     inherit overlays;
     config.allowUnfree = true;
   };
-  specialArgs = { inherit claude-desktop; };
+  specialArgs = { inherit claude-desktop hermes-agent; };
   modules = [
     ../modules
     sops-nix.nixosModules.sops
@@ -25,7 +25,11 @@ nixpkgs.lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.netscape = {
-        imports = [ ../modules/home hostPackages ];
+        imports = [
+          ../modules/home
+          hostPackages
+          nix-openclaw.homeManagerModules.openclaw
+        ];
       } // homeConfig;
     }
   ];
