@@ -15,7 +15,7 @@ in
         # Security
         wireshark
         nmap
-        unstable.netexec
+        netexec
         gobuster
         seclists
         netcat-openbsd
