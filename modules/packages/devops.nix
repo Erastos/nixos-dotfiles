@@ -17,7 +17,7 @@ in
         kubernetes-helm
         skopeo
         ansible
-        unstable.terraform
+        terraform
         jq
         packer
         talosctl
