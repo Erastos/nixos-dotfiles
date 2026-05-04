@@ -10,6 +10,7 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.adb.enable = true;
+    programs.wireshark.enable = true;
     home-manager.users.netscape = {
       home.packages = with pkgs; [
         # Security

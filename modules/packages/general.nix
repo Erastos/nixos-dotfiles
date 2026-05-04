@@ -47,6 +47,7 @@ in
         android-file-transfer
         lxappearance
         cool-retro-term
+        winbox
       ];
     };
   };
