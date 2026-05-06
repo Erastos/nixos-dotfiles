@@ -59,7 +59,8 @@ in
         extraPackages = [ chromium-steam ];
         settings = {
           model.default = "anthropic/claude-sonnet-4-6";
-          model.provider = "anthropic";
+          # model.provider = "anthropic";
+          model.provider = "openrouter";
           approvals.mode = "on";
           platform_toolsets.discord = [
             "terminal" "file" "web" "vision" "browser"
@@ -75,9 +76,9 @@ in
         addToSystemPackages = true;
       };
 
-      system.activationScripts."hermes-claude-credentials" = lib.stringAfter [ "hermes-agent-setup" ] ''
-        ln -sfn /home/netscape/.claude /var/lib/hermes/.claude
-      '';
+      # system.activationScripts."hermes-claude-credentials" = lib.stringAfter [ "hermes-agent-setup" ] ''
+      #   ln -sfn /home/netscape/.claude /var/lib/hermes/.claude
+      # '';
     })
   ]);
 }
