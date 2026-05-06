@@ -36,6 +36,7 @@ in
         foremost
         openstego
         aapt
+        python313Packages.impacket
       ];
     };
   };

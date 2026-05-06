@@ -15,6 +15,7 @@ in
         discord
         spotify
         fastfetch
+        hyfetch
         whois
         dropbox
         wezterm
