@@ -36,6 +36,9 @@ in
         foremost
         openstego
         aapt
+        hashcat
+        hashid
+        evil-winrm
         python313Packages.impacket
       ];
     };

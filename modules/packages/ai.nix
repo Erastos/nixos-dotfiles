@@ -58,7 +58,8 @@ in
         createUser = false;
         extraPackages = [ chromium-steam ];
         settings = {
-          model.default = "anthropic/claude-sonnet-4-6";
+          model.default = "google/gemini-2.5-flash";
+          # model.default = "anthropic/claude-sonnet-4-6";
           # model.provider = "anthropic";
           model.provider = "openrouter";
           approvals.mode = "on";
