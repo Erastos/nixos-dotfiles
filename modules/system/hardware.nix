@@ -32,10 +32,11 @@ in
     # NVIDIA
     (lib.mkIf cfg.nvidia.enable {
       hardware.graphics.enable = true;
+      hardware.graphics.enable32Bit = true;
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware.nvidia = {
         modesetting.enable = true;
-        open = true;
+        open = false;
         nvidiaSettings = true;
       };
     })
@@ -48,6 +49,7 @@ in
     # Graphics (general)
     (lib.mkIf (cfg.graphics.enable && !cfg.nvidia.enable) {
       hardware.graphics.enable = true;
+      hardware.graphics.enable32Bit = true;
     })
 
     # Touchpad

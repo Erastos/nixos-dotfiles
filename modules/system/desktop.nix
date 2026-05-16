@@ -118,7 +118,9 @@ in
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
         QT_QPA_PLATFORM = "wayland";
-        SDL_VIDEODRIVER = "wayland";
+        # SDL_VIDEODRIVER intentionally omitted: setting it to "wayland" globally
+        # breaks Steam's XWayland-based processes (steamwebhelper, pressure-vessel).
+        # Steam manages its own SDL backend internally.
         CLUTTER_BACKEND = "wayland";
       };
 
@@ -134,6 +136,9 @@ in
     # Steam
     (lib.mkIf cfg.steam.enable {
       programs.steam.enable = true;
+      programs.steam.package = pkgs.steam.override {
+        extraEnv.STEAM_RUNTIME_PREFER_HOST_LIBRARIES = "0";
+      };
       programs.steam.extraCompatPackages = [ pkgs.unstable.proton-ge-bin ];
       programs.steam.extraPackages = with pkgs; [
         # System Wine with X11 support for protontricks GUI tools
