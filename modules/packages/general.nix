@@ -49,6 +49,8 @@ in
         lxappearance
         cool-retro-term
         winbox
+        fzf
+        fd
       ];
     };
   };

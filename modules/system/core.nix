@@ -59,6 +59,10 @@ in
       basePackages = {
         enable = lib.mkEnableOption "base system packages" // { default = true; };
       };
+
+      man = {
+        enable = lib.mkEnableOption "man page documentation" // { default = true; };
+      };
     };
   };
 
@@ -117,6 +121,12 @@ in
     # Base packages
     (lib.mkIf cfg.basePackages.enable {
       environment.systemPackages = with pkgs; [ wget ];
+    })
+
+    # Man pages
+    (lib.mkIf cfg.man.enable {
+      documentation.man.enable = true;
+      documentation.man.generateCaches = true;
     })
   ]);
 }

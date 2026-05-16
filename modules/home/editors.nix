@@ -43,6 +43,13 @@ in
       historyLimit = 10000;
       plugins = with pkgs.tmuxPlugins; [
         resurrect
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '5'
+          '';
+        }
         catppuccin
         dracula
       ];
@@ -50,6 +57,12 @@ in
         # Terminal color support
         set -g default-terminal "tmux-256color"
         set -ga terminal-overrides ",*256col*:RGB"
+
+        # Faster escape (critical for Neovim)
+        set -sg escape-time 10
+
+        # Mouse support
+        set -g mouse on
 
         # Theme selection
         ${if cfg.tmuxTheme == "catppuccin-mocha" then ''
@@ -70,21 +83,45 @@ in
         # Send C-a to shell when pressed twice
         bind C-a send-keys C-a
 
-        # split panes using | and -
+        # Split panes using | and - (inherit current path)
         bind | split-window -h -c "#{pane_current_path}"
         bind - split-window -v -c "#{pane_current_path}"
         unbind '"'
         unbind %
 
+        # New window inherits current path
+        bind c new-window -c "#{pane_current_path}"
+
+        # Pane navigation
         bind h select-pane -L
         bind l select-pane -R
         bind k select-pane -U
         bind j select-pane -D
 
+        # Pane resizing (repeatable)
+        bind -r H resize-pane -L 5
+        bind -r J resize-pane -D 5
+        bind -r K resize-pane -U 5
+        bind -r L resize-pane -R 5
+
+        # Window cycling (repeatable)
+        bind -r C-h previous-window
+        bind -r C-l next-window
+
+        # Copy mode
         bind -T copy-mode u send -X page-up
         bind -T copy-mode f send -X page-down
+        bind -T copy-mode v send -X begin-selection
+        bind -T copy-mode y send -X copy-selection-and-cancel
 
+        # C-u enters copy mode at page-up (no prefix needed)
+        bind -n C-u copy-mode -u
         bind C-u copy-mode -u
+
+        # fzf popup bindings
+        bind f display-popup -E "zsh -i -c tms"
+        bind g display-popup -E "zsh -i -c fs"
+        bind p display-popup -E "zsh -i -c ftpane"
 
         # Status bar configuration
         set -g status-position bottom
@@ -92,6 +129,11 @@ in
         set -g status-left-length 200
         set -g status-right-length 200
         set -g status-left "[#S]  "
+
+        # Window title shows running command, auto-renames
+        set -g window-status-format " #I:#W "
+        set -g window-status-current-format " #I:#W* "
+        setw -g automatic-rename on
 
         # Display git branch and status in right side
         set -g status-right "#(cd #{pane_current_path} && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo \'\') | %H:%M | %a %b %d"
