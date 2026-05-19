@@ -58,6 +58,7 @@ in
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";
         secrets = "cd ${config.home.homeDirectory}/nixos-dotfiles && sops secrets/secrets.yaml";
         k = "kubectl";
+        open = "xdg-open";
 
         # fzf — file & text
         fe      = "fzf --preview 'bat --color=always {}' | xargs -r nvim";

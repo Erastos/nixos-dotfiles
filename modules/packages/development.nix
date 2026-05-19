@@ -36,6 +36,8 @@ in
         _86Box-with-roms
 
         hercules
+        x3270
+        regina
 
       ]
       # LSP servers for Neovim

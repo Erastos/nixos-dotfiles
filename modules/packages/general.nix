@@ -51,6 +51,7 @@ in
         winbox
         fzf
         fd
+        unrar
       ];
     };
   };
