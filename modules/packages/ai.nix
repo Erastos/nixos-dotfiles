@@ -57,6 +57,7 @@ in
         group = "users";
         createUser = false;
         extraPackages = [ chromium-steam ];
+        extraDependencyGroups = [ "messaging" ];
         settings = {
           model.default = "google/gemini-2.5-flash";
           # model.default = "anthropic/claude-sonnet-4-6";
