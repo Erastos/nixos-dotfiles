@@ -8,3 +8,7 @@
 # Build artifacts
 result
 result-*
+
+# Devenv Shell
+
+.devenv/

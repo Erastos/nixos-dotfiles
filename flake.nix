@@ -33,7 +33,13 @@
     #   url = "github:purpleclay/go-overlay";
     # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, nix-openclaw, ...}:
+
+  nixConfig = {
+    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
+    extra-substituters = "https://devenv.cachix.org";
+  };
+
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, nix-openclaw, ...}@inputs:
     let
       system = "x86_64-linux";
       overlays = builtins.map (name: import (./overlays + "/${name}"))
@@ -102,20 +108,8 @@
         };
         hostPackages = ./hosts/Neo.nix;
       };
-    }
-    //
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = allOverlays;
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "openclaw-2026.4.12"
-          ];
-        };
-      in {
-        devShells = import ./shells { inherit self pkgs devenv system nixpkgs-python; };
-      }
-    );
+
+    devShells.${system} = import ./shells { inherit system inputs; };
+
+  };
 }

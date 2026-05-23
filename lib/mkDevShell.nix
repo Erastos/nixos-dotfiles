@@ -1,5 +1,5 @@
 # lib/mkDevShell.nix
-{ self, pkgs, devenv, system, nixpkgs-python }:
+{ system, pkgs, inputs }:
 
 { name
 , packages  ? []
@@ -9,13 +9,11 @@
 , processes ? {}
 , shellHook ? ""
 }:
-
-devenv.lib.mkShell {
+inputs.devenv.lib.mkShell {
   # devenv needs inputs to resolve its own internal modules
-  inputs = { inherit self devenv nixpkgs-python; nixpkgs = { legacyPackages.${system} = pkgs; }; };
-  inherit pkgs;
+  inherit inputs pkgs;
   modules = [{
-    devenv.root = builtins.toString self;
+    devenv.root = builtins.toString inputs.self;
     inherit packages languages services scripts processes;
 
     enterShell = ''
