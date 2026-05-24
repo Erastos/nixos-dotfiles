@@ -142,7 +142,7 @@ in
     # Configure sops secret for HTB API key
     sops.secrets."htb-api-key" = {
       sopsFile = ../../secrets/secrets.yaml;
-      key = "${config.netscape.systemName}/htb/api_key";
+      key = "${config.networking.hostName}/htb/api_key";
       mode = "0400";
       owner = "root";
       group = "root";

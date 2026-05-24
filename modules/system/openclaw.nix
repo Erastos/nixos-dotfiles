@@ -11,21 +11,21 @@ in
   config = lib.mkIf cfg.enable {
     sops.secrets."openclaw-discord-token" = {
       sopsFile = ../../secrets/secrets.yaml;
-      key = "${config.netscape.systemName}/openclaw/discord_token";
+      key = "${config.networking.hostName}/openclaw/discord_token";
       mode = "0400";
       owner = "netscape";
       group = "users";
     };
     sops.secrets."openclaw-anthropic-key" = {
       sopsFile = ../../secrets/secrets.yaml;
-      key = "${config.netscape.systemName}/openclaw/anthropic_api_key";
+      key = "${config.networking.hostName}/openclaw/anthropic_api_key";
       mode = "0400";
       owner = "netscape";
       group = "users";
     };
     sops.secrets."openclaw-gateway-token" = {
       sopsFile = ../../secrets/secrets.yaml;
-      key = "${config.netscape.systemName}/openclaw/gateway_token";
+      key = "${config.networking.hostName}/openclaw/gateway_token";
       mode = "0400";
       owner = "netscape";
       group = "users";

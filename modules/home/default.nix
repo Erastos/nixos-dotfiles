@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{ ... }: {
   imports = [
     ./colors.nix
     ./shell.nix
@@ -10,6 +8,13 @@
     ./git.nix
     ./gtk.nix
     ./newsboat.nix
+    ./coding-agents.nix
     ./openclaw.nix
+    ./packages/general.nix
+    ./packages/hardware.nix
+    ./packages/development.nix
+    ./packages/devops.nix
+    ./packages/security.nix
+    ./packages/ai-tools.nix
   ];
 }

@@ -51,8 +51,8 @@ in
 
       # Aliases
       shellAliases = {
-        up = "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
-        boot = "sudo nixos-rebuild boot --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.netscape.systemName}' -v";
+        up = "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.networking.hostName}' -v";
+        boot = "sudo nixos-rebuild boot --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.networking.hostName}' -v";
         en = "nvim ${config.home.homeDirectory}/nixos-dotfiles";
         eco = "nvim ${config.xdg.configHome}/nvim";
         nix-shell = "nix-shell --command 'export SHELL=/bin/zsh; zsh'";

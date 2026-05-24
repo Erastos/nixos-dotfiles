@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, osConfig, ... }:
 
 let
   cfg = config.netscape.home.theming;
@@ -41,7 +41,8 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkMerge [
+  (lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       cyberpunk-neon-gtk-theme
       tokyonight-gtk-theme
@@ -119,5 +120,6 @@ in
   #     GTK_THEME = cfg.gtkTheme;
   #     QT_QPA_PLATFORMTHEME = "kvantum";
   #   };
-  };
+  })
+  ];
 }

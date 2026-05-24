@@ -23,12 +23,6 @@ in
   };
 
   config = lib.mkMerge [
-    # Default hardware settings based on host type
-    {
-      netscape.system.hardware.nvidia.enable = lib.mkDefault (config.netscape.hostType == "desktop");
-      netscape.system.hardware.intel.enable = lib.mkDefault (config.netscape.hostType == "laptop");
-    }
-
     # NVIDIA
     (lib.mkIf cfg.nvidia.enable {
       hardware.graphics.enable = true;

@@ -29,8 +29,6 @@ in
   config = lib.mkMerge [
     # Default services based on host type
     {
-      netscape.system.services.bluetooth.enable = lib.mkDefault (config.netscape.hostType == "laptop");
-
       assertions = [
         {
           assertion = !(cfg.docker.enable && cfg.podman.enable);

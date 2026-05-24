@@ -33,8 +33,4 @@ in
     description = "Currently active color scheme";
   };
 
-  config = {
-    # Enable colors by default on laptops
-    netscape.home.colors.enable = lib.mkDefault (osConfig.netscape.hostType == "laptop");
-  };
 }

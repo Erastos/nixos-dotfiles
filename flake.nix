@@ -11,13 +11,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
     claude-desktop = {
       url = "github:k3d3/claude-desktop-linux-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     devenv.url = "github:cachix/devenv";
     nixpkgs-python = {
@@ -29,9 +25,10 @@
       url = "github:openclaw/nix-openclaw";
       inputs.home-manager.follows = "home-manager";
     };
-    # go-overlay = {
-    #   url = "github:purpleclay/go-overlay";
-    # };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    den.url = "github:vic/den";
+    coding-agents.url = "github:kissgyorgy/coding-agents";
   };
 
   nixConfig = {
@@ -39,77 +36,6 @@
     extra-substituters = "https://devenv.cachix.org";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, claude-desktop, flake-utils, devenv, nixpkgs-python, hermes-agent, nix-openclaw, ...}@inputs:
-    let
-      system = "x86_64-linux";
-      overlays = builtins.map (name: import (./overlays + "/${name}"))
-        (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
-          (builtins.attrNames (builtins.readDir ./overlays)));
-      unstableOverlay = final: prev: let
-        unstablePkgs = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
-          overlays = [ nix-openclaw.overlays.default ];
-        };
-      in {
-        unstable = unstablePkgs;
-        inherit (unstablePkgs) openclaw openclawPackages;
-      };
-      allOverlays = [ unstableOverlay ] ++ overlays;
-      mkHost = import ./lib/mkHost.nix {
-        inherit nixpkgs home-manager sops-nix claude-desktop hermes-agent nix-openclaw;
-        overlays = allOverlays;
-      };
-    in
-    {
-      nixosConfigurations.Trinity = mkHost {
-        name = "Trinity";
-        hostType = "desktop";
-        hardware = ./hardware/Trinity.nix;
-        systemConfig = {
-          netscape.system.networking.firewall.http.enable = true;
-          netscape.system.htb.enable = true;
-          netscape.system.virtualisation.vmware.enable = true;
-          netscape.system.virtualisation.qemu.enable = true;
-          netscape.system.desktop.plasma.enable = false;
-          netscape.system.desktop.niri.enable = true;
-          netscape.system.services.docker.enable = true;
-          # netscape.system.openclaw.enable = true;
-        };
-        homeConfig = {
-          netscape.home.colors.enable = true;
-          netscape.home.colors.scheme = "cyberpunk-neon";
-          netscape.home.terminals.foot.enable = true;
-          netscape.home.wm.niri.enable = true;
-          netscape.home.wm.waybar.enable = true;
-          netscape.home.theming.enable = true;
-          # netscape.home.openclaw.enable = true;
-          # netscape.home.openclaw.discord.enable = true;
-          # netscape.home.openclaw.discord.allowedUsers = [ "472461058855010334" ];
-        };
-        hostPackages = ./hosts/Trinity.nix;
-      };
-
-      nixosConfigurations.Neo = mkHost {
-        name = "Neo";
-        hostType = "laptop";
-        hardware = ./hardware/Neo.nix;
-        systemConfig = {
-          netscape.system.networking.firewall.http.enable = true;
-          netscape.system.htb.enable = true;
-          netscape.system.virtualisation.qemu.enable = true;
-          netscape.system.services.docker.enable = true;
-        };
-        homeConfig = {
-          netscape.home.wm.waybar.enable = true;
-          netscape.home.theming.enable = true;
-          netscape.home.theming.gtkTheme = "Tokyonight-Dark";
-        };
-        hostPackages = ./hosts/Neo.nix;
-      };
-
-    devShells.${system} = import ./shells { inherit system inputs; };
-
-  };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
+    (inputs.import-tree ./parts);
 }
