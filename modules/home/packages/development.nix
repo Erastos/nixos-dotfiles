@@ -32,7 +32,7 @@ in
       # Sqlite DB Client
       sqlite
 
-      _86Box-with-roms
+      _86box-with-roms
 
       hercules
       x3270
@@ -46,7 +46,6 @@ in
       yaml-language-server
       pyright
       rust-analyzer
-      ansible-language-server
     ];
   };
 }

@@ -1,4 +1,4 @@
 { ... }: {
   documentation.man.enable         = true;
-  documentation.man.generateCaches = true;
+  documentation.man.cache.enable = true;
 }

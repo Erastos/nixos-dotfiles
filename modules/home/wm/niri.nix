@@ -12,16 +12,16 @@ in
     netscape.home.wm.swaylock.enable = lib.mkDefault true;
 
     home.packages = with pkgs; [
-      swww
+      awww
       swayidle
       grim
       slurp
       swappy
       cliphist
       wl-clipboard
-      xfce.thunar
-      xfce.thunar-volman
-      xfce.thunar-archive-plugin
+      thunar
+      thunar-volman
+      thunar-archive-plugin
       blueman
       networkmanagerapplet
       pavucontrol
@@ -100,8 +100,8 @@ in
 
       // Spawn startup programs
       spawn-at-startup "waybar"
-      spawn-at-startup "swww-daemon"
-      spawn-at-startup "swww" "img" "/home/netscape/Pictures/wallpaper.jpg"
+      spawn-at-startup "awww-daemon"
+      spawn-at-startup "awww" "img" "/home/netscape/Pictures/wallpaper.jpg"
       spawn-at-startup "dunst"
       spawn-at-startup "nm-applet" "--indicator"
       spawn-at-startup "blueman-applet"

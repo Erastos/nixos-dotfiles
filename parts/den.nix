@@ -5,14 +5,13 @@
 
   den.default = {
     homeManager = {
-      home.stateVersion = "22.11";
+      home.stateVersion = "26.05";
       nixpkgs.config.allowUnfree = true;
       imports = [
         inputs.sops-nix.homeManagerModules.sops
         inputs.nix-openclaw.homeManagerModules.openclaw
         inputs.coding-agents.homeManagerModules.default
       ];
-      _module.args."claude-desktop" = inputs.claude-desktop;
     };
     nixos = {
       system.stateVersion = lib.mkDefault "25.05";

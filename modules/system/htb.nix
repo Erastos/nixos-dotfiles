@@ -54,7 +54,7 @@ let
         # Handle active.htb alias
         ${if cfg.activeMachine != null then ''
           # Use specified active machine
-          active_ip=$(echo "$machines" | grep -E " ${cfg.activeMachine}$" | awk '{print $1}' || true)
+ colors         active_ip=$(echo "$machines" | grep -E " ${cfg.activeMachine}$" | ${pkgs.gawk}/bin/awk '{print $1}' || true)
           if [[ -n "$active_ip" ]]; then
             echo "$active_ip active${cfg.domainSuffix}"
           else
@@ -62,7 +62,7 @@ let
           fi
         '' else ''
           # Use first machine as active
-          first_ip=$(echo "$machines" | head -n1 | awk '{print $1}')
+          first_ip=$(echo "$machines" | head -n1 | ${pkgs.gawk}/bin/awk '{print $1}')
           if [[ -n "$first_ip" ]]; then
             echo "$first_ip active${cfg.domainSuffix}"
           fi

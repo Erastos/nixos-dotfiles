@@ -78,7 +78,7 @@ in
           # cursor = {
           #   color = "${config.colors.cursor.text} ${config.colors.cursor.cursor}"; # <text> <cursor>
           # };
-          colors = {
+          colors-dark = {
             cursor = "${config.colors.cursor.text} ${config.colors.cursor.cursor}";
             foreground = config.colors.foreground;
             background = config.colors.background;

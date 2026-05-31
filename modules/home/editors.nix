@@ -27,7 +27,13 @@ in
     programs.neovim = {
       enable = true;
       package = pkgs.unstable.neovim-unwrapped;
+      withRuby = false;
+      withPython3 = false;
     };
+
+    # HM 26.05 switched from init.vim to init.lua; override so it doesn't
+    # clobber the hand-managed config at ~/.config/nvim/init.lua.
+    xdg.configFile."nvim/init.lua" = lib.mkForce { enable = false; };
 
     home.packages = [
       pkgs.nodejs_24
