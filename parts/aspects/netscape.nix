@@ -7,6 +7,19 @@
     includes = [ den.aspects.netscape den.aspects.shared-hm ];
   };
 
+  den.aspects.netscape-neo = {
+    includes = [ den.aspects.netscape-linux ];
+    homeManager.imports = [
+      ({ pkgs, ... }: {
+        netscape.home.wm.river.enable  = true;
+        netscape.home.wm.waybar.enable = true;
+        netscape.home.theming.enable   = true;
+        netscape.home.theming.gtkTheme = "Tokyonight-Dark";
+        home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard ];
+      })
+    ];
+  };
+
   den.aspects.netscape-trinity = {
     includes = [ den.aspects.netscape-linux ];
     homeManager.imports = [

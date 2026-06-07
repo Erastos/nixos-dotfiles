@@ -11,15 +11,5 @@
       netscape.system.hardware.intel.enable           = true;
       netscape.system.services.bluetooth.enable       = true;
     };
-    # homeManager applies to all users on Neo (only netscape currently)
-    homeManager.imports = [
-      ({ pkgs, ... }: {
-        netscape.home.wm.river.enable  = true;
-        netscape.home.wm.waybar.enable = true;
-        netscape.home.theming.enable   = true;
-        netscape.home.theming.gtkTheme = "Tokyonight-Dark";
-        home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard ];
-      })
-    ];
   };
 }

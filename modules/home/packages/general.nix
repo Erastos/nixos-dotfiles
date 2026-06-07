@@ -20,7 +20,7 @@
     playerctl
     dig
     openssl
-    libreoffice-fresh
+    libreoffice
     unzip
     emacs
     ripgrep
