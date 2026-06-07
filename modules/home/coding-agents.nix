@@ -8,7 +8,7 @@
     (_: prev: {
       pi-coding-agent = prev.pi-coding-agent.overrideAttrs (old: {
         npmDeps = old.npmDeps.overrideAttrs (_: {
-          outputHash = "sha256-vNXInQTvB8h8/8PA0WcQ69Ni+pABK7n9wMr3pY3aY4c=";
+          outputHash = "sha256-7zLvhuhyOD/p5xCZ4hsCdFH9E9AQFu8HCOsjSxMB74o=";
         });
       });
     })
