@@ -5,5 +5,5 @@
     cores                 = 0;
     auto-optimise-store   = true;
   };
-  nix.package = pkgs.lix;
+  nix.package = pkgs.unstable.lix;
 }
