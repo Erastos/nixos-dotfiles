@@ -25,6 +25,7 @@
     import-tree.url = "github:vic/import-tree";
     den.url = "github:vic/den";
     coding-agents.url = "github:kissgyorgy/coding-agents";
+    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
   };
 
   nixConfig = {
