@@ -1,6 +1,6 @@
 { den, ... }: {
   den.aspects.Trinity = {
-    includes = [ den.batteries.hostname den.aspects.shared-nixos ];
+    includes = [ den.batteries.hostname den.aspects.shared-nixos den.aspects.cachyos-kernel ];
     nixos = { ... }: {
       imports = [
         ../../hardware/Trinity.nix

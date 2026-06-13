@@ -17,6 +17,6 @@ let
   };
 in
 {
-  den.default.nixos.nixpkgs.overlays = [ unstableOverlay ] ++ overlays;
+  den.default.nixos.nixpkgs.overlays = [ unstableOverlay inputs.cachyos-kernel.overlays.pinned ] ++ overlays;
   den.default.homeManager.nixpkgs.overlays = [ unstableOverlay inputs.coding-agents.overlays.default ] ++ overlays;
 }
