@@ -19,10 +19,10 @@ in
 
   config = lib.mkIf cfg.enable {
     # Neovim
-    programs.zsh.localVariables = {
-      EDITOR = "nvim";
-      NVIM_THEME = cfg.theme;
-    };
+    programs.zsh.envExtra = ''
+      export EDITOR="nvim"
+      export NVIM_THEME="${cfg.theme}"
+    '';
 
     programs.neovim = {
       enable = true;

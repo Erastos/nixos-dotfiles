@@ -11,10 +11,11 @@
     includes = [ den.aspects.netscape-linux ];
     homeManager.imports = [
       ({ pkgs, ... }: {
-        netscape.home.wm.river.enable  = true;
-        netscape.home.wm.waybar.enable = true;
-        netscape.home.theming.enable   = true;
-        netscape.home.theming.gtkTheme = "Tokyonight-Dark";
+        netscape.home.wm.river.enable       = true;
+        netscape.home.wm.waybar.enable      = true;
+        netscape.home.theming.enable        = true;
+        netscape.home.theming.gtkTheme      = "Tokyonight-Dark";
+        netscape.home.editors.theme         = "gruvbox-material";
         home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard ];
       })
     ];
