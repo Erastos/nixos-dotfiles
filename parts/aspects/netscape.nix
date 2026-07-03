@@ -16,7 +16,7 @@
         netscape.home.theming.enable        = true;
         netscape.home.theming.gtkTheme      = "Tokyonight-Dark";
         netscape.home.editors.theme         = "gruvbox-material";
-        home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard ];
+        home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard eslint_d ];
       })
     ];
   };
