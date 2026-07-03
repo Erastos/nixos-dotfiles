@@ -44,5 +44,6 @@
     unstable.sunsama
     nvtopPackages.full
     pulsemixer
+    signal-desktop
   ];
 }

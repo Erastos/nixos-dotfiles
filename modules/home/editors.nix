@@ -115,13 +115,12 @@ in
         bind -r C-l next-window
 
         # Copy mode
-        bind -T copy-mode u send -X page-up
-        bind -T copy-mode f send -X page-down
+        bind -T copy-mode C-u send -X page-up
+        bind -T copy-mode C-f send -X page-down
         bind -T copy-mode v send -X begin-selection
         bind -T copy-mode y send -X copy-selection-and-cancel
 
         # C-u enters copy mode at page-up (no prefix needed)
-        bind -n C-u copy-mode -u
         bind C-u copy-mode -u
 
         # fzf popup bindings
