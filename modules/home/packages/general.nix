@@ -41,5 +41,6 @@
     fzf
     fd
     unrar
+    unstable.sunsama
   ];
 }
