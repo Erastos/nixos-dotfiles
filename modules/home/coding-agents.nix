@@ -4,13 +4,13 @@
     pi-coding-agent.extensionsDir = "~/.pi/agent/extra-extensions/";
   };
 
-  nixpkgs.overlays = lib.mkAfter [
-    (_: prev: {
-      pi-coding-agent = prev.pi-coding-agent.overrideAttrs (old: {
-        npmDeps = old.npmDeps.overrideAttrs (_: {
-          outputHash = "sha256-Ro2ovgqH6EpFb20M5DvcP6KIxXZPHcjeEdo1Sh4JbDM=";
-        });
-      });
-    })
-  ];
+  # nixpkgs.overlays = lib.mkAfter [
+  #   (_: prev: {
+  #     pi-coding-agent = prev.pi-coding-agent.overrideAttrs (old: {
+  #       npmDeps = old.npmDeps.overrideAttrs (_: {
+  #         outputHash = "sha256-+7Kss4l85CSC84Y9qHp65AXjxIlsWzITPuA6uqQ+9XE=";
+  #       });
+  #     });
+  #   })
+  # ];
 }
