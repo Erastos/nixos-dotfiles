@@ -25,8 +25,32 @@ lib.mkIf cfg.steam.enable {
     SUBSYSTEM=="input", ATTRS{name}=="Keychron Keychron Q6 Max System Control", ENV{ID_INPUT_JOYSTICK}=""
   '';
 
-  # Wrap protontricks in steam-run FHS env with system Wine (X11) instead of Proton Wine (Wayland-only)
+  # Script to fix MGSV Phantom Pain phantom-input bug by disabling
+  # winebus hidraw — prevents keyboard HID interfaces from being
+  # exposed as gamepads to games.
   environment.systemPackages = [
+    (pkgs.writeShellScriptBin "fix-mgsv-input" ''
+      set -e
+      PREFIX="$HOME/.steam/steam/steamapps/compatdata/287700/pfx"
+      REGFILE="$PREFIX/system.reg"
+      if [ ! -f "$REGFILE" ]; then
+        echo "MGSV prefix not found at $PREFIX. Launch the game at least once with Proton."
+        exit 1
+      fi
+      if grep -q 'DisableHidraw' "$REGFILE" 2>/dev/null; then
+        echo "winebus DisableHidraw already set in MGSV prefix."
+      else
+        echo "Patching MGSV prefix to disable winebus hidraw..."
+        sed -i '/^\[System\\\\ControlSet001\\\\Services\\\\winebus\]/{
+          n
+          n
+          a\"DisableHidraw"=dword:00000001\n"Enable SDL"=dword:00000000
+        }' "$REGFILE"
+        echo "Done. Restart Steam and launch MGSV."
+      fi
+    '')
+
+    # Wrap protontricks in steam-run FHS env with system Wine (X11) instead of Proton Wine (Wayland-only)
     (pkgs.writeShellScriptBin "protontricks" ''
       exec ${config.programs.steam.package.run}/bin/steam-run \
         env WINE=/usr/bin/wine WINESERVER=/usr/bin/wineserver \
