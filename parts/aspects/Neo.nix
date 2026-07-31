@@ -10,6 +10,7 @@
       netscape.system.desktop.sway.enable             = true;
       netscape.system.hardware.intel.enable           = true;
       netscape.system.services.bluetooth.enable       = true;
+      netscape.system.hardware.fwupd.enable           = true;
     };
   };
 }

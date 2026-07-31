@@ -20,6 +20,10 @@ in
     touchpad = {
       enable = lib.mkEnableOption "touchpad support (libinput)" // { default = true; };
     };
+
+    fwupd = {
+      enable = lib.mkEnableOption "Firmware Updater support";
+    };
   };
 
   config = lib.mkMerge [
@@ -49,6 +53,11 @@ in
     # Touchpad
     (lib.mkIf cfg.touchpad.enable {
       services.libinput.enable = true;
+    })
+
+    # Fwupd
+    (lib.mkIf cfg.fwupd.enable {
+      services.fwupd.enable = true;
     })
   ];
 }
