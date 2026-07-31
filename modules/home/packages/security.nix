@@ -37,6 +37,7 @@ in
       hashid
       evil-winrm
       python313Packages.impacket
+      socat
     ];
   };
 }
