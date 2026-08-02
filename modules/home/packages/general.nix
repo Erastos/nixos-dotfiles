@@ -42,5 +42,7 @@
     fd
     unrar
     unstable.sunsama
+    nvtopPackages.full
+    pulsemixer
   ];
 }
