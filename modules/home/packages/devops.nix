@@ -23,6 +23,9 @@ in
       sops
       age
       ssh-to-age
+      tflint
+      awscli2
+      terraform-ls
 
       # Nix / NixOS
       cntr
