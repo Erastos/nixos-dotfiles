@@ -38,6 +38,9 @@ in
       evil-winrm
       python313Packages.impacket
       socat
+      smap
+      sdlookup
+      python313Packages.shodan
     ];
   };
 }
