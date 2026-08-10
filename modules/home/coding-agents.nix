@@ -1,8 +1,13 @@
-{ inputs, lib, ... }: {
-  coding-agents = {
-    pi-coding-agent.enable = true;
-    pi-coding-agent.extensionsDir = "~/.pi/agent/extra-extensions/";
-  };
+{ pkgs, ... }: {
+
+  home.packages = [
+    pkgs.llm-agents.pi
+    pkgs.llm-agents.omp
+  ];
+  # coding-agents = {
+  #   pi-coding-agent.enable = true;
+  #   pi-coding-agent.extensionsDir = "~/.pi/agent/extra-extensions/";
+  # };
 
   # nixpkgs.overlays = lib.mkAfter [
   #   (_: prev: {

@@ -18,5 +18,5 @@ let
 in
 {
   den.default.nixos.nixpkgs.overlays = [ unstableOverlay inputs.cachyos-kernel.overlays.pinned ] ++ overlays;
-  den.default.homeManager.nixpkgs.overlays = [ unstableOverlay inputs.coding-agents.overlays.default ] ++ overlays;
+  den.default.homeManager.nixpkgs.overlays = [ unstableOverlay inputs.llm-agents.overlays.shared-nixpkgs ] ++ overlays;
 }

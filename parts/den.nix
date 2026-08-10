@@ -10,7 +10,6 @@
       imports = [
         inputs.sops-nix.homeManagerModules.sops
         inputs.nix-openclaw.homeManagerModules.openclaw
-        inputs.coding-agents.homeManagerModules.default
       ];
     };
     nixos = {
