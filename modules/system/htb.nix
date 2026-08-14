@@ -136,9 +136,35 @@ in
       '';
       example = "example";
     };
+
+    vpn = {
+      enable = lib.mkEnableOption "HTB OpenVPN split-tunnel VPN service";
+
+      autoStart = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to start the VPN automatically on boot";
+      };
+
+      subnets = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [
+          "10.10.0.0 255.255.0.0"
+          "10.129.0.0 255.255.0.0"
+        ];
+        description = "HTB subnets in OpenVPN route format (IP netmask) to route through the VPN tunnel. Defaults cover Labs (10.10.0.0/16) and Starting Point/Academy (10.129.0.0/16).";
+      };
+
+      ovpnSecretName = lib.mkOption {
+        type = lib.types.str;
+        default = "htb-ovpn";
+        description = "Sops secret name for the .ovpn config file";
+      };
+    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
     # Configure sops secret for HTB API key
     sops.secrets."htb-api-key" = {
       sopsFile = ../../secrets/secrets.yaml;
@@ -189,5 +215,29 @@ in
         Unit = "htb-update.service";
       };
     };
-  };
+    })
+    (lib.mkIf cfg.vpn.enable {
+      # Sops secret for the .ovpn file
+      sops.secrets.${cfg.vpn.ovpnSecretName} = {
+        sopsFile = ../../secrets/secrets.yaml;
+        key = "${config.networking.hostName}/htb/ovpn";
+        mode = "0400";
+        owner = "root";
+        group = "root";
+      };
+
+      # OpenVPN split-tunnel service.
+      # The wrapper config includes the user's .ovpn (from the sops secret)
+      # and adds split-tunnel directives so only HTB subnets route through tun0.
+      services.openvpn.servers.htb = {
+        autoStart = cfg.vpn.autoStart;
+        config = ''
+          config /run/secrets/${cfg.vpn.ovpnSecretName}
+          route-nopull
+          ${lib.concatStringsSep "\n" (map (s: "route ${s} vpn_gateway") cfg.vpn.subnets)}
+          pull-filter ignore "dhcp-option DNS"
+        '';
+      };
+    })
+  ];
 }

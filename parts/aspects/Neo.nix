@@ -5,6 +5,7 @@
       imports = [ ../../hardware/Neo.nix ];
       netscape.system.networking.firewall.http.enable = true;
       netscape.system.htb.enable                      = true;
+      netscape.system.htb.vpn.enable                  = true;
       netscape.system.virtualisation.qemu.enable      = true;
       netscape.system.services.docker.enable          = true;
       netscape.system.desktop.sway.enable             = true;

@@ -13,7 +13,7 @@ in
       # Security
       wireshark
       nmap
-      netexec
+      unstable.netexec
       gobuster
       seclists
       netcat-openbsd
@@ -36,11 +36,12 @@ in
       hashcat
       hashid
       evil-winrm
-      python313Packages.impacket
+      # python313Packages.impacket
       socat
       smap
       sdlookup
       python313Packages.shodan
+      smbclient-ng
     ];
   };
 }

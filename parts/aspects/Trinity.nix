@@ -8,6 +8,7 @@
       ];
       netscape.system.networking.firewall.http.enable = true;
       netscape.system.htb.enable                      = true;
+      netscape.system.htb.vpn.enable                  = true;
       netscape.system.virtualisation.vmware.enable    = true;
       netscape.system.virtualisation.qemu.enable      = true;
       netscape.system.desktop.plasma.enable           = false;
