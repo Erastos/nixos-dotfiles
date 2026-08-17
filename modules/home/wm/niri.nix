@@ -63,7 +63,7 @@ in
 
       // Output configuration
       output "DP-2" {
-          mode "2560x1440@165"
+          mode "2560x1440@144.003"
           position x=0 y=0
       }
 

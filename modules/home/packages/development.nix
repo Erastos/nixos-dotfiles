@@ -14,6 +14,7 @@ in
       cmake
       gnumake
       gcc
+      gdb
 
       # Haskell
       ghc
