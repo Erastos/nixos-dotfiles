@@ -5,7 +5,11 @@ lib.mkIf cfg.steam.enable {
   programs.steam.package = pkgs.steam.override {
     extraEnv.STEAM_RUNTIME_PREFER_HOST_LIBRARIES = "0";
   };
-  programs.steam.extraCompatPackages = [ pkgs.unstable.proton-ge-bin ];
+  programs.steam.extraCompatPackages = [
+    pkgs.unstable.proton-ge-bin
+    pkgs.unstable.proton-ge-bin-9
+    pkgs.unstable.proton-ge-bin-8
+  ];
   programs.steam.extraPackages = with pkgs; [
     # System Wine with X11 support for protontricks GUI tools
     # (Proton's Wine is Wayland-only and doesn't render utility windows on niri)
