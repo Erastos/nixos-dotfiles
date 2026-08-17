@@ -16,5 +16,6 @@
     ./packages/devops.nix
     ./packages/security.nix
     ./packages/ai-tools.nix
+    ./sioyek.nix
   ];
 }
