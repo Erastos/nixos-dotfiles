@@ -1,53 +1,56 @@
 final: prev: let
+  python = prev.python312.override {
+    self = prev.python312;
+    packageOverrides = self: super: {
+      impacket = super.impacket.overridePythonAttrs {
+        version = "0.14.0-unstable-2025-12-03";
+        src = prev.fetchFromGitHub {
+          owner = "fortra";
+          repo = "impacket";
+          rev = "caba5facdd3a01b5d0decc6daf5871839f22f792";
+          hash = "sha256-W7wXgUq34xzqbi/vEyUoKguaBmKeKGd6u3Oce39JHFc=";
+        };
+        postPatch = ''
+          substituteInPlace setup.py \
+            --replace 'version="{}.{}.{}.{}{}"' 'version="{}.{}.{}"'
+        '';
+      };
+
+      certipy-ad = super.certipy-ad.overridePythonAttrs (oa: {
+        pythonRemoveDeps = (oa.pythonRemoveDeps or []) ++ [ "impacket" ];
+      });
+      bloodhound-ce = self.buildPythonPackage rec {
+        pname = "bloodhound-ce";
+        version = "1.9.1";
+        format = "setuptools";
+        src = prev.fetchurl {
+          url = "https://files.pythonhosted.org/packages/93/38/74403e5730f3571a0cb42ddecc9b33af491eddb878db92be87b08add2180/bloodhound_ce-1.9.1.tar.gz";
+          hash = "sha256-CD3z3DrZmO3P+Ptj/dj1tGSqtf2sjgXMmztlICEPeas=";
+        };
+        dependencies = with self; [
+          dnspython
+          impacket
+          ldap3
+          pyasn1
+          pycryptodome
+        ];
+        postPatch = ''
+          ${prev.python3.interpreter} ${./patch-bh-domain.py}
+          ${prev.python3.interpreter} ${./patch-bh-auth.py}
+        '';
+        doCheck = false;
+        pythonImportsCheck = [ "bloodhound" ];
+      };
+    };
+  };
+
   netexecPkg = {
     lib,
     stdenv,
     fetchFromGitHub,
     fetchurl,
-    python312,
     writableTmpDirAsHomeHook,
-  }: let
-    python = python312.override {
-      self = python;
-      packageOverrides = self: super: {
-        impacket = super.impacket.overridePythonAttrs {
-          version = "0.14.0-unstable-2025-12-03";
-          src = fetchFromGitHub {
-            owner = "fortra";
-            repo = "impacket";
-            rev = "caba5facdd3a01b5d0decc6daf5871839f22f792";
-            hash = "sha256-W7wXgUq34xzqbi/vEyUoKguaBmKeKGd6u3Oce39JHFc=";
-          };
-          postPatch = ''
-            substituteInPlace setup.py \
-              --replace 'version="{}.{}.{}.{}{}"' 'version="{}.{}.{}"'
-          '';
-        };
-
-        certipy-ad = super.certipy-ad.overridePythonAttrs (oa: {
-          pythonRemoveDeps = (oa.pythonRemoveDeps or []) ++ [ "impacket" ];
-        });
-        bloodhound-ce = self.buildPythonPackage rec {
-          pname = "bloodhound-ce";
-          version = "1.9.1";
-          format = "setuptools";
-          src = fetchurl {
-            url = "https://files.pythonhosted.org/packages/93/38/74403e5730f3571a0cb42ddecc9b33af491eddb878db92be87b08add2180/bloodhound_ce-1.9.1.tar.gz";
-            hash = "sha256-CD3z3DrZmO3P+Ptj/dj1tGSqtf2sjgXMmztlICEPeas=";
-          };
-          dependencies = with self; [
-            dnspython
-            impacket
-            ldap3
-            pyasn1
-            pycryptodome
-          ];
-          doCheck = false;
-          pythonImportsCheck = [ "bloodhound" ];
-        };
-      };
-    };
-  in
+  }:
   python.pkgs.buildPythonApplication (finalAttrs: {
     pname = "netexec";
     version = "1.5.1";
@@ -63,7 +66,6 @@ final: prev: let
     pythonRelaxDeps = true;
 
     pythonRemoveDeps = [
-      # Fail to detect dev version requirement
       "neo4j"
     ];
 
@@ -135,4 +137,5 @@ final: prev: let
   });
 in {
   netexec = prev.callPackage netexecPkg { };
+  bloodhound-ce = python.pkgs.bloodhound-ce;
 }

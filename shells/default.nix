@@ -42,7 +42,7 @@ in
       ({ pkgs, config, ...}: {
         inherit enterShell;
         packages = with pkgs; [
-          nmap unstable.netexec gobuster seclists
+          nmap unstable.netexec unstable.bloodhound-ce gobuster seclists
           netcat-openbsd responder hashcat
           unstable.metasploit wireshark tcpdump
           python3Packages.impacket bloodhound binwalk xxd curl
