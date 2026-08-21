@@ -51,7 +51,8 @@ in
 
       # Aliases
       shellAliases = {
-        up = "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.networking.hostName}' -v";
+        # up = "sudo nixos-rebuild switch --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.networking.hostName}' -v";
+        up = "nh os switch";
         boot = "sudo nixos-rebuild boot --flake '${config.home.homeDirectory}/nixos-dotfiles#${osConfig.networking.hostName}' -v";
         en = "nvim ${config.home.homeDirectory}/nixos-dotfiles";
         eco = "nvim ${config.xdg.configHome}/nvim";
