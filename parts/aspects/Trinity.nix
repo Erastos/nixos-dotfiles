@@ -4,7 +4,7 @@
     nixos = { ... }: {
       imports = [
         ../../hardware/Trinity.nix
-        ../../modules/system/hermes.nix
+        # ../../modules/system/hermes.nix
       ];
       netscape.system.networking.firewall.http.enable = true;
       netscape.system.htb.enable                      = true;
@@ -15,6 +15,7 @@
       netscape.system.desktop.niri.enable             = true;
       netscape.system.desktop.steam.enable            = true;
       netscape.system.services.docker.enable          = true;
+      netscape.system.bloodhound-ce.enable              = true;
       netscape.system.hardware.nvidia.enable          = true;
       programs.nix-ld.enable                          = true;
     };
