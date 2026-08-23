@@ -42,6 +42,7 @@ in
       sdlookup
       python313Packages.shodan
       smbclient-ng
+      unstable.ldeep
     ];
   };
 }
