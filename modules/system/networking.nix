@@ -15,7 +15,10 @@ in {
       services.openssh.enable          = true;
       services.tailscale.enable        = true;
     }
-    (lib.mkIf cfg.firewall.http.enable  { networking.firewall.allowedTCPPortRanges = [{ from = 8000; to = 8010; }]; })
+    (lib.mkIf cfg.firewall.http.enable { 
+      networking.firewall.allowedTCPPortRanges = [{ from = 8000; to = 8010; }];  
+      networking.firewall.allowedTCPPorts = [ 80 443 ]; 
+    })
     (lib.mkIf cfg.firewall.shell.enable { networking.firewall.allowedTCPPorts = [ 4444 9001 ]; })
     (lib.mkIf cfg.firewall.smb.enable   { networking.firewall.allowedTCPPorts = [ 445 ]; })
     (lib.mkIf cfg.firewall.wireshark.enable   { networking.firewall.allowedUDPPorts = [ 37008 ]; })

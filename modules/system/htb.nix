@@ -7,6 +7,7 @@ let
     set -euo pipefail
 
     HOSTS_FILE="/var/lib/htb/hosts"
+    DNS_FILE="/var/lib/htb/dnsmasq.conf"
     API_URL="${cfg.url}"
     API_KEY="$(cat /run/secrets/htb-api-key)"
 
@@ -18,6 +19,7 @@ let
     if [[ -z "$response" || "$response" == "{}" ]]; then
       echo "No active machine found or API error"
       echo "# No active HTB machines" > "$HOSTS_FILE"
+      echo "# No active HTB machines" > "$DNS_FILE"
       exit 0
     fi
 
@@ -35,6 +37,7 @@ let
         echo "Could not parse API response. Response:"
         echo "$response" | ${pkgs.jq}/bin/jq '.' 2>/dev/null || echo "$response"
         echo "# Failed to parse HTB API response" > "$HOSTS_FILE"
+        echo "# Failed to parse HTB API response" > "$DNS_FILE"
         exit 1
       fi
 
@@ -54,7 +57,7 @@ let
         # Handle active.htb alias
         ${if cfg.activeMachine != null then ''
           # Use specified active machine
- colors         active_ip=$(echo "$machines" | grep -E " ${cfg.activeMachine}$" | ${pkgs.gawk}/bin/awk '{print $1}' || true)
+          active_ip=$(echo "$machines" | grep -E " ${cfg.activeMachine}$" | ${pkgs.gawk}/bin/awk '{print $1}' || true)
           if [[ -n "$active_ip" ]]; then
             echo "$active_ip active${cfg.domainSuffix}"
           else
@@ -68,6 +71,15 @@ let
           fi
         ''}
       } > "$HOSTS_FILE"
+      # Write dnsmasq wildcard entries: machine domain and all subdomains
+      {
+        echo "# HTB wildcard DNS (machine domain and all subdomains)"
+        echo "$machines" | while read -r machine_ip machine_name; do
+          if [[ -n "$machine_ip" && -n "$machine_name" ]]; then
+            echo "address=/$machine_name${cfg.domainSuffix}/$machine_ip"
+          fi
+        done
+      } > "$DNS_FILE"
     else
       # Single machine response
       if [[ -n "$ip" && -n "$name" ]]; then
@@ -78,10 +90,15 @@ let
           echo ""
           echo "$ip $name${cfg.domainSuffix} $name active${cfg.domainSuffix}"
         } > "$HOSTS_FILE"
+        {
+          echo "# HTB wildcard DNS (machine domain and all subdomains)"
+          echo "address=/$name${cfg.domainSuffix}/$ip"
+        } > "$DNS_FILE"
         echo "Updated HTB hosts: $ip $name${cfg.domainSuffix}"
       else
         echo "Invalid machine data: ip=$ip name=$name"
         echo "# Invalid HTB machine data" > "$HOSTS_FILE"
+        echo "# Invalid HTB machine data" > "$DNS_FILE"
         exit 1
       fi
     fi
@@ -178,16 +195,19 @@ in
     # This provides dynamic DNS without needing systemd-resolved
     networking.networkmanager.dns = "dnsmasq";
 
-    # Configure dnsmasq to read HTB hosts file
+    # Configure dnsmasq to read HTB hosts file and wildcard entries
     environment.etc."NetworkManager/dnsmasq.d/htb.conf".text = ''
       # Read HTB hosts from /var/lib/htb/hosts
       addn-hosts=/var/lib/htb/hosts
+      # Wildcard DNS: resolve *.<machine>.htb to the machine IP
+      conf-file=/var/lib/htb/dnsmasq.conf
     '';
 
     # Create directory and initial hosts file
     systemd.tmpfiles.rules = [
       "d /var/lib/htb 0755 root root -"
       "f /var/lib/htb/hosts 0644 root root - # HTB hosts file\n"
+      "f /var/lib/htb/dnsmasq.conf 0644 root root - # HTB dnsmasq wildcard config\n"
     ];
 
     # Service to update HTB hosts
