@@ -26,12 +26,12 @@
     den.url = "github:vic/den";
     # coding-agents.url = "github:kissgyorgy/coding-agents";
     llm-agents.url = "github:numtide/llm-agents.nix";
-    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   nixConfig = {
-    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-    extra-substituters = "https://devenv.cachix.org";
+    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=";
+    extra-substituters = "https://devenv.cachix.org https://attic.xuyh0120.win/lantian";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
