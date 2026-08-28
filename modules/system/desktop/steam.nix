@@ -16,11 +16,13 @@ lib.mkIf cfg.steam.enable {
     wineWow64Packages.stable
     freetype
     mangohud
+    fzf
   ];
   programs.steam.gamescopeSession.enable = true;
   programs.steam.protontricks.enable     = true;
   programs.steam.protontricks.package    = pkgs.unstable.protontricks;
   programs.gamemode.enable               = true;
+  users.users.netscape.extraGroups        = [ "gamemode" ];
 
   # Keychron Q6 Max keyboard: System Control interface is wrongly tagged
   # as a joystick by the kernel. MGSV's FOX Engine reads it as a gamepad
@@ -60,6 +62,49 @@ lib.mkIf cfg.steam.enable {
       exec ${config.programs.steam.package.run}/bin/steam-run \
         env WINE=/usr/bin/wine WINESERVER=/usr/bin/wineserver \
         ${config.programs.steam.protontricks.package}/bin/protontricks --no-bwrap "$@"
+    '')
+
+    (pkgs.writeShellScriptBin "steamid" ''
+
+      STEAM_PATH="$HOME/.local/share/Steam/steamapps"
+
+      if [ -n "''${1}" ]; then
+        GAME_SUBSTRING="''${1}"
+      else
+        GAME_SUBSTRING=""
+      fi
+
+      if [ -z "''${GAME_SUBSTRING}" ]; then
+        GAMEDIR_BASENAME=$(find "''${STEAM_PATH}/common" -maxdepth 1 ! -name "common" -exec basename {} \; | fzf)
+        GAMEDIR="''${STEAM_PATH}/common/''${GAMEDIR_BASENAME}"
+      else
+        GAMEDIR=$(find "''${STEAM_PATH}/common" -maxdepth 1 -iname "*$GAME_SUBSTRING*")
+      fi
+
+      GAMEDIR_LEN=$(wc -l <<< "''${GAMEDIR}")
+
+      if [[ "''${GAMEDIR_LEN}" == "0" ]]; then
+        echo "No Game Found..."
+        echo "Try a different string"
+        exit 1
+      elif [[ "''${GAMEDIR_LEN}" == "2" ]]; then
+        echo "Found too many games..."
+        echo "Use a more specific substring"
+        exit 1
+      fi
+
+      GAMEDIR_FILENAME=$(basename "''${GAMEDIR}")
+
+      cd $STEAM_PATH
+      MANIFEST_FILE=$(rg -l -d 1 "''${GAMEDIR_FILENAME}")
+      MANIFEST_FILE_NUM=$(wc -l <<< "''${MANIFEST_FILE}")
+
+      if [[ "''${MANIFEST_FILE_NUM}" == "0" ]]; then
+        echo "No Manifest File Located for ''${GAMEDIR_FILENAME}"
+        exit 1
+      fi
+
+      echo $MANIFEST_FILE | sed -r 's;^.*_(.*).acf$;\1;'
     '')
   ];
 }
