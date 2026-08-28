@@ -15,6 +15,7 @@ lib.mkIf cfg.steam.enable {
     # (Proton's Wine is Wayland-only and doesn't render utility windows on niri)
     wineWow64Packages.stable
     freetype
+    mangohud
   ];
   programs.steam.gamescopeSession.enable = true;
   programs.steam.protontricks.enable     = true;
