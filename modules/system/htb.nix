@@ -26,12 +26,21 @@ let
     # Parse JSON - handle both single object and array responses
     # Try to parse as single machine first
     ip=$(echo "$response" | ${pkgs.jq}/bin/jq -r '.info.ip // .ip // empty' 2>/dev/null || true)
-    name=$(echo "$response" | ${pkgs.jq}/bin/jq -r '.info.name // .info.name // empty' 2>/dev/null || true)
+    name=$(echo "$response" | ${pkgs.jq}/bin/jq -r '.info.name // .name // empty' 2>/dev/null || true)
 
     # If single machine parsing failed, try array format
     if [[ -z "$ip" ]]; then
       # Parse as array and get all machines
-      machines=$(echo "$response" | ${pkgs.jq}/bin/jq -r '.[] | "\(.ip // .info.ip) \(.name // .info.name)"' 2>/dev/null || true)
+      machines=$(echo "$response" | ${pkgs.jq}/bin/jq -r '
+        .[]
+        | (.ip // .info.ip // empty) as $machine_ip
+        | (.name // .info.name // empty) as $machine_name
+        | select(
+            ($machine_ip | strings | test("^(?:(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\\.){3}(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})$"))
+            and ($machine_name | strings | test("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?$"))
+          )
+        | "\($machine_ip) \($machine_name)"
+      ' 2>/dev/null || true)
 
       if [[ -z "$machines" ]]; then
         echo "Could not parse API response. Response:"
