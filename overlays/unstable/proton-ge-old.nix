@@ -1,9 +1,9 @@
 final: prev: let
   mkProtonGE = version: hash:
-    (prev.proton-ge-bin.override {
-      steamDisplayName = version;
-    }).overrideAttrs (old: {
+    prev.proton-ge-bin.overrideAttrs (old: {
       inherit version;
+      steamDisplayName = version;
+      toolName = version;
       src = prev.fetchzip {
         url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/${version}/${version}.tar.gz";
         inherit hash;
