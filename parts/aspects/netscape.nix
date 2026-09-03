@@ -24,11 +24,17 @@
   den.aspects.netscape-trinity = {
     includes = [ den.aspects.netscape-linux ];
     homeManager.imports = [
-      ({ pkgs, ... }: {
+      ({ config, pkgs, ... }: {
         netscape.home.colors.enable         = true;
-        netscape.home.colors.scheme         = "cyberpunk-neon";
+        netscape.home.colors.scheme         =
+          if config.netscape.home.wm.niri.profile == "enterprise-2000"
+          then "enterprise-2000"
+          else "cyberpunk-neon";
         netscape.home.terminals.foot.enable = true;
         netscape.home.wm.niri.enable        = true;
+        # Switch Trinity between the cyberpunk rice and the early-2000s
+        # Bluecurve rice: change this one value and rebuild.
+        netscape.home.wm.niri.profile       = "enterprise-2000";
         netscape.home.wm.waybar.enable      = true;
         netscape.home.theming.enable        = true;
         home.packages = with pkgs; [ git unstable.claude-code fzf ];
