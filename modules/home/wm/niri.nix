@@ -395,6 +395,7 @@ in
       # profile the Noctalia shell provides bar/launcher/notifications/lock,
       # so the legacy daemons stay off (dunst would fight Noctalia's
       # notification daemon for the same DBus name).
+      netscape.home.wm.waybar.enable = lib.mkDefault (!enterprise);
       netscape.home.wm.rofi.enable = lib.mkDefault (!enterprise);
       netscape.home.wm.dunst.enable = lib.mkDefault (!enterprise);
       netscape.home.wm.swaylock.enable = lib.mkDefault (!enterprise);
@@ -456,7 +457,7 @@ in
     (lib.mkIf enterprise {
       # Early-2000s Red Hat Bluecurve session: Noctalia shell, Bluecurve GTK
       # theme and icons, Luxi Sans everywhere, square corners, solid panels.
-      netscape.home.theming.gtkTheme = lib.mkDefault "Bluecurve";
+      netscape.home.theming.gtkTheme = lib.mkDefault "Bluecurve-Dark";
       gtk.enable = lib.mkDefault true;
       gtk.iconTheme = {
         name = "Bluecurve";
@@ -469,7 +470,7 @@ in
       xdg.configFile."noctalia/config.toml".text = ''
         # Noctalia shell — Trinity "Enterprise 2000" (Red Hat Bluecurve) profile
         [theme]
-        mode = "light"
+        mode = "dark"
         source = "custom"
         custom_palette = "Bluecurve"
 
@@ -478,6 +479,10 @@ in
         font_family = "Luxi Sans"
         time_format = "{:%H:%M}"
         date_format = "%A, %d %B %Y"
+        # Fresh hosts must not run the setup wizard: it writes [theme]
+        # mode/source/wallpaper_scheme overrides to settings.toml that
+        # clobber the declarative Bluecurve theme below.
+        setup_wizard_enabled = false
 
         [shell.animation]
         enabled = false
@@ -493,8 +498,10 @@ in
         transition_duration = 0
         transition_on_startup = false
 
+        # wallpaper: wallhaven.cc/w/d6lmv3 by Cyb3rCr0w (personal-use, no explicit license)
+        # source: ~/Dropbox/Pictures/enterprise-vaporwave.jpg (plain path, read live by Noctalia — not store-instantiated)
         [wallpaper.default]
-        path = "${pkgs.bluecurve}/share/wallpapers/lightrays.png"
+        path = "/home/netscape/Dropbox/Pictures/enterprise-vaporwave.jpg"
 
         [bar.main]
         position = "top"
@@ -522,7 +529,7 @@ in
         enabled = true
       '';
 
-      # Noctalia palette — Bluecurve light (the active mode) plus a navy dark
+      # Noctalia palette — Bluecurve dark (the active mode) plus a light
       # fallback in case the mode is ever toggled in Noctalia's GUI.
       xdg.configFile."noctalia/palettes/Bluecurve.json".text = builtins.toJSON {
         light = {
