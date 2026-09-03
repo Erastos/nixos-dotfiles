@@ -5,4 +5,5 @@
   blue-matrix = import ./blue-matrix.nix { inherit lib; };
   cyberpunk-neon = import ./cyberpunk-neon.nix { inherit lib; };
   enterprise-2000 = import ./enterprise-2000.nix { inherit lib; };
+  enterprise-2000-dark = import ./enterprise-2000-dark.nix { inherit lib; };
 }
