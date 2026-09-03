@@ -18,6 +18,7 @@ in
       default = {
         "Materia-Cyberpunk-Neon" = pkgs.cyberpunk-neon-gtk-theme;
         "Tokyonight-Dark" = pkgs.tokyonight-gtk-theme;
+        "Bluecurve" = pkgs.bluecurve;
       }.${cfg.gtkTheme} or pkgs.cyberpunk-neon-gtk-theme;
       description = "GTK theme package (auto-derived from gtkTheme name)";
     };
