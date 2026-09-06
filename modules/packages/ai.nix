@@ -1,4 +1,4 @@
-{ config, lib, pkgs, claude-desktop, hermes-agent, ... }:
+{ config, lib, pkgs, claude-desktop, ... }:
 
 let
   cfg = config.netscape.packages.ai;
@@ -35,44 +35,5 @@ in
       };
     }
 
-    # ── Hermes gateway (Trinity only) ───────────────────────────────────
-    (lib.mkIf (config.netscape.systemName == "Trinity") {
-      programs.nix-ld.enable = true;
-
-      sops.secrets."hermes/env" = {
-        sopsFile = ../../secrets/secrets.yaml;
-        key = "hermes/env";
-        mode = "0400";
-        owner = "root";
-      };
-
-      users.users.netscape = {
-        extraGroups = [ "hermes" ];
-      };
-
-      services.hermes-agent = {
-        enable = true;
-        container = {
-          enable = true;
-          hostUsers = [ "netscape" ];
-        };
-
-        addToSystemPackages = true;
-        environmentFiles = [ config.sops.secrets."hermes/env".path ];
-        extraDependencyGroups = [ "messaging" ];
-        settings = {
-          model = {
-            default = "google/gemini-2.5-flash";
-          };
-          toolsets = [ "all" ];
-          gateway.discord = {
-            require_mention = true;
-            auto_thread = true;
-            reactions = true;
-          };
-        };
-      };
-
-    })
   ]);
 }

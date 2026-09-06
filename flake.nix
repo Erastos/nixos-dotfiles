@@ -16,7 +16,6 @@
       url = "github:cachix/nixpkgs-python";
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
-    hermes-agent.url = "github:NousResearch/hermes-agent";
     nix-openclaw = {
       url = "github:openclaw/nix-openclaw";
       inputs.home-manager.follows = "home-manager";

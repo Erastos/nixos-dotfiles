@@ -17,9 +17,7 @@
       nixpkgs.config.allowUnfree = true;
       imports = [
         inputs.sops-nix.nixosModules.sops
-        inputs.hermes-agent.nixosModules.default
       ];
-      _module.args.hermes-agent = inputs.hermes-agent;
     };
   };
 }
