@@ -27,6 +27,23 @@
   brightCyan = "34e2e2";
   brightWhite = "ffffff";
 
+  # Keep desktop Tango colors above; terminal overrides improve text contrast.
+  terminal = {
+    red = "ef6b73";
+    green = "8ac65b";
+    yellow = "e4c767";
+    blue = "83a8e8";
+    magenta = "c18bcf";
+    cyan = "58c5cf";
+    brightBlack = "8c96a6";
+    brightRed = "ff9299";
+    brightGreen = "b0e17a";
+    brightYellow = "ffe08a";
+    brightBlue = "adc8ff";
+    brightMagenta = "dfb0ec";
+    brightCyan = "8be6ec";
+  };
+
   foreground = "ffffff";
   background = "1f2a3d";
 
