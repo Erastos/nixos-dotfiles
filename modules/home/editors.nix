@@ -48,14 +48,6 @@ in
       keyMode = "emacs";
       historyLimit = 10000;
       plugins = with pkgs.tmuxPlugins; [
-        resurrect
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '5'
-          '';
-        }
         catppuccin
         dracula
       ];
