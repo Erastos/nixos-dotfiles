@@ -3,6 +3,7 @@
 let
   cfg = config.netscape.home.wm;
   colors = config.colors;
+  terminalColors = colors // (colors.terminal or {});
   enterprise = cfg.niri.profile == "enterprise-2000";
 
   # Profile-dependent niri config fragments. Nix indented strings strip the
@@ -562,8 +563,8 @@ in
             background = "#1f2a3d"; foreground = "#ffffff";
             cursor = "#ffffff"; cursorText = "#1f2a3d";
             selectionBg = "#4464ac"; selectionFg = "#ffffff";
-            normal = { black = "#2e3436"; red = "#cc0000"; green = "#4e9a06"; yellow = "#c4a000"; blue = "#5e7ab7"; magenta = "#75507b"; cyan = "#06989a"; white = "#d3d7cf"; };
-            bright  = { black = "#555753"; red = "#ef2929"; green = "#73d216"; yellow = "#f57900"; blue = "#7a9ede"; magenta = "#ad7fa8"; cyan = "#34e2e2"; white = "#ffffff"; };
+            normal = { black = "#${terminalColors.black}"; red = "#${terminalColors.red}"; green = "#${terminalColors.green}"; yellow = "#${terminalColors.yellow}"; blue = "#${terminalColors.blue}"; magenta = "#${terminalColors.magenta}"; cyan = "#${terminalColors.cyan}"; white = "#${terminalColors.white}"; };
+            bright  = { black = "#${terminalColors.brightBlack}"; red = "#${terminalColors.brightRed}"; green = "#${terminalColors.brightGreen}"; yellow = "#${terminalColors.brightYellow}"; blue = "#${terminalColors.brightBlue}"; magenta = "#${terminalColors.brightMagenta}"; cyan = "#${terminalColors.brightCyan}"; white = "#${terminalColors.brightWhite}"; };
           };
         };
       };

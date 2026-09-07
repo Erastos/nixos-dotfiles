@@ -2,6 +2,7 @@
 
 let
   cfg = config.netscape.home.terminals;
+  terminalColors = config.colors // (config.colors.terminal or {});
 in
 {
   options.netscape.home.terminals = {
@@ -25,31 +26,31 @@ in
 
           -- Custom colorscheme from NixOS config
           config.colors = {
-            foreground = "#${config.colors.foreground}",
-            background = "#${config.colors.background}",
-            cursor_bg = "#${config.colors.cursor.cursor}",
-            cursor_fg = "#${config.colors.cursor.text}",
+            foreground = "#${terminalColors.foreground}",
+            background = "#${terminalColors.background}",
+            cursor_bg = "#${terminalColors.cursor.cursor}",
+            cursor_fg = "#${terminalColors.cursor.text}",
 
             ansi = {
-              "#${config.colors.black}",
-              "#${config.colors.red}",
-              "#${config.colors.green}",
-              "#${config.colors.yellow}",
-              "#${config.colors.blue}",
-              "#${config.colors.magenta}",
-              "#${config.colors.cyan}",
-              "#${config.colors.white}",
+              "#${terminalColors.black}",
+              "#${terminalColors.red}",
+              "#${terminalColors.green}",
+              "#${terminalColors.yellow}",
+              "#${terminalColors.blue}",
+              "#${terminalColors.magenta}",
+              "#${terminalColors.cyan}",
+              "#${terminalColors.white}",
             },
 
             brights = {
-              "#${config.colors.brightBlack}",
-              "#${config.colors.brightRed}",
-              "#${config.colors.brightGreen}",
-              "#${config.colors.brightYellow}",
-              "#${config.colors.brightBlue}",
-              "#${config.colors.brightMagenta}",
-              "#${config.colors.brightCyan}",
-              "#${config.colors.brightWhite}",
+              "#${terminalColors.brightBlack}",
+              "#${terminalColors.brightRed}",
+              "#${terminalColors.brightGreen}",
+              "#${terminalColors.brightYellow}",
+              "#${terminalColors.brightBlue}",
+              "#${terminalColors.brightMagenta}",
+              "#${terminalColors.brightCyan}",
+              "#${terminalColors.brightWhite}",
             },
           }
 
@@ -75,29 +76,26 @@ in
           main = {
             font = "Hack Nerd Font:size=12";
           };
-          # cursor = {
-          #   color = "${config.colors.cursor.text} ${config.colors.cursor.cursor}"; # <text> <cursor>
-          # };
           colors-dark = {
-            cursor = "${config.colors.cursor.text} ${config.colors.cursor.cursor}";
-            foreground = config.colors.foreground;
-            background = config.colors.background;
-            regular0 = config.colors.black; # black
-            regular1 = config.colors.red; # red
-            regular2 = config.colors.green; # green
-            regular3 = config.colors.yellow; # yellow
-            regular4 = config.colors.blue; # blue
-            regular5 = config.colors.magenta; # magenta
-            regular6 = config.colors.cyan; # cyan
-            regular7 = config.colors.white; # white
-            bright0 = config.colors.brightBlack; # bright black
-            bright1 = config.colors.brightRed; # bright red
-            bright2 = config.colors.brightGreen; # bright green
-            bright3 = config.colors.brightYellow; # bright yellow
-            bright4 = config.colors.brightBlue; # bright blue
-            bright5 = config.colors.brightMagenta; # bright magenta
-            bright6 = config.colors.brightCyan; # bright cyan
-            bright7 = config.colors.brightWhite; # bright white
+            cursor = "${terminalColors.cursor.text} ${terminalColors.cursor.cursor}";
+            foreground = terminalColors.foreground;
+            background = terminalColors.background;
+            regular0 = terminalColors.black; # black
+            regular1 = terminalColors.red; # red
+            regular2 = terminalColors.green; # green
+            regular3 = terminalColors.yellow; # yellow
+            regular4 = terminalColors.blue; # blue
+            regular5 = terminalColors.magenta; # magenta
+            regular6 = terminalColors.cyan; # cyan
+            regular7 = terminalColors.white; # white
+            bright0 = terminalColors.brightBlack; # bright black
+            bright1 = terminalColors.brightRed; # bright red
+            bright2 = terminalColors.brightGreen; # bright green
+            bright3 = terminalColors.brightYellow; # bright yellow
+            bright4 = terminalColors.brightBlue; # bright blue
+            bright5 = terminalColors.brightMagenta; # bright magenta
+            bright6 = terminalColors.brightCyan; # bright cyan
+            bright7 = terminalColors.brightWhite; # bright white
           };
         };
       };
