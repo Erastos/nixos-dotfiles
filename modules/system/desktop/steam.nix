@@ -9,6 +9,7 @@ lib.mkIf cfg.steam.enable {
     pkgs.unstable.proton-ge-bin
     pkgs.unstable.proton-ge-bin-9
     pkgs.unstable.proton-ge-bin-8
+    pkgs.proton-cachyos
   ];
   programs.steam.extraPackages = with pkgs; [
     # System Wine with X11 support for protontricks GUI tools
