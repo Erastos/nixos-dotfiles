@@ -26,6 +26,10 @@
     # coding-agents.url = "github:kissgyorgy/coding-agents";
     llm-agents.url = "github:numtide/llm-agents.nix";
     cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    proton-cachyos = {
+      url = "github:Daaboulex/proton-cachyos-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
