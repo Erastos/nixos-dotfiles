@@ -43,6 +43,7 @@ in
       python313Packages.shodan
       smbclient-ng
       unstable.ldeep
+      burpsuite
     ];
   };
 }
