@@ -9,7 +9,6 @@
     ./gtk.nix
     ./newsboat.nix
     ./coding-agents.nix
-    ./openclaw.nix
     ./packages/general.nix
     ./packages/hardware.nix
     ./packages/development.nix

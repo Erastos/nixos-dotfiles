@@ -16,14 +16,9 @@
       url = "github:cachix/nixpkgs-python";
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
-    # nix-openclaw = {
-    #   url = "github:openclaw/nix-openclaw";
-    #   inputs.home-manager.follows = "home-manager";
-    # };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     den.url = "github:vic/den";
-    # coding-agents.url = "github:kissgyorgy/coding-agents";
     llm-agents.url = "github:numtide/llm-agents.nix";
     cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     proton-cachyos = {

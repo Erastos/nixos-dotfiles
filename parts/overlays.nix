@@ -12,7 +12,7 @@ let
       inherit system;
       config.allowUnfree = true;
       config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
-      overlays = [ inputs.nix-openclaw.overlays.default ] ++ unstableOverlays;
+      overlays = unstableOverlays;
     };
   in {
     unstable = unstablePkgs;

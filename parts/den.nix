@@ -9,7 +9,6 @@
       nixpkgs.config.allowUnfree = true;
       imports = [
         inputs.sops-nix.homeManagerModules.sops
-        inputs.nix-openclaw.homeManagerModules.openclaw
       ];
     };
     nixos = {
