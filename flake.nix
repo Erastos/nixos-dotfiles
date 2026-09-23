@@ -16,10 +16,10 @@
       url = "github:cachix/nixpkgs-python";
       inputs = { nixpkgs.follows = "nixpkgs"; };
     };
-    nix-openclaw = {
-      url = "github:openclaw/nix-openclaw";
-      inputs.home-manager.follows = "home-manager";
-    };
+    # nix-openclaw = {
+    #   url = "github:openclaw/nix-openclaw";
+    #   inputs.home-manager.follows = "home-manager";
+    # };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     den.url = "github:vic/den";
