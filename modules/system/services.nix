@@ -9,6 +9,10 @@ in
       enable = lib.mkEnableOption "CUPS printing service" // { default = true; };
     };
 
+    scanning = {
+      enable = lib.mkEnableOption "SANE scanning (eSCL) support" // { default = true; };
+    };
+
     podman = {
       enable = lib.mkEnableOption "Podman container runtime" // { default = false; };
     };
@@ -40,6 +44,34 @@ in
     # CUPS printing
     (lib.mkIf cfg.printing.enable {
       services.printing.enable = true;
+
+      hardware.printers.ensurePrinters = [
+        {
+          name = "Canon_MF650C";
+          description = "Canon MF650C Series";
+          location = null;
+          deviceUri = "ipp://10.0.0.103:631/ipp/print";
+          model = "everywhere";
+        }
+      ];
+      hardware.printers.ensureDefaultPrinter = "Canon_MF650C";
+    })
+
+    # SANE scanning (eSCL)
+    (lib.mkIf cfg.scanning.enable {
+      hardware.sane.enable = true;
+      hardware.sane.disabledDefaultBackends = [ "escl" ];
+      hardware.sane.extraBackends = [
+        pkgs.sane-airscan
+        (pkgs.writeTextDir "etc/sane.d/airscan.conf" ''
+          [devices]
+          "Canon_MF650C" = http://10.0.0.103:80/eSCL, escl
+
+          [options]
+          discovery = disable
+        '')
+      ];
+      environment.systemPackages = [ pkgs.gscan2pdf ];
     })
 
     # Docker
