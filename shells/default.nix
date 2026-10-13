@@ -7,12 +7,26 @@ let
       exec ${pkgs.zsh}/bin/zsh
   fi
   '';
-  pkgs = inputs.nixpkgs.legacyPackages.${system};
+  pkgs = import inputs.nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+  unstableOverlays = builtins.map (name: import (../overlays/unstable + "/${name}"))
+    (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
+      (builtins.attrNames (builtins.readDir ../overlays/unstable)));
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config.allowUnfree = true;
+    config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
+    overlays = unstableOverlays;
+  };
+  rootModule = { devenv.root = builtins.toString inputs.self; };
 in
 {
   python = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.python = {
@@ -26,6 +40,7 @@ in
   web = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         packages = with pkgs; [
@@ -39,10 +54,11 @@ in
   security = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         packages = with pkgs; [
-          nmap unstable.netexec unstable.bloodhound-ce gobuster seclists
+          nmap unstable.netexec unstable.bloodhound-ce gobuster unstable.seclists
           netcat-openbsd responder hashcat
           unstable.metasploit wireshark tcpdump
           python3Packages.impacket bloodhound binwalk xxd curl
@@ -53,6 +69,7 @@ in
   rust = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.rust.enable = true;
@@ -65,6 +82,7 @@ in
   pwn = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.python = {
@@ -76,7 +94,7 @@ in
           python313Packages.pwntools
           gdb gef patchelf checksec
           binutils file ltrace strace
-          rdare2 python313packages.ropper 
+          radare2 python313Packages.ropper
           unstable.ghidra-bin xxd
         ];
       })
@@ -85,6 +103,7 @@ in
   node = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.javascript = {
@@ -92,7 +111,7 @@ in
           npm.enable = true;
         };
         packages = with pkgs; [
-          nodePackages.yarn pnpm typescript
+          yarn pnpm typescript
         ];
       })
     ];
@@ -100,6 +119,7 @@ in
   java = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.java = {
@@ -115,6 +135,7 @@ in
   go = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.go = {
@@ -129,6 +150,7 @@ in
   devops = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         packages = with pkgs; [
@@ -142,6 +164,7 @@ in
   data = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         languages.python = {
@@ -160,10 +183,11 @@ in
   cpp = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
+      rootModule
       ({ pkgs, config, ...}: {
         inherit enterShell;
         packages = with pkgs; [
-          gcc clang cmake gnumake gdb valgrind boost catch2 pkgs-config
+          gcc clang cmake gnumake gdb valgrind boost catch2 pkg-config
         ];
       })
     ];

@@ -16,7 +16,7 @@
         netscape.home.theming.enable        = true;
         netscape.home.theming.gtkTheme      = "Tokyonight-Dark";
         netscape.home.editors.theme         = "gruvbox-material";
-        home.packages = with pkgs; [ pulsemixer acpi dmenu wl-clipboard eslint_d ];
+        home.packages = with pkgs; [ acpi dmenu wl-clipboard eslint_d ];
       })
     ];
   };
@@ -38,7 +38,7 @@
         # waybar/rofi/dunst/swaylock are auto-enabled by the niri module
         # unless niri.profile is "enterprise-2000".
         netscape.home.theming.enable        = true;
-        home.packages = with pkgs; [ git unstable.claude-code fzf ];
+        home.packages = with pkgs; [ git ];
       })
     ];
   };

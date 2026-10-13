@@ -28,7 +28,6 @@ in
       python313Packages.pynvim
 
       # Fast file finder for telescope
-      fd
 
       # Sqlite DB Client
       sqlite

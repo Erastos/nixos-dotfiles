@@ -15,7 +15,7 @@ in
       nmap
       unstable.netexec
       gobuster
-      seclists
+      unstable.seclists
       netcat-openbsd
       responder
       python313
@@ -36,7 +36,6 @@ in
       hashcat
       hashid
       evil-winrm
-      # python313Packages.impacket
       socat
       smap
       sdlookup

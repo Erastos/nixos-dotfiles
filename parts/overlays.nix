@@ -7,7 +7,7 @@ let
   unstableOverlays = builtins.map (name: import (../overlays/unstable + "/${name}"))
     (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
       (builtins.attrNames (builtins.readDir ../overlays/unstable)));
-  unstableOverlay = final: prev: let
+  unstableOverlay = final: _prev: let
     unstablePkgs = import inputs.nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
