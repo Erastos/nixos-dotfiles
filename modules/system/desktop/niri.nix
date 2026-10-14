@@ -42,7 +42,6 @@ lib.mkIf cfg.niri.enable {
     qt5.qtwayland
     qt6.qtwayland
     polkit_gnome
-    sddm-sugar-dark
     sddm-astronaut
     xwayland-satellite
   ];

@@ -1,4 +1,4 @@
-{ config, lib, osConfig, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.netscape.home.colors;

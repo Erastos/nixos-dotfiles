@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 
 {
   name = "Enterprise 2000";

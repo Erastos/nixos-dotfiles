@@ -125,15 +125,6 @@ in
   options.netscape.system.htb = {
     enable = lib.mkEnableOption "HTB dynamic DNS resolution";
 
-    apiKey = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-      description = ''
-        HTB API authentication token.
-        Managed via sops-nix - read from /run/secrets/htb-api-key at runtime.
-      '';
-    };
-
     url = lib.mkOption {
       type = lib.types.str;
       default = "https://labs.hackthebox.com/api/v4/machine/active";

@@ -27,8 +27,6 @@ in
       python313Packages.pip
       python313Packages.pynvim
 
-      # Fast file finder for telescope
-
       # Sqlite DB Client
       sqlite
 
@@ -37,7 +35,6 @@ in
       hercules
       x3270
       regina
-
     ]
     # LSP servers for Neovim
     ++ lib.optionals config.programs.neovim.enable [

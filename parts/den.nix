@@ -12,7 +12,7 @@
       ];
     };
     nixos = {
-      system.stateVersion = lib.mkDefault "25.05";
+      system.stateVersion = "25.05";
       nixpkgs.config.allowUnfree = true;
       imports = [
         inputs.sops-nix.nixosModules.sops

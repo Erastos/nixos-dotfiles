@@ -4,17 +4,8 @@ let
   overlays = builtins.map (name: import (../overlays + "/${name}"))
     (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
       (builtins.attrNames (builtins.readDir ../overlays)));
-  unstableOverlays = builtins.map (name: import (../overlays/unstable + "/${name}"))
-    (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
-      (builtins.attrNames (builtins.readDir ../overlays/unstable)));
-  unstableOverlay = final: _prev: let
-    unstablePkgs = import inputs.nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
-      config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
-      overlays = unstableOverlays;
-    };
-  in {
+  unstablePkgs = import ../lib/mkUnstablePkgs.nix { inherit inputs system; };
+  unstableOverlay = _final: _prev: {
     unstable = unstablePkgs;
     inherit (unstablePkgs) openclaw openclawPackages;
   };

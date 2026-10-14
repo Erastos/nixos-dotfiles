@@ -7,7 +7,6 @@
     hyfetch
     whois
     dropbox
-    wezterm
     firefox
     w3m
     pciutils
@@ -38,7 +37,6 @@
     lxappearance
     cool-retro-term
     winbox
-    fzf
     fd
     unrar
     unstable.sunsama

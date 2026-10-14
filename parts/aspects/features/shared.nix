@@ -13,6 +13,13 @@
       den.aspects.security-tools
       den.aspects.bloodhound-ce
     ];
+
+    nixos = { ... }: {
+      netscape.system.networking.firewall.http.enable = true;
+      netscape.system.htb.enable = true;
+      netscape.system.htb.vpn.enable = true;
+      netscape.system.services.docker.enable = true;
+    };
   };
 
   den.aspects.shared-hm = {

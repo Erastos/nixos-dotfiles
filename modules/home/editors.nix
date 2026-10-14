@@ -118,7 +118,6 @@ in
         # fzf popup bindings
         bind f display-popup -E "zsh -i -c tms"
         bind g display-popup -E "zsh -i -c fs"
-        # bind p display-popup -E "zsh -i -c ftpane"
 
         # Status bar configuration
         set -g status-position bottom

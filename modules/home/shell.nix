@@ -1,4 +1,4 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, osConfig, ... }:
 
 let
   cfg = config.netscape.home.shell;

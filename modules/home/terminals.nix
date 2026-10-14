@@ -1,4 +1,4 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.netscape.home.terminals;

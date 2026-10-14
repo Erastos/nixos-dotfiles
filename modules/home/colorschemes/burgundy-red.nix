@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 
 {
   name = "Burgundy Red";

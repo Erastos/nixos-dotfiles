@@ -11,15 +11,7 @@ let
     inherit system;
     config.allowUnfree = true;
   };
-  unstableOverlays = builtins.map (name: import (../overlays/unstable + "/${name}"))
-    (builtins.filter (name: builtins.match ".*\\.nix$" name != null)
-      (builtins.attrNames (builtins.readDir ../overlays/unstable)));
-  unstable = import inputs.nixpkgs-unstable {
-    inherit system;
-    config.allowUnfree = true;
-    config.permittedInsecurePackages = [ "openclaw-2026.4.12" ];
-    overlays = unstableOverlays;
-  };
+  unstable = import ../lib/mkUnstablePkgs.nix { inherit inputs system; };
   rootModule = { devenv.root = builtins.toString inputs.self; };
 in
 {

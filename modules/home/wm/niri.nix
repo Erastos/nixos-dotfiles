@@ -415,8 +415,6 @@ in
         blueman
         networkmanagerapplet
         pavucontrol
-        papirus-icon-theme
-        bibata-cursors
         libsForQt5.qtstyleplugin-kvantum
       ];
 
