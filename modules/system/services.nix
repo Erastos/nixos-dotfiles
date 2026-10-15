@@ -44,6 +44,7 @@ in
     # CUPS printing
     (lib.mkIf cfg.printing.enable {
       services.printing.enable = true;
+      systemd.services.ensure-printers.enable = false;
 
       hardware.printers.ensurePrinters = [
         {
