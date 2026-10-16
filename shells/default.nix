@@ -12,7 +12,8 @@ let
     config.allowUnfree = true;
   };
   unstable = import ../lib/mkUnstablePkgs.nix { inherit inputs system; };
-  rootModule = { devenv.root = builtins.toString inputs.self; };
+  # These shells run in the calling project, not the read-only flake store path.
+  rootModule = { devenv.root = builtins.getEnv "PWD"; };
 in
 {
   python = inputs.devenv.lib.mkShell {
