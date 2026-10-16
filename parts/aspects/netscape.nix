@@ -13,7 +13,7 @@
     netscape.home.wm.river.enable  = true;
     netscape.home.wm.waybar.enable = true;
     netscape.home.theming.gtkTheme = "Tokyonight-Dark";
-    netscape.home.editors.theme    = "gruvbox-material";
+    netscape.home.editors.theme    = "tokyonight";
     home.packages = with pkgs; [ acpi dmenu wl-clipboard eslint_d ];
   };
 
