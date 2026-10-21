@@ -2,10 +2,22 @@ final: prev: let
   python = prev.python312.override {
     self = prev.python312;
     packageOverrides = self: super: {
+      # Keep unrelated test tooling in the stock Python 3.12 scope.
+      aiohttp = super.aiohttp.override {
+        proxy-py = prev.python312.pkgs.proxy-py;
+      };
+      scikit-build-core = super.scikit-build-core.override {
+        pytest-subprocess = prev.python312.pkgs.pytest-subprocess;
+      };
+
       # These two tests fail in the build's Python/OpenSSL environment:
       # TLS raises a client-mode ValueError; both report unraisable exceptions.
       anyio = super.anyio.overridePythonAttrs (oa: {
         disabledTests = (oa.disabledTests or []) ++ [ "test_tls_connectable" "test_free_tcp_port" ];
+        # Flaky global thread count: https://github.com/NixOS/nixpkgs/issues/456675
+        disabledTestPaths = (oa.disabledTestPaths or []) ++ [
+          "tests/test_to_thread.py::TestBlockingPortalProvider::test_single_thread[asyncio]"
+        ];
       });
 
       impacket = super.impacket.overridePythonAttrs {
