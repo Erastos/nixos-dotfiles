@@ -37,6 +37,7 @@ lib.mkIf cfg.steam.enable {
   # winebus hidraw — prevents keyboard HID interfaces from being
   # exposed as gamepads to games.
   environment.systemPackages = [
+    pkgs.ludusavi
     (pkgs.writeShellScriptBin "fix-mgsv-input" ''
       set -e
       PREFIX="$HOME/.steam/steam/steamapps/compatdata/287700/pfx"
