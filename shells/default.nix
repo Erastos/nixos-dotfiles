@@ -16,6 +16,18 @@ let
   rootModule = { devenv.root = builtins.getEnv "PWD"; };
 in
 {
+  osdev = inputs.devenv.lib.mkShell {
+    inherit inputs pkgs;
+    modules = [
+      rootModule
+      ({ ... }: {
+        inherit enterShell;
+        packages = with pkgs.pkgsCross.i686-embedded.buildPackages; [
+          gcc
+        ];
+      })
+    ];
+  };
   python = inputs.devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [

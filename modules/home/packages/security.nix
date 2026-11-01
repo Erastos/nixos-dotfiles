@@ -27,7 +27,13 @@ in
       binwalk
       realm-studio
       dex2jar
-      unstable.ghidra-bin
+      (unstable.ghidra-bin.overrideAttrs (old: {
+        postFixup = (old.postFixup or "") + ''
+          substituteInPlace $out/lib/ghidra/support/launch.properties \
+            --replace-fail '#ENVVARS_LINUX=_JAVA_AWT_WM_NONREPARENTING=1' \
+                           'ENVVARS_LINUX=_JAVA_AWT_WM_NONREPARENTING=1'
+        '';
+      }))
       quark-engine
       exiftool
       foremost

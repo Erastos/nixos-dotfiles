@@ -12,6 +12,7 @@
       den.aspects.virtualisation
       den.aspects.security-tools
       den.aspects.bloodhound-ce
+      den.aspects.osdev
     ];
 
     nixos = { ... }: {
