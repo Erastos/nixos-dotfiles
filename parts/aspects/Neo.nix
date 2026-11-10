@@ -3,7 +3,7 @@
     includes = [ den.batteries.hostname den.aspects.shared-nixos ];
 
     nixos = { ... }: {
-      imports = [ ../../hardware/Neo.nix ];
+      imports = [ ../../hardware/Neo.nix ../../modules/system/local-kubernetes.nix ];
       netscape.system.virtualisation.qemu.enable      = true;
       netscape.system.desktop.sway.enable             = true;
       netscape.system.hardware.intel.enable           = true;
