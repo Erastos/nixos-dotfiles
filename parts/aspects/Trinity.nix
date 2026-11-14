@@ -3,7 +3,7 @@
     includes = [ den.batteries.hostname den.aspects.shared-nixos den.aspects.cachyos-kernel ];
 
     nixos = { ... }: {
-      imports = [ ../../hardware/Trinity.nix ];
+      imports = [ ../../hardware/Trinity.nix ../../modules/system/local-kubernetes.nix ];
       netscape.system.virtualisation.vmware.enable = true;
       netscape.system.virtualisation.qemu.enable   = true;
       netscape.system.desktop.niri.enable          = true;
