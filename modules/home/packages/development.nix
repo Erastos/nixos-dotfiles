@@ -23,6 +23,9 @@ in
       cargo
       rustc
 
+      # Nodejs
+      yarn
+
       # Python with pip and pynvim
       python313Packages.pip
       python313Packages.pynvim
@@ -36,13 +39,16 @@ in
       x3270
       regina
     ]
-    # LSP servers for Neovim
+    # Language servers and linters for Neovim
     ++ lib.optionals config.programs.neovim.enable [
       lua-language-server
       gopls
       yaml-language-server
       pyright
       rust-analyzer
+      typescript-language-server
+      vscode-langservers-extracted
+      eslint_d
     ];
   };
 }

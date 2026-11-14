@@ -10,6 +10,7 @@
       netscape.system.desktop.steam.enable         = true;
       netscape.system.bloodhound-ce.enable         = true;
       netscape.system.hardware.nvidia.enable       = true;
+      netscape.system.local-kubernetes.enable      = true;
       programs.nix-ld.enable                       = true;
     };
   };

@@ -14,7 +14,7 @@
     netscape.home.wm.waybar.enable = true;
     netscape.home.theming.gtkTheme = "Tokyonight-Dark";
     netscape.home.editors.theme    = "tokyonight";
-    home.packages = with pkgs; [ acpi dmenu wl-clipboard eslint_d ];
+    home.packages = with pkgs; [ acpi dmenu wl-clipboard ];
   };
 
   den.aspects."netscape@Trinity".homeManager = { config, ... }: {
