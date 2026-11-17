@@ -6,7 +6,7 @@
       imports = [ ../../hardware/Trinity.nix ../../modules/system/local-kubernetes.nix ];
       netscape.system.virtualisation.vmware.enable = true;
       netscape.system.virtualisation.qemu.enable   = true;
-      netscape.system.desktop.niri.enable          = true;
+      netscape.system.desktop.plasma.enable        = true;
       netscape.system.desktop.steam.enable         = true;
       netscape.system.bloodhound-ce.enable         = true;
       netscape.system.hardware.nvidia.enable       = true;

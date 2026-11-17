@@ -24,7 +24,7 @@
       then "enterprise-2000-dark"
       else "cyberpunk-neon";
     netscape.home.terminals.foot.enable = true;
-    netscape.home.wm.niri.enable        = true;
+    netscape.home.wm.niri.enable        = false;
     # Change this value to switch between the cyberpunk and Bluecurve rice.
     netscape.home.wm.niri.profile = "enterprise-2000";
   };

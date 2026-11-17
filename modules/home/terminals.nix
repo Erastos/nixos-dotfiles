@@ -76,6 +76,7 @@ in
           main = {
             font = "Hack Nerd Font:size=12";
           };
+          bell.system = "no";
           colors-dark = {
             cursor = "${terminalColors.cursor.text} ${terminalColors.cursor.cursor}";
             foreground = terminalColors.foreground;
